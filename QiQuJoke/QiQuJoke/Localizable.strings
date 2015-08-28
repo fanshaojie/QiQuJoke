@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  QiQuJoke
+
+  Created by 少杰范 on 15/8/28.
+  Copyright (c) 2015年 少杰范. All rights reserved.
+*/
+"appName" = "猜一猜";
+"riddle" = "谜语";
+"trick" = "脑筋急转弯";
+"saying" = "歇后语";
+"openResult" = "查看答案";
+"share" = "分享";
