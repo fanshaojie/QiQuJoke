@@ -11,3 +11,9 @@
 "saying" = "歇后语";
 "openResult" = "查看答案";
 "share" = "分享";
+"tip" = "提示";
+"netErr" = "网络繁忙,请重试!";
+"confirm" = "确定";
+"all" = "全部";
+"rightAnswer" = "正确答案";
+"canYouGuess" = "你猜出来了吗";

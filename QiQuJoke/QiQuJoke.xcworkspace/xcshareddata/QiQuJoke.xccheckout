@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>CBED2B04-A2B0-4ABB-B0F2-A485AB492A92</string>
+	<key>IDESourceControlProjectName</key>
+	<string>QiQuJoke</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>530136B266EE6C31892538C3B2D04C34E4964CE1</key>
+		<string>https://github.com/fanshaojie/QiQuJoke.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>QiQuJoke/QiQuJoke.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>530136B266EE6C31892538C3B2D04C34E4964CE1</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/fanshaojie/QiQuJoke.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>530136B266EE6C31892538C3B2D04C34E4964CE1</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>530136B266EE6C31892538C3B2D04C34E4964CE1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>QiQuJoke</string>
+		</dict>
+	</array>
+</dict>
+</plist>

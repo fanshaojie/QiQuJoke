@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface SayingViewController : UIViewController
+#import "SayingModel.h"
+#import "SayingManager.h"
+#import "UIManager.h"
+#import "CAPSPageMenu.h"
+#import "CommonTableViewController.h"
+#import "EnumManager.h"
+#import "DefineManager.h"
+#import "CommonSingleQuestViewController.h"
+@interface SayingViewController : UIViewController<tableViewProcotol>
 
 @end

@@ -36,6 +36,9 @@
     [self addChildViewController:[[UINavigationController alloc] initWithRootViewController:rvCtrl]];
     [self addChildViewController:[[UINavigationController alloc] initWithRootViewController:trickCtrl]];
     [self addChildViewController:[[UINavigationController alloc] initWithRootViewController:sayingCtrl]];
+//    [self addChildViewController:rvCtrl];
+//    [self addChildViewController:trickCtrl];
+//    [self addChildViewController:sayingCtrl];
     
 }
 

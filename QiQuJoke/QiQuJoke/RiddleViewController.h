@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface RiddleViewController : UIViewController
+#import "RiddleModel.h"
+#import "RiddleManager.h"
+#import "UIManager.h"
+#import "CAPSPageMenu.h"
+#import "CommonTableViewController.h"
+#import "EnumManager.h"
+#import "DefineManager.h"
+#import "CommonSingleQuestViewController.h"
+@interface RiddleViewController : UIViewController<tableViewProcotol>
 
 @end

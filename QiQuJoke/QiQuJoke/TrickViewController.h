@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface TrickViewController : UIViewController
+#import "TrickManager.h"
+#import "TrickModel.h"
+#import "UIManager.h"
+#import "CAPSPageMenu.h"
+#import "CommonTableViewController.h"
+#import "EnumManager.h"
+#import "DefineManager.h"
+#import "CommonSingleQuestViewController.h"
+@interface TrickViewController : UIViewController<tableViewProcotol,CAPSPageMenuDelegate>
 
 @end
