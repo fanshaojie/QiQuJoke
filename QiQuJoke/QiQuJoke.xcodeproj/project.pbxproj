@@ -36,11 +36,6 @@
 		FD1BFFF81B9005B500E5FE74 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1BFFF71B9005B500E5FE74 /* main.m */; };
 		FD1BFFFB1B9005B500E5FE74 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1BFFFA1B9005B500E5FE74 /* AppDelegate.m */; };
 		FD1BFFFE1B9005B500E5FE74 /* QiQuJoke.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FD1BFFFC1B9005B500E5FE74 /* QiQuJoke.xcdatamodeld */; };
-		FD45E03F1B96D826003FFF67 /* sdRefeshView_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FD45E0351B96D826003FFF67 /* sdRefeshView_arrow@2x.png */; };
-		FD45E0401B96D826003FFF67 /* SDRefreshFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD45E0381B96D826003FFF67 /* SDRefreshFooterView.m */; };
-		FD45E0411B96D826003FFF67 /* SDRefreshHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD45E03A1B96D826003FFF67 /* SDRefreshHeaderView.m */; };
-		FD45E0421B96D826003FFF67 /* SDRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD45E03C1B96D826003FFF67 /* SDRefreshView.m */; };
-		FD45E0431B96D826003FFF67 /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = FD45E03E1B96D826003FFF67 /* UIView+SDExtension.m */; };
 		FD55042A1B9418DC0003A4A9 /* TrickManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5504291B9418DC0003A4A9 /* TrickManager.m */; };
 		FD55042E1B9419150003A4A9 /* TrickModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD55042D1B9419150003A4A9 /* TrickModel.m */; };
 		FD87B07B1B9C1354006F4C06 /* RiddleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD87B07A1B9C1354006F4C06 /* RiddleManager.m */; };
@@ -122,16 +117,6 @@
 		FD1BFFFA1B9005B500E5FE74 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		FD1BFFFD1B9005B500E5FE74 /* QiQuJoke.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QiQuJoke.xcdatamodel; sourceTree = "<group>"; };
 		FD1BFFFF1B9005B500E5FE74 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		FD45E0351B96D826003FFF67 /* sdRefeshView_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sdRefeshView_arrow@2x.png"; sourceTree = "<group>"; };
-		FD45E0361B96D826003FFF67 /* SDRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDRefresh.h; sourceTree = "<group>"; };
-		FD45E0371B96D826003FFF67 /* SDRefreshFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDRefreshFooterView.h; sourceTree = "<group>"; };
-		FD45E0381B96D826003FFF67 /* SDRefreshFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDRefreshFooterView.m; sourceTree = "<group>"; };
-		FD45E0391B96D826003FFF67 /* SDRefreshHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDRefreshHeaderView.h; sourceTree = "<group>"; };
-		FD45E03A1B96D826003FFF67 /* SDRefreshHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDRefreshHeaderView.m; sourceTree = "<group>"; };
-		FD45E03B1B96D826003FFF67 /* SDRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDRefreshView.h; sourceTree = "<group>"; };
-		FD45E03C1B96D826003FFF67 /* SDRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDRefreshView.m; sourceTree = "<group>"; };
-		FD45E03D1B96D826003FFF67 /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
-		FD45E03E1B96D826003FFF67 /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
 		FD5504281B9418DC0003A4A9 /* TrickManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrickManager.h; sourceTree = "<group>"; };
 		FD5504291B9418DC0003A4A9 /* TrickManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrickManager.m; sourceTree = "<group>"; };
 		FD55042C1B9419150003A4A9 /* TrickModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrickModel.h; sourceTree = "<group>"; };
@@ -262,7 +247,6 @@
 		FD1B00221B90069D00E5FE74 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
-				FD45E0341B96D826003FFF67 /* Lib */,
 				FD1B01121B906A7100E5FE74 /* PageMenu */,
 				FD1B00E01B90655400E5FE74 /* SDWebImage */,
 				FD1B00A41B90644F00E5FE74 /* MBProgressHUD */,
@@ -377,23 +361,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		FD45E0341B96D826003FFF67 /* Lib */ = {
-			isa = PBXGroup;
-			children = (
-				FD45E0351B96D826003FFF67 /* sdRefeshView_arrow@2x.png */,
-				FD45E0361B96D826003FFF67 /* SDRefresh.h */,
-				FD45E0371B96D826003FFF67 /* SDRefreshFooterView.h */,
-				FD45E0381B96D826003FFF67 /* SDRefreshFooterView.m */,
-				FD45E0391B96D826003FFF67 /* SDRefreshHeaderView.h */,
-				FD45E03A1B96D826003FFF67 /* SDRefreshHeaderView.m */,
-				FD45E03B1B96D826003FFF67 /* SDRefreshView.h */,
-				FD45E03C1B96D826003FFF67 /* SDRefreshView.m */,
-				FD45E03D1B96D826003FFF67 /* UIView+SDExtension.h */,
-				FD45E03E1B96D826003FFF67 /* UIView+SDExtension.m */,
-			);
-			path = Lib;
-			sourceTree = "<group>";
-		};
 		FD55042B1B9418F70003A4A9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -499,7 +466,6 @@
 				FD1B00331B904A5000E5FE74 /* Images.xcassets in Resources */,
 				FD1B00091B9005B500E5FE74 /* LaunchScreen.xib in Resources */,
 				FD1B002D1B900DEC00E5FE74 /* Localizable.strings in Resources */,
-				FD45E03F1B96D826003FFF67 /* sdRefeshView_arrow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,11 +516,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD45E0401B96D826003FFF67 /* SDRefreshFooterView.m in Sources */,
 				FD87B07B1B9C1354006F4C06 /* RiddleManager.m in Sources */,
 				FD1B01111B90655400E5FE74 /* UIView+WebCacheOperation.m in Sources */,
 				FD1B01101B90655400E5FE74 /* UIImageView+WebCache.m in Sources */,
-				FD45E0411B96D826003FFF67 /* SDRefreshHeaderView.m in Sources */,
 				FD1B01031B90655400E5FE74 /* NSData+ImageContentType.m in Sources */,
 				FD1B010B1B90655400E5FE74 /* UIButton+WebCache.m in Sources */,
 				FD1B010A1B90655400E5FE74 /* SDWebImagePrefetcher.m in Sources */,
@@ -569,7 +533,6 @@
 				FD1B010C1B90655400E5FE74 /* UIImage+GIF.m in Sources */,
 				FD1B002B1B900C8200E5FE74 /* SayingViewController.m in Sources */,
 				FD1B00251B900B5C00E5FE74 /* TrickViewController.m in Sources */,
-				FD45E0421B96D826003FFF67 /* SDRefreshView.m in Sources */,
 				FD1B010D1B90655400E5FE74 /* UIImage+MultiFormat.m in Sources */,
 				FDBAA5151B958F5D00F544A6 /* CommonSingleQuestViewController.m in Sources */,
 				FDBAA5181B968FFD00F544A6 /* NSString+MessageDigest.m in Sources */,
@@ -581,7 +544,6 @@
 				FD1B010E1B90655400E5FE74 /* UIImage+WebP.m in Sources */,
 				FD55042A1B9418DC0003A4A9 /* TrickManager.m in Sources */,
 				FD1B01051B90655400E5FE74 /* SDWebImageCompat.m in Sources */,
-				FD45E0431B96D826003FFF67 /* UIView+SDExtension.m in Sources */,
 				FDBAA50D1B9541D000F544A6 /* UIManager.m in Sources */,
 				FD1B01071B90655400E5FE74 /* SDWebImageDownloader.m in Sources */,
 				FD87B0811B9C13C0006F4C06 /* RiddleModel.m in Sources */,
