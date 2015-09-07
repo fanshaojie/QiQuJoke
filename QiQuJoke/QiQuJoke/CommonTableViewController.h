@@ -11,7 +11,7 @@
 #import "DefineManager.h"
 #import "TrickModel.h"
 #import "TrickManager.h"
-#import "SDRefresh.h"
+#import <XHRefreshControl.h>
 #import "UIManager.h"
 #import "RiddleManager.h"
 #import "RiddleModel.h"
@@ -23,7 +23,7 @@
 
 @end
 
-@interface CommonTableViewController : UITableViewController
+@interface CommonTableViewController : UITableViewController<XHRefreshControlDelegate>
 
 -(instancetype)initWithContentType:(ContentType)type Content:(id)ct;
 

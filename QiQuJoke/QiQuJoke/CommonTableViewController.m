@@ -12,8 +12,7 @@
     ContentType cntType;
     id cnt;
     NSInteger pageIndex;
-    SDRefreshHeaderView *refreshHeader;
-    SDRefreshFooterView *refreshFooter;
+    XHRefreshControl *refreshCtrl;
 }
 
 @end
@@ -27,19 +26,25 @@
 }
 
 -(void)initView{
-    refreshHeader = [SDRefreshHeaderView refreshView];
-    [refreshHeader addTarget:self refreshAction:@selector(refreshByHeader)];
-    [refreshHeader addToScrollView:self.tableView];
-    
-    refreshFooter = [SDRefreshFooterView refreshView];
-    [refreshFooter addTarget:self  refreshAction:@selector(refreshByFooter)];
-    [refreshFooter addToScrollView:self.tableView];
-    
-    
+    refreshCtrl = [[XHRefreshControl alloc]initWithScrollView:self.tableView delegate:self];
 }
 
--(void)refreshByHeader{
+- (BOOL)keepiOS7NewApiCharacter;{
+    return YES;
+}
+
+-(void)beginPullDownRefreshing{
     [self reloadData];
+}
+
+-(void)beginLoadMoreRefreshing{
+    [self refreshByFooter];
+}
+
+-(NSString *)lastUpdateTimeString{
+    NSDateFormatter *formater = [[NSDateFormatter alloc]init];
+    [formater setDateFormat:@"HH:mm:ss"];
+    return [formater stringFromDate:[NSDate date]];
 }
 
 -(void)refreshByFooter{
@@ -56,7 +61,7 @@
             [cateModel.trickArray addObjectsFromArray:cm.trickArray];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
-                [refreshFooter endRefreshing];
+                [refreshCtrl endLoadMoreRefresing];
             });
             
         }];
@@ -72,7 +77,7 @@
             RiddleCateModel *riddleCM = cnt;
             [riddleCM.riddleArray addObjectsFromArray:rcm.riddleArray];
             [self.tableView reloadData];
-            [refreshFooter endRefreshing];
+            [refreshCtrl endLoadMoreRefresing];
         }];
     }
     else if(cntType == CTSaying) {
@@ -86,7 +91,7 @@
             SayingCateModel *sayingCM = cnt;
             [sayingCM.sayingArray addObjectsFromArray:scm.sayingArray];
             [self.tableView reloadData];
-            [refreshFooter endRefreshing];
+            [refreshCtrl endLoadMoreRefresing];
         }];
     }
     
@@ -118,7 +123,7 @@
                 cnt = cm;
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.tableView reloadData];
-                    [refreshHeader endRefreshing];
+                    [refreshCtrl endPullDownRefreshing];
                 });
                 
             }];
@@ -135,8 +140,11 @@
             [manager initRiddleOfCate:[self checkOutCateKey:cateModel.cateName] reloadFromServer:NO complete:^(RiddleCateModel *rcm) {
                 cnt = rcm;
                 [self.tableView reloadData];
-                [refreshHeader endRefreshing];
+                [refreshCtrl endPullDownRefreshing];
             }];
+        }
+        else{
+            [refreshCtrl endPullDownRefreshing];
         }
     }
     else if(cntType == CTSaying) {
@@ -146,11 +154,11 @@
             [manager initSayingOfCate:[self checkOutCateKey:cateModel.cateName] reloadFromServer:NO complete:^(SayingCateModel *scm) {
                 cnt = scm;
                 [self.tableView reloadData];
-                [refreshHeader endRefreshing];
+                [refreshCtrl endPullDownRefreshing];
             }];
         }
     }
-    [refreshHeader beginRefreshing];
+    [refreshCtrl startPullDownRefreshing];
 }
 
 
@@ -164,13 +172,13 @@
         TrickManager *manager =   [[TrickManager alloc]init];
         [manager   initTrickOfCate:[self checkOutCateKey:cateModel.cateName] reloadFromServer:YES complete:^(TrickCateModel *cm) {
             if (!cm) {
-                [refreshHeader endRefreshing];
+                [refreshCtrl endPullDownRefreshing];
                 return;
             }
             cnt = cm;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
-                [refreshHeader endRefreshing];
+               [refreshCtrl endPullDownRefreshing];
             });
             
         }];
@@ -180,12 +188,12 @@
         RiddleManager *manager = [[RiddleManager alloc]init];
         [manager initRiddleOfCate:[self checkOutCateKey:cateModel.cateName] reloadFromServer:YES complete:^(RiddleCateModel *rcm) {
             if (!rcm) {
-                [refreshHeader endRefreshing];
+                [refreshCtrl endPullDownRefreshing];
                 return;
             }
             cnt =  rcm;
             [self.tableView reloadData];
-            [refreshHeader endRefreshing];
+            [refreshCtrl endPullDownRefreshing];
         }];
     }
     else if(cntType == CTSaying) {
@@ -193,12 +201,12 @@
         SayingManager *manager = [[SayingManager alloc]init];
         [manager initSayingOfCate:[self checkOutCateKey:cateModel.cateName] reloadFromServer:YES complete:^(SayingCateModel *scm) {
             if (!scm) {
-                [refreshHeader endRefreshing];
+                [refreshCtrl endPullDownRefreshing];
                 return;
             }
             cnt =  scm;
             [self.tableView reloadData];
-            [refreshHeader endRefreshing];
+            [refreshCtrl endPullDownRefreshing];
         }];
     }
 }
