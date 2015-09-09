@@ -24,6 +24,15 @@
     // Do any additional setup after loading the view.
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
+    NetState netState = [NetHelper Instance].netState;
+    if ((!cateArr)&&(netState == QQReachabilityStatusReachableViaWiFi || netState == QQReachabilityStatusReachableViaWWAN)) {
+        [self initData];
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -35,7 +44,11 @@
 
 -(void)initData{
     RiddleManager *manager = [[RiddleManager alloc]init];
-    [manager initRiddlesOfCateAllWithComplete:^(NSArray *riddleCateArr)  {
+    [manager initRiddlesOfCateAllWithComplete:^(NSArray *riddleCateArr,RequestState errState)  {
+        if (errState == NENoNet) {
+            [UIManager showNoNetToastIn:self.view];
+            return;
+        }
         cateArr = riddleCateArr;
         dispatch_async(dispatch_get_main_queue(), ^{
             if (riddleCateArr == nil) {
@@ -77,19 +90,15 @@
     [self.navigationController pushViewController:singleCtrl animated:true];
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES];
-}
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

@@ -11,12 +11,12 @@
 #import "AFNetworking.h"
 #import "DefineManager.h"
 #import "NSString+MessageDigest.h"
+#import "NetHelper.h"
+#import "EnumManager.h"
 @interface TrickManager : NSObject
 
--(void)initTricksOfCateAllWithComplete:(void(^)(NSArray *trickCateArr))complete ;
+-(void)initTricksOfCateAllWithComplete:(void(^)(NSArray *trickCateArr,RequestState errState))complete;
 
--(void)initTrickOfCate:(NSString*)cate reloadFromServer:(BOOL)needReload complete:(void(^)(TrickCateModel*)) _complete;
-
--(void)requestTrickOfCate:(NSString*)cate pageIndex:(NSInteger)pIndex complete:(void(^)(TrickCateModel*)) _complete;
+-(void)requestTrickOfCate:(NSString*)cate reloadFormServer:(BOOL)needReload  pageIndex:(NSInteger)pIndex complete:(void(^)(TrickCateModel*,RequestState errState)) _complete;
 
 @end

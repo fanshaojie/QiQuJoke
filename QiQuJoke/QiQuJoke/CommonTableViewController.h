@@ -17,6 +17,7 @@
 #import "RiddleModel.h"
 #import "SayingModel.h"
 #import "SayingManager.h"
+#import "NetHelper.h"
 @protocol tableViewProcotol <NSObject>
 
 -(void)cellSelectedAtModel:(id)model;

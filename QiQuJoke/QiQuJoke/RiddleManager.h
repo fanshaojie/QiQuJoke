@@ -11,13 +11,12 @@
 #import "AFNetworking.h"
 #import "DefineManager.h"
 #import "NSString+MessageDigest.h"
-
+#import "EnumManager.h"
+#import "NetHelper.h"
 @interface RiddleManager : NSObject
 
--(void)initRiddlesOfCateAllWithComplete:(void(^)(NSArray *riddleCateArr))complete ;
+-(void)initRiddlesOfCateAllWithComplete:(void(^)(NSArray *riddleCateArr,RequestState errState))complete ;
 
--(void)initRiddleOfCate:(NSString*)cate reloadFromServer:(BOOL)needReload complete:(void(^)(RiddleCateModel* rcm)) _complete;
-
--(void)requestRiddleOfCate:(NSString*)cate pageIndex:(NSInteger)pIndex complete:(void(^)(RiddleCateModel* rcm)) _complete;
+-(void)requestRiddleOfCate:(NSString*)cate reloadFromServer:(BOOL)needReload  pageIndex:(NSInteger)pIndex complete:(void(^)(RiddleCateModel* rcm,RequestState errState)) _complete;
 
 @end

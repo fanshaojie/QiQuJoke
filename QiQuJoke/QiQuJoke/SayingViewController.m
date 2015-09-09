@@ -24,9 +24,23 @@
     // Do any additional setup after loading the view.
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
+    NetState netState = [NetHelper Instance].netState;
+    if ((!cateArr)&&(netState == QQReachabilityStatusReachableViaWiFi || netState == QQReachabilityStatusReachableViaWWAN)) {
+        [self initData];
+    }
+}
+
 -(void)initData{
     SayingManager *manager = [[SayingManager alloc]init];
-    [manager initSayingsOfCateAllWithComplete:^(NSArray *sayingCateArr)  {
+    [manager initSayingsOfCateAllWithComplete:^(NSArray *sayingCateArr,RequestState errState)  {
+        if (errState == NENoNet) {
+            [UIManager showNoNetToastIn:self.view];
+            return;
+        }
+        
         cateArr = sayingCateArr;
         dispatch_async(dispatch_get_main_queue(), ^{
             if (sayingCateArr == nil) {
@@ -66,10 +80,6 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES];
-}
 
 -(void)cellSelectedAtModel:(id)model{
     SayingModel *tm = model;

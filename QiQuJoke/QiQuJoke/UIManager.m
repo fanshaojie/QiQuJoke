@@ -24,4 +24,14 @@
     return [UIColor colorWithRed:87.0/255.0 green:135.0/255.0 blue:173.0/255.0 alpha:1];
 }
 
++(void)showNoNetToastIn:(UIView *)view{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:true];
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText = NSLocalizedString(@"noNet", nil);
+    hud.margin = 10.f;
+    hud.yOffset = 150.f;
+    hud.removeFromSuperViewOnHide = YES;
+    [hud hide:YES afterDelay:1];
+}
+
 @end

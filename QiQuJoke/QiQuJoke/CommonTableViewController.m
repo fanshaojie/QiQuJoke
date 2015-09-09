@@ -12,6 +12,7 @@
     ContentType cntType;
     id cnt;
     NSInteger pageIndex;
+    BOOL didFirstReload ;
     XHRefreshControl *refreshCtrl;
 }
 
@@ -23,6 +24,7 @@
     [super viewDidLoad];
     [self initView];
     [self initData];
+    
 }
 
 -(void)initView{
@@ -34,11 +36,17 @@
 }
 
 -(void)beginPullDownRefreshing{
-    [self reloadData];
+    if (!didFirstReload) {
+        [self loadDataByOperMode:RMInit];
+        didFirstReload = YES;
+    }else{
+        [self loadDataByOperMode:RMReload];
+    }
 }
 
 -(void)beginLoadMoreRefreshing{
-    [self refreshByFooter];
+    pageIndex++;
+    [self loadDataByOperMode:RMLoadMore];
 }
 
 -(NSString *)lastUpdateTimeString{
@@ -47,54 +55,150 @@
     return [formater stringFromDate:[NSDate date]];
 }
 
--(void)refreshByFooter{
-    pageIndex++;
-    if (cntType == CTTrick) {
-        TrickCateModel *cateModel = cnt;
-        TrickManager *manager =   [[TrickManager alloc]init];
-        [manager requestTrickOfCate:[self checkOutCateKey:cateModel.cateName] pageIndex:pageIndex complete:^(TrickCateModel *cm) {
-            if (!cm) {
-                pageIndex--;
-                return;
-            }
-            TrickCateModel *cateModel = cnt;
-            [cateModel.trickArray addObjectsFromArray:cm.trickArray];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-                [refreshCtrl endLoadMoreRefresing];
-            });
-            
-        }];
+-(void)loadDataByOperMode:(RequestMode)mode{
+    BOOL needReloadFormServer = false;
+    if (mode == RMInit) {
+        needReloadFormServer = NO;
     }
-    else if(cntType == CTRiddle) {
-        RiddleCateModel *cateModel = cnt;
-        RiddleManager *manager = [[RiddleManager alloc]init];
-        [manager requestRiddleOfCate:[self checkOutCateKey:cateModel.cateName] pageIndex:pageIndex complete:^(RiddleCateModel *rcm) {
-            if (!rcm) {
-                pageIndex--;
-                return;
-            }
-            RiddleCateModel *riddleCM = cnt;
-            [riddleCM.riddleArray addObjectsFromArray:rcm.riddleArray];
-            [self.tableView reloadData];
-            [refreshCtrl endLoadMoreRefresing];
-        }];
-    }
-    else if(cntType == CTSaying) {
-        SayingCateModel *cateModel = cnt;
-        SayingManager *manager = [[SayingManager alloc]init];
-        [manager requestSayingOfCate:[self checkOutCateKey:cateModel.cateName] pageIndex:pageIndex complete:^(SayingCateModel *scm) {
-            if (!scm) {
-                pageIndex--;
-                return;
-            }
-            SayingCateModel *sayingCM = cnt;
-            [sayingCM.sayingArray addObjectsFromArray:scm.sayingArray];
-            [self.tableView reloadData];
-            [refreshCtrl endLoadMoreRefresing];
-        }];
+    else{
+        needReloadFormServer = YES;
     }
     
+    switch (cntType) {
+        case CTTrick:{
+            TrickCateModel *cateModel = cnt;
+            if(mode == RMInit && cateModel.trickArray){
+                [refreshCtrl endPullDownRefreshing];
+                return;
+            }
+            TrickManager *manager =   [[TrickManager alloc]init];
+            [manager requestTrickOfCate:[self checkOutCateKey:cateModel.cateName] reloadFormServer:needReloadFormServer pageIndex:pageIndex complete:^(TrickCateModel *cm, RequestState errState) {
+                if(errState == NENoNet)
+                {
+                    if(mode == RMLoadMore)
+                    {
+                        pageIndex-- ;
+                    }
+                    [UIManager showNoNetToastIn:self.view];
+                }
+                else if(cm)
+                {
+                    if(mode == RMLoadMore){
+                        TrickCateModel *cateModel = cnt;
+                        [cateModel.trickArray addObjectsFromArray:cm.trickArray];
+                    }
+                    else{
+                        cnt = cm;
+                    }
+                    [self.tableView reloadData];
+                }
+                else {
+                    if(mode == RMLoadMore)
+                    {
+                        pageIndex-- ;
+                    }
+                }
+                if (mode == RMLoadMore) {
+                    [refreshCtrl endLoadMoreRefresing];
+                }
+                else{
+                    [refreshCtrl endPullDownRefreshing];
+                }
+                
+            }];
+            break;
+        }
+        case CTRiddle:{
+            RiddleCateModel *cateModel = cnt;
+            if(mode == RMInit && cateModel.riddleArray){
+                [refreshCtrl endPullDownRefreshing];
+                return;
+            }
+            RiddleManager *manager =   [[RiddleManager alloc]init];
+            
+            [manager requestRiddleOfCate:[self checkOutCateKey:cateModel.cateName] reloadFromServer:needReloadFormServer pageIndex:pageIndex complete:^(RiddleCateModel *rcm, RequestState errState) {
+                if(errState == NENoNet)
+                {
+                    if(mode == RMLoadMore)
+                    {
+                        pageIndex-- ;
+                    }
+                    [UIManager showNoNetToastIn:self.view];
+                }
+                else if(rcm)
+                {
+                    if(mode == RMLoadMore){
+                        RiddleCateModel *cateModel = cnt;
+                        [cateModel.riddleArray addObjectsFromArray:rcm.riddleArray];
+                    }
+                    else{
+                        cnt = rcm;
+                    }
+                    [self.tableView reloadData];
+                }
+                else {
+                    if(mode == RMLoadMore)
+                    {
+                        pageIndex-- ;
+                    }
+                }
+                if (mode == RMLoadMore) {
+                    [refreshCtrl endLoadMoreRefresing];
+                }
+                else{
+                    [refreshCtrl endPullDownRefreshing];
+                }
+                
+            }];
+            break;
+        }
+        case CTSaying:
+        {
+            SayingCateModel *cateModel = cnt;
+            if(mode == RMInit && cateModel.sayingArray){
+                [refreshCtrl endPullDownRefreshing];
+                return;
+            }
+            SayingManager *manager =   [[SayingManager alloc]init];
+            [manager requestSayingOfCate:[self checkOutCateKey:cateModel.cateName] reloadFromServer:needReloadFormServer pageIndex:pageIndex complete:^(SayingCateModel *scm, RequestState errState) {
+                if(errState == NENoNet)
+                {
+                    if(mode == RMLoadMore)
+                    {
+                        pageIndex-- ;
+                    }
+                    [UIManager showNoNetToastIn:self.view];
+                }
+                else if(scm)
+                {
+                    if(mode == RMLoadMore){
+                        SayingCateModel *cateModel = cnt;
+                        [cateModel.sayingArray addObjectsFromArray:scm.sayingArray];
+                    }
+                    else{
+                        cnt = scm;
+                    }
+                    [self.tableView reloadData];
+                }
+                else {
+                    if(mode == RMLoadMore)
+                    {
+                        pageIndex-- ;
+                    }
+                }
+                if (mode == RMLoadMore) {
+                    [refreshCtrl endLoadMoreRefresing];
+                }
+                else{
+                    [refreshCtrl endPullDownRefreshing];
+                }
+                
+            }];
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 
@@ -114,102 +218,9 @@
 
 -(void)initData{
     pageIndex = 0;
-    if (cntType == CTTrick) {
-        TrickCateModel *cateModel = cnt;
-        if (cateModel.trickArray == nil) {
-            //todo  进行首次加载数据操作
-            TrickManager *manager =   [[TrickManager alloc]init];
-            [manager   initTrickOfCate:[self checkOutCateKey:cateModel.cateName] reloadFromServer:NO complete:^(TrickCateModel *cm) {
-                cnt = cm;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.tableView reloadData];
-                    [refreshCtrl endPullDownRefreshing];
-                });
-                
-            }];
-        }
-        else{
-            //数据已存在，则直接等待初始化视图,这里不用做处理
-        }
-        
-    }
-    else if(cntType == CTRiddle) {
-        RiddleCateModel *cateModel = cnt;
-        if (cateModel.riddleArray == nil) {
-            RiddleManager *manager = [[RiddleManager alloc]init];
-            [manager initRiddleOfCate:[self checkOutCateKey:cateModel.cateName] reloadFromServer:NO complete:^(RiddleCateModel *rcm) {
-                cnt = rcm;
-                [self.tableView reloadData];
-                [refreshCtrl endPullDownRefreshing];
-            }];
-        }
-        else{
-            [refreshCtrl endPullDownRefreshing];
-        }
-    }
-    else if(cntType == CTSaying) {
-        SayingCateModel *cateModel = cnt;
-        if (cateModel.sayingArray == nil) {
-            SayingManager *manager = [[SayingManager alloc]init];
-            [manager initSayingOfCate:[self checkOutCateKey:cateModel.cateName] reloadFromServer:NO complete:^(SayingCateModel *scm) {
-                cnt = scm;
-                [self.tableView reloadData];
-                [refreshCtrl endPullDownRefreshing];
-            }];
-        }
-    }
     [refreshCtrl startPullDownRefreshing];
 }
 
-
-
-
--(void)reloadData{
-    pageIndex = 0;
-    if (cntType == CTTrick) {
-        TrickCateModel *cateModel = cnt;
-        //todo  进行首次加载数据操作
-        TrickManager *manager =   [[TrickManager alloc]init];
-        [manager   initTrickOfCate:[self checkOutCateKey:cateModel.cateName] reloadFromServer:YES complete:^(TrickCateModel *cm) {
-            if (!cm) {
-                [refreshCtrl endPullDownRefreshing];
-                return;
-            }
-            cnt = cm;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-               [refreshCtrl endPullDownRefreshing];
-            });
-            
-        }];
-    }
-    else if(cntType == CTRiddle) {
-        RiddleCateModel *cateModel = cnt;
-        RiddleManager *manager = [[RiddleManager alloc]init];
-        [manager initRiddleOfCate:[self checkOutCateKey:cateModel.cateName] reloadFromServer:YES complete:^(RiddleCateModel *rcm) {
-            if (!rcm) {
-                [refreshCtrl endPullDownRefreshing];
-                return;
-            }
-            cnt =  rcm;
-            [self.tableView reloadData];
-            [refreshCtrl endPullDownRefreshing];
-        }];
-    }
-    else if(cntType == CTSaying) {
-        SayingCateModel *cateModel = cnt;
-        SayingManager *manager = [[SayingManager alloc]init];
-        [manager initSayingOfCate:[self checkOutCateKey:cateModel.cateName] reloadFromServer:YES complete:^(SayingCateModel *scm) {
-            if (!scm) {
-                [refreshCtrl endPullDownRefreshing];
-                return;
-            }
-            cnt =  scm;
-            [self.tableView reloadData];
-            [refreshCtrl endPullDownRefreshing];
-        }];
-    }
-}
 
 
 - (void)didReceiveMemoryWarning {

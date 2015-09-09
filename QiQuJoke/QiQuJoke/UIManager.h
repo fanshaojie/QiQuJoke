@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "DXAlertView.h"
 #import <UIKit/UIKit.h>
+#import <MBProgressHUD.h>
 @interface UIManager : NSObject
 +(void)showAlert:(NSString*)content;
 +(void)showAlert:(NSString *)content title:(NSString*)title;
++(void)showNoNetToastIn:(UIView*)view;
 +(UIColor*)btnDefaultColor;
 @end

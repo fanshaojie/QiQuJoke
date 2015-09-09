@@ -24,15 +24,27 @@
     // Do any additional setup after loading the view.
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
+    NetState netState = [NetHelper Instance].netState;
+    if ((!cateArr)&&(netState == QQReachabilityStatusReachableViaWiFi || netState == QQReachabilityStatusReachableViaWWAN)) {
+        [self initData];
+    }
+}
+
 -(void)initView{
-//    self.navigationItem.title = NSLocalizedString(@"trick", nil);
-//    self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
     [self.navigationController setNavigationBarHidden:YES];
 }
 
 -(void)initData{
     TrickManager *manager = [[TrickManager alloc]init];
-    [manager initTricksOfCateAllWithComplete:^(NSArray *trickCateArr)  {
+    [manager initTricksOfCateAllWithComplete:^(NSArray *trickCateArr,RequestState ErrState)  {
+        if (ErrState == NENoNet) {
+            [UIManager  showNoNetToastIn:self.view];
+            return;
+        }
+        
         cateArr = trickCateArr;
         dispatch_async(dispatch_get_main_queue(), ^{
             if (trickCateArr == nil) {
@@ -69,10 +81,7 @@
 - (void)didMoveToPage:(UIViewController *)controller index:(NSInteger)index{
    
 }
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES];
-}
+
 
 -(void)cellSelectedAtModel:(id)model{
     TrickModel *tm = model;

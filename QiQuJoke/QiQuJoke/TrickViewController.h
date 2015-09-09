@@ -15,6 +15,8 @@
 #import "EnumManager.h"
 #import "DefineManager.h"
 #import "CommonSingleQuestViewController.h"
+#import <MONActivityIndicatorView.h>
+#import "NetHelper.h"
 @interface TrickViewController : UIViewController<tableViewProcotol,CAPSPageMenuDelegate>
 
 @end

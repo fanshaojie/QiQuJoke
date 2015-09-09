@@ -15,4 +15,28 @@ typedef enum{
     CTSaying
 }ContentType;
 
+
+typedef enum{
+    QQReachabilityStatusUnknown          = -1,
+    QQReachabilityStatusNotReachable     = 0,
+    QQReachabilityStatusReachableViaWWAN = 1,
+    QQReachabilityStatusReachableViaWiFi = 2,
+    
+}NetState;
+
+typedef enum{
+    NENoNet,
+    NENetDataErr,
+    NELocalDateErr,
+    NEOK
+    
+}RequestState;
+
+typedef enum{
+    RMInit,
+    RMReload,
+    RMLoadMore
+    
+}RequestMode;
+
 #endif

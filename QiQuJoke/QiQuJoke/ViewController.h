@@ -11,6 +11,7 @@
 #import "RiddleViewController.h"
 #import "SayingViewController.h"
 #import "MLNavigationController.h"
+#import "NetHelper.h"
 @interface ViewController : UITabBarController
 
 

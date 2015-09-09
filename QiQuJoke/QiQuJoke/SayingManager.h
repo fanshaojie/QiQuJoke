@@ -12,13 +12,12 @@
 #import "AFNetworking.h"
 #import "DefineManager.h"
 #import "NSString+MessageDigest.h"
-
+#import "EnumManager.h"
+#import "NetHelper.h"
 @interface SayingManager : NSObject
 
--(void)initSayingsOfCateAllWithComplete:(void(^)(NSArray *SayingCateArr))complete ;
+-(void)initSayingsOfCateAllWithComplete:(void(^)(NSArray *SayingCateArr,RequestState errState))complete ;
 
--(void)initSayingOfCate:(NSString*)cate reloadFromServer:(BOOL)needReload complete:(void(^)(SayingCateModel* scm)) _complete;
-
--(void)requestSayingOfCate:(NSString*)cate pageIndex:(NSInteger)pIndex complete:(void(^)(SayingCateModel* scm)) _complete;
+-(void)requestSayingOfCate:(NSString*)cate reloadFromServer:(BOOL)needReload pageIndex:(NSInteger)pIndex complete:(void(^)(SayingCateModel* scm,RequestState errState)) _complete;
 
 @end
