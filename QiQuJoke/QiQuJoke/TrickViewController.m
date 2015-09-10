@@ -80,13 +80,15 @@
             }
             
             NSDictionary *parameters = @{
-                                         CAPSPageMenuOptionScrollMenuBackgroundColor: [UIColor colorWithRed:30.0/255.0 green:30.0/255.0 blue:30.0/255.0 alpha:1.0],
-                                         CAPSPageMenuOptionViewBackgroundColor: [UIColor colorWithRed:20.0/255.0 green:20.0/255.0 blue:20.0/255.0 alpha:1.0],
+                                         CAPSPageMenuOptionScrollMenuBackgroundColor: [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:0.8],
+                                         CAPSPageMenuOptionViewBackgroundColor: [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:0.8],
+                                         CAPSPageMenuOptionSelectedMenuItemLabelColor:[UIColor orangeColor],
                                          CAPSPageMenuOptionSelectionIndicatorColor: [UIColor orangeColor],
+                                         CAPSPageMenuOptionUnselectedMenuItemLabelColor:[UIColor blackColor],
                                          CAPSPageMenuOptionBottomMenuHairlineColor: [UIColor colorWithRed:70.0/255.0 green:70.0/255.0 blue:70.0/255.0 alpha:1.0],
                                          CAPSPageMenuOptionMenuItemFont: [UIFont fontWithName:@"HelveticaNeue" size:13.0],
                                          CAPSPageMenuOptionMenuHeight: @(40.0),
-                                         CAPSPageMenuOptionMenuItemWidth: @(90.0),
+                                         CAPSPageMenuOptionMenuItemWidth: @(80.0),
                                          CAPSPageMenuOptionCenterMenuItems: @(YES)
                                          };
             

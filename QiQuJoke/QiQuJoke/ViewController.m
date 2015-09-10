@@ -37,7 +37,8 @@
     [self addChildViewController:[[UINavigationController alloc] initWithRootViewController:rvCtrl]];
     [self addChildViewController:[[UINavigationController alloc] initWithRootViewController:trickCtrl]];
     [self addChildViewController:[[UINavigationController alloc] initWithRootViewController:sayingCtrl]];
-    
+    self.tabBar.barTintColor = [UIColor blackColor];
+    self.tabBar.tintColor = [UIColor orangeColor];
 }
 
 

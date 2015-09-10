@@ -21,7 +21,7 @@
 }
 
 +(UIColor *)btnDefaultColor{
-    return [UIColor colorWithRed:87.0/255.0 green:135.0/255.0 blue:173.0/255.0 alpha:1];
+    return [UIColor orangeColor];
 }
 
 +(void)showNoNetToastIn:(UIView *)view{
