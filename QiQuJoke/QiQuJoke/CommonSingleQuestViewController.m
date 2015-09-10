@@ -8,11 +8,16 @@
 
 #import "CommonSingleQuestViewController.h"
 
-@interface CommonSingleQuestViewController(){
-    UILabel *cntLbl;
-    UIButton *answerBtn;
-    UIButton *shareBtn;
-}
+@interface CommonSingleQuestViewController()
+
+@property (nonatomic,strong) UILabel *cntLbl;
+@property (nonatomic,strong) UIButton *btnPrevious;
+@property (nonatomic,strong) UIButton *btnNext;
+@property (nonatomic,strong) UIBarButtonItem *shareItem;
+@property (nonatomic,strong) STScratchView *scratchView;
+@property (nonatomic,strong) UIImageView *ball;
+@property (nonatomic,strong) UILabel *lblAnswer;
+@property (nonatomic,strong) UILabel *lblTip;
 
 @end
 
@@ -25,52 +30,64 @@
     // Do any additional setup after loading the view.
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:false];
-}
-
 -(void)initView{
-    
+    [self.navigationController setNavigationBarHidden:false];
     self.title = NSLocalizedString(@"canYouGuess", nil);
     self.view.backgroundColor =[UIColor whiteColor];
-    cntLbl = [[UILabel alloc]initWithFrame:CGRectMake(25, CGRectGetHeight(self.view.frame)/3, CGRectGetWidth(self.view.frame) - 50, 100)];
-    cntLbl.textAlignment = NSTextAlignmentCenter;
-    cntLbl.numberOfLines = 0;
-    [self.view addSubview:cntLbl];
+    //内容
+    self.cntLbl = [[UILabel alloc]initWithFrame:CGRectMake(25, CGRectGetHeight(self.view.frame)/3, CGRectGetWidth(self.view.frame) - 50, 100)];
+    self.cntLbl.textAlignment = NSTextAlignmentCenter;
+    self.cntLbl.numberOfLines = 0;
+    [self.view addSubview:self.cntLbl];
     
-    answerBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    answerBtn.frame = CGRectMake((CGRectGetWidth(self.view.frame)-kBtnNormalWidth)/2, CGRectGetMaxY(cntLbl.frame)+30, kBtnNormalWidth, kBtnDefaultHeight);
-    answerBtn.layer.cornerRadius = 2;
-    [answerBtn addTarget:self action:@selector(btnAnswerClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [answerBtn setBackgroundColor:[UIManager btnDefaultColor]];
-    [answerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [answerBtn setTitle:NSLocalizedString(@"openResult", nil) forState:UIControlStateNormal];
-    [self.view addSubview:answerBtn];
-    
-    shareBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    shareBtn.frame = CGRectMake(CGRectGetMinX(answerBtn.frame), CGRectGetMaxY(answerBtn.frame)+15, CGRectGetWidth(answerBtn.frame), CGRectGetHeight(answerBtn.frame));
-    shareBtn.layer.cornerRadius = 2;
-    [shareBtn addTarget:self action:@selector(btnShareClicked) forControlEvents:UIControlEventTouchUpInside];
-    [shareBtn setBackgroundColor:[UIManager btnDefaultColor]];
-    [shareBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [shareBtn setTitle:NSLocalizedString(@"share", nil) forState:UIControlStateNormal];
-    [self.view addSubview:shareBtn];
-    
+    //分享
+    self.shareItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(btnShareClicked)];
+    self.navigationItem.rightBarButtonItem = self.shareItem;
     
     if (_cntType == CTTrick) {
         TrickModel *trickModel = _cnt;
-        cntLbl.text =trickModel.content;
+        self.cntLbl.text =trickModel.content;
     }
     else if (_cntType == CTRiddle) {
         RiddleModel *riddleModel = _cnt;
-        cntLbl.text = riddleModel.content;
+        self.cntLbl.text = riddleModel.content;
     }
     else if (_cntType == CTSaying) {
         SayingModel *sayingModel = _cnt;
-        cntLbl.text = sayingModel.content;
-        answerBtn.hidden = YES;
+        self.cntLbl.text = sayingModel.content;
     }
+    
+    CGFloat scratchX = 30;
+    CGFloat scratchY = self.cntLbl.frame.origin.y+self.cntLbl.frame.size.height+20;
+    CGFloat scratchWidth = self.view.frame.size.width-scratchX * 2;
+    CGFloat scratchHeight = 80;
+    
+    self.scratchView = [[STScratchView alloc] initWithFrame:CGRectMake(scratchX, scratchY, scratchWidth, scratchHeight)];
+    [self.scratchView setSizeBrush:20.0];
+    
+    self.ball = [[UIImageView alloc] init];
+    [self.ball setFrame:CGRectMake(0, 0, scratchWidth, scratchHeight)];
+    [self.ball setImage:[UIImage imageNamed:@"scratch"]];
+    [self.scratchView setHideView:self.ball];
+    
+    self.lblAnswer = [[UILabel alloc] initWithFrame:CGRectMake(scratchX, scratchY, scratchWidth, scratchHeight)];
+    self.lblAnswer.textAlignment = NSTextAlignmentCenter;
+    TrickModel *trickModel = _cnt;
+    [self.lblAnswer setText:trickModel.answer];
+    
+    self.lblTip = [[UILabel alloc] initWithFrame:CGRectMake(scratchX, scratchY, scratchWidth, scratchHeight)];
+    self.lblTip.textAlignment = NSTextAlignmentCenter;
+    self.lblTip.textColor = [UIColor whiteColor];
+    self.lblTip.text = @"刮开我,揭晓答案";
+    
+    [self.view addSubview:self.lblAnswer];
+    [self.view addSubview:self.scratchView];
+    [self.view addSubview:self.lblTip];
+    
+    
+    [UIView animateWithDuration:5.0 animations:^{
+        [self.lblTip setAlpha:0];
+    }];
     
 }
 
@@ -91,8 +108,6 @@
     else if (_cntType == CTSaying) {
         
     }
-    
-    
 }
 
 -(void)shareToWechat{
@@ -106,7 +121,7 @@
 -(void)shareCommon:(SSDKPlatformType)platformType{
     //创建分享参数
     NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
-    [shareParams SSDKSetupShareParamsByText:cntLbl.text
+    [shareParams SSDKSetupShareParamsByText:self.cntLbl.text
                                      images:@[[UIImage imageNamed:@"shareImg"]]
                                         url:[NSURL URLWithString:@"http://mob.com"]
                                       title:self.tabBarItem.title
@@ -125,7 +140,7 @@
              }
              case SSDKResponseStateFail:
              {
-                 [UIManager showAlert:[NSString stringWithFormat:@"%@", error]  title:NSLocalizedString(@"shareFailed", nil)];
+                 [UIManager showAlert:[NSString stringWithFormat:@"%@", [error.userInfo valueForKey:@"error_message"]]  title:NSLocalizedString(@"shareFailed", nil)];
                  break;
              }
              case SSDKResponseStateCancel:

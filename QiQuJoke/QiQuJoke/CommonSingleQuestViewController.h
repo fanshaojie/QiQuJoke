@@ -15,6 +15,7 @@
 #import <ShareSDK/ShareSDK.h>
 #import "LXActivity.h"
 #import "UIManager.h"
+#import "STScratchView.h"
 @interface CommonSingleQuestViewController : UIViewController<LXActivityDelegate>
 
 @property (nonatomic) id  cnt;
