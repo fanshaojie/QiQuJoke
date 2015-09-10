@@ -57,57 +57,44 @@
         self.cntLbl.text = sayingModel.content;
     }
     
-    CGFloat scratchX = 30;
-    CGFloat scratchY = self.cntLbl.frame.origin.y+self.cntLbl.frame.size.height+20;
-    CGFloat scratchWidth = self.view.frame.size.width-scratchX * 2;
-    CGFloat scratchHeight = 80;
     
-    self.scratchView = [[STScratchView alloc] initWithFrame:CGRectMake(scratchX, scratchY, scratchWidth, scratchHeight)];
-    [self.scratchView setSizeBrush:20.0];
-    
-    self.ball = [[UIImageView alloc] init];
-    [self.ball setFrame:CGRectMake(0, 0, scratchWidth, scratchHeight)];
-    [self.ball setImage:[UIImage imageNamed:@"scratch"]];
-    [self.scratchView setHideView:self.ball];
-    
-    self.lblAnswer = [[UILabel alloc] initWithFrame:CGRectMake(scratchX, scratchY, scratchWidth, scratchHeight)];
-    self.lblAnswer.textAlignment = NSTextAlignmentCenter;
-    TrickModel *trickModel = _cnt;
-    [self.lblAnswer setText:trickModel.answer];
-    
-    self.lblTip = [[UILabel alloc] initWithFrame:CGRectMake(scratchX, scratchY, scratchWidth, scratchHeight)];
-    self.lblTip.textAlignment = NSTextAlignmentCenter;
-    self.lblTip.textColor = [UIColor whiteColor];
-    self.lblTip.text = @"刮开我,揭晓答案";
-    
-    [self.view addSubview:self.lblAnswer];
-    [self.view addSubview:self.scratchView];
-    [self.view addSubview:self.lblTip];
-    
-    
-    [UIView animateWithDuration:5.0 animations:^{
-        [self.lblTip setAlpha:0];
-    }];
-    
+    if (_cntType != CTSaying) {
+        CGFloat scratchX = 30;
+        CGFloat scratchY = CGRectGetMaxY(self.cntLbl.frame)+ 20;
+        CGFloat scratchWidth = self.view.frame.size.width-scratchX * 2;
+        CGFloat scratchHeight = 80;
+        
+        self.scratchView = [[STScratchView alloc] initWithFrame:CGRectMake(scratchX, scratchY, scratchWidth, scratchHeight)];
+        [self.scratchView setSizeBrush:20.0];
+        
+        self.ball = [[UIImageView alloc] init];
+        [self.ball setFrame:CGRectMake(0, 0, scratchWidth, scratchHeight)];
+        [self.ball setImage:[UIImage imageNamed:@"scratch"]];
+        [self.scratchView setHideView:self.ball];
+        
+        self.lblAnswer = [[UILabel alloc] initWithFrame:CGRectMake(scratchX, scratchY, scratchWidth, scratchHeight)];
+        self.lblAnswer.textAlignment = NSTextAlignmentCenter;
+        TrickModel *trickModel = _cnt;
+        [self.lblAnswer setText:trickModel.answer];
+        
+        self.lblTip = [[UILabel alloc] initWithFrame:CGRectMake(scratchX, scratchY, scratchWidth, scratchHeight)];
+        self.lblTip.textAlignment = NSTextAlignmentCenter;
+        self.lblTip.textColor = [UIColor whiteColor];
+        self.lblTip.text = @"刮开我,揭晓答案";
+        
+        [self.view addSubview:self.lblAnswer];
+        [self.view addSubview:self.scratchView];
+        [self.view addSubview:self.lblTip];
+        
+        [UIView animateWithDuration:5.0 animations:^{
+            [self.lblTip setAlpha:0];
+        }];
+    }
 }
 
 -(void)btnShareClicked{
     LXActivity  *sheetView = [[LXActivity alloc]initWithTitle:NSLocalizedString(@"shareToWhere", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) ShareButtonTitles:@[NSLocalizedString(@"wechat", nil),NSLocalizedString(@"wechatFriends", nil),NSLocalizedString(@"QQ", nil),NSLocalizedString(@"QQZone", nil)] withShareButtonImagesName:@[@"sns_icon_wechat",@"sns_icon_friends",@"sns_icon_qq",@"sns_icon_zone" ]];
     [sheetView showInView:self.view];
-}
-
--(void)btnAnswerClicked:(id)sender{
-    if (_cntType == CTTrick) {
-        TrickModel *trickModel = _cnt;
-        [UIManager showAlert:trickModel.answer  title:NSLocalizedString(@"rightAnswer", nil)];
-    }
-    else if (_cntType == CTRiddle) {
-        RiddleModel *riddleModel =_cnt;
-        [UIManager showAlert:riddleModel.answer title:NSLocalizedString(@"rightAnswer", nil) ];
-    }
-    else if (_cntType == CTSaying) {
-        
-    }
 }
 
 -(void)shareToWechat{
