@@ -29,6 +29,7 @@
 
 -(void)initView{
     refreshCtrl = [[XHRefreshControl alloc]initWithScrollView:self.tableView delegate:self];
+    refreshCtrl.circleColor = [UIColor orangeColor];
 }
 
 - (BOOL)keepiOS7NewApiCharacter;{
