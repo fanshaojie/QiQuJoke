@@ -11,6 +11,7 @@
 @interface SayingViewController (){
     NSArray *cateArr;
     CAPSPageMenu *cateMenu;
+    MONActivityIndicatorView *loadingView;
 }
 
 @end
@@ -20,7 +21,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView];
-    [self initData];
     // Do any additional setup after loading the view.
 }
 
@@ -34,8 +34,10 @@
 }
 
 -(void)initData{
+    [loadingView startAnimating];
     SayingManager *manager = [[SayingManager alloc]init];
     [manager initSayingsOfCateAllWithComplete:^(NSArray *sayingCateArr,RequestState errState)  {
+        [loadingView stopAnimating];
         if (errState == NENoNet) {
             [UIManager showNoNetToastIn:self.view];
             return;
@@ -91,6 +93,23 @@
 
 -(void)initView{
     self.navigationItem.title = NSLocalizedString(@"saying", nil);
+    loadingView = [[MONActivityIndicatorView alloc]init];
+    loadingView.delegate = self;
+    loadingView.numberOfCircles =5;
+    loadingView.radius = 10;
+    loadingView.internalSpacing = 3;
+    loadingView.center = self.view.center;
+    [self.view addSubview:loadingView];
+    [loadingView startAnimating];
+}
+
+- (UIColor *)activityIndicatorView:(MONActivityIndicatorView *)activityIndicatorView
+      circleBackgroundColorAtIndex:(NSUInteger)index {
+    CGFloat red   = (arc4random() % 256)/255.0;
+    CGFloat green = (arc4random() % 256)/255.0;
+    CGFloat blue  = (arc4random() % 256)/255.0;
+    CGFloat alpha = 1.0f;
+    return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
 }
 
 /*

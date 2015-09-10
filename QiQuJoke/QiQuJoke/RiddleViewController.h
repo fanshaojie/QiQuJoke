@@ -15,6 +15,7 @@
 #import "EnumManager.h"
 #import "DefineManager.h"
 #import "CommonSingleQuestViewController.h"
-@interface RiddleViewController : UIViewController<tableViewProcotol>
+#import <MONActivityIndicatorView.h>
+@interface RiddleViewController : UIViewController<tableViewProcotol,MONActivityIndicatorViewDelegate>
 
 @end

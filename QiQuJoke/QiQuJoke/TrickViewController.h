@@ -17,6 +17,6 @@
 #import "CommonSingleQuestViewController.h"
 #import <MONActivityIndicatorView.h>
 #import "NetHelper.h"
-@interface TrickViewController : UIViewController<tableViewProcotol,CAPSPageMenuDelegate>
+@interface TrickViewController : UIViewController<tableViewProcotol,CAPSPageMenuDelegate,MONActivityIndicatorViewDelegate>
 
 @end

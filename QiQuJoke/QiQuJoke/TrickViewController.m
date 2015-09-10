@@ -11,6 +11,7 @@
 @interface TrickViewController (){
     NSArray *cateArr;
     CAPSPageMenu *cateMenu;
+    MONActivityIndicatorView *loadingView;
 }
 
 @end
@@ -20,7 +21,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView];
-    [self initData];
     // Do any additional setup after loading the view.
 }
 
@@ -33,13 +33,32 @@
     }
 }
 
+- (UIColor *)activityIndicatorView:(MONActivityIndicatorView *)activityIndicatorView
+      circleBackgroundColorAtIndex:(NSUInteger)index {
+    CGFloat red   = (arc4random() % 256)/255.0;
+    CGFloat green = (arc4random() % 256)/255.0;
+    CGFloat blue  = (arc4random() % 256)/255.0;
+    CGFloat alpha = 1.0f;
+    return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+}
+
 -(void)initView{
     [self.navigationController setNavigationBarHidden:YES];
+    loadingView = [[MONActivityIndicatorView alloc]init];
+    loadingView.delegate = self;
+    loadingView.numberOfCircles =5;
+    loadingView.radius = 10;
+    loadingView.internalSpacing = 3;
+    loadingView.center = self.view.center;
+    [self.view addSubview:loadingView];
+    [loadingView startAnimating];
 }
 
 -(void)initData{
+    [loadingView startAnimating];
     TrickManager *manager = [[TrickManager alloc]init];
     [manager initTricksOfCateAllWithComplete:^(NSArray *trickCateArr,RequestState ErrState)  {
+        [loadingView stopAnimating];
         if (ErrState == NENoNet) {
             [UIManager  showNoNetToastIn:self.view];
             return;

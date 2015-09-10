@@ -21,6 +21,7 @@
 }
 
 -(void)initView{
+    NetState netState = [NetHelper Instance].netState;
     RiddleViewController *rvCtrl = [[RiddleViewController alloc]init];
     rvCtrl.tabBarItem.title = NSLocalizedString(@"riddle", nil);
     rvCtrl.tabBarItem.image = [UIImage imageNamed:@"chat_b"];

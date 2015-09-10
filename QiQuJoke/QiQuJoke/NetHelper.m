@@ -24,6 +24,7 @@
     self = [super init];
     if (self) {
         //网络初始化
+        _netState = QQReachabilityStatusReachableViaWWAN;
         [self checkNetworkState];
     }
     return  self;

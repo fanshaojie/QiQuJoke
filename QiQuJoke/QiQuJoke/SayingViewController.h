@@ -15,6 +15,7 @@
 #import "EnumManager.h"
 #import "DefineManager.h"
 #import "CommonSingleQuestViewController.h"
-@interface SayingViewController : UIViewController<tableViewProcotol>
+#import <MONActivityIndicatorView.h>
+@interface SayingViewController : UIViewController<tableViewProcotol,MONActivityIndicatorViewDelegate>
 
 @end
