@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2E5F5F401BA169280040BF06 /* STScratchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5F5F3F1BA169280040BF06 /* STScratchView.m */; };
+		2E5F5F461BA175710040BF06 /* STScratchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5F5F451BA175710040BF06 /* STScratchView.m */; };
 		F75F527120135F1553F379A5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA98F9C1F5D3AF2E1CF37BB9 /* libPods.a */; };
 		FD1B00011B9005B500E5FE74 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1B00001B9005B500E5FE74 /* ViewController.m */; };
 		FD1B00091B9005B500E5FE74 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD1B00071B9005B500E5FE74 /* LaunchScreen.xib */; };
@@ -80,8 +80,8 @@
 
 /* Begin PBXFileReference section */
 		1810D4AC4F9A13670FC25435 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		2E5F5F3E1BA169280040BF06 /* STScratchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STScratchView.h; sourceTree = "<group>"; };
-		2E5F5F3F1BA169280040BF06 /* STScratchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STScratchView.m; sourceTree = "<group>"; };
+		2E5F5F441BA175710040BF06 /* STScratchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STScratchView.h; sourceTree = "<group>"; };
+		2E5F5F451BA175710040BF06 /* STScratchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STScratchView.m; sourceTree = "<group>"; };
 		8E2DCDEEA6F3A593C2402EEC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		FA98F9C1F5D3AF2E1CF37BB9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD1B00001B9005B500E5FE74 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
@@ -285,8 +285,8 @@
 		FD1B001F1B90067900E5FE74 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2E5F5F3E1BA169280040BF06 /* STScratchView.h */,
-				2E5F5F3F1BA169280040BF06 /* STScratchView.m */,
+				2E5F5F441BA175710040BF06 /* STScratchView.h */,
+				2E5F5F451BA175710040BF06 /* STScratchView.m */,
 				FDCEB1C71B9EB2E9000FBA71 /* MLNavigationController.h */,
 				FDCEB1C81B9EB2E9000FBA71 /* MLNavigationController.m */,
 				FDCEB1C01B9E8EAD000FBA71 /* LXActivity.h */,
@@ -672,7 +672,7 @@
 				FD87B0811B9C13C0006F4C06 /* RiddleModel.m in Sources */,
 				FD1BFFFE1B9005B500E5FE74 /* QiQuJoke.xcdatamodeld in Sources */,
 				FDCEB1D81B9ED183000FBA71 /* NetHelper.m in Sources */,
-				2E5F5F401BA169280040BF06 /* STScratchView.m in Sources */,
+				2E5F5F461BA175710040BF06 /* STScratchView.m in Sources */,
 				FDBAA5101B954AC600F544A6 /* CommonTableViewController.m in Sources */,
 				FDCEB1D51B9EC1D4000FBA71 /* DXAlertView.m in Sources */,
 			);
