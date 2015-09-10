@@ -24,15 +24,15 @@
     NetState netState = [NetHelper Instance].netState;
     RiddleViewController *rvCtrl = [[RiddleViewController alloc]init];
     rvCtrl.tabBarItem.title = NSLocalizedString(@"riddle", nil);
-    rvCtrl.tabBarItem.image = [UIImage imageNamed:@"chat_b"];
+    rvCtrl.tabBarItem.image = [UIImage imageNamed:@"riddleIcon"];
     
     TrickViewController *trickCtrl = [[TrickViewController alloc]init];
     trickCtrl.tabBarItem.title = NSLocalizedString(@"trick", nil);
-    trickCtrl.tabBarItem.image = [UIImage imageNamed:@"icloud_b"];
+    trickCtrl.tabBarItem.image = [UIImage imageNamed:@"trickIcon"];
     
     SayingViewController *sayingCtrl =[[SayingViewController alloc]init];
     sayingCtrl.tabBarItem.title = NSLocalizedString(@"saying", nil);
-    sayingCtrl.tabBarItem.image = [UIImage imageNamed:@"kb_b"];
+    sayingCtrl.tabBarItem.image = [UIImage imageNamed:@"sayingIcon"];
     
     [self addChildViewController:[[UINavigationController alloc] initWithRootViewController:rvCtrl]];
     [self addChildViewController:[[UINavigationController alloc] initWithRootViewController:trickCtrl]];

@@ -25,8 +25,13 @@
     // Do any additional setup after loading the view.
 }
 
--(void)initView{
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:false];
+}
+
+-(void)initView{
+    
     self.title = NSLocalizedString(@"canYouGuess", nil);
     self.view.backgroundColor =[UIColor whiteColor];
     cntLbl = [[UILabel alloc]initWithFrame:CGRectMake(25, CGRectGetHeight(self.view.frame)/3, CGRectGetWidth(self.view.frame) - 50, 100)];
