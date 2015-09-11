@@ -39,6 +39,7 @@
     [self addChildViewController:[[UINavigationController alloc] initWithRootViewController:sayingCtrl]];
     self.tabBar.barTintColor = [UIColor blackColor];
     self.tabBar.tintColor = [UIColor orangeColor];
+    self.selectedIndex = 1;
 }
 
 
