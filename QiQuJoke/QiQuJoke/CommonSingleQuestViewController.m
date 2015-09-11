@@ -30,8 +30,12 @@
     // Do any additional setup after loading the view.
 }
 
--(void)initView{
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:false];
+}
+
+-(void)initView{
     self.title = NSLocalizedString(@"canYouGuess", nil);
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"listBg"] forBarMetrics:UIBarMetricsDefault];
     UIImageView *ivBg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"detailBg"]];
