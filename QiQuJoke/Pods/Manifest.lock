@@ -25,6 +25,7 @@ PODS:
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
+  - UMengFeedback (2.3.4)
   - XHRefreshControl (4.5.3)
 
 DEPENDENCIES:
@@ -32,6 +33,7 @@ DEPENDENCIES:
   - MBProgressHUD (~> 0.9.1)
   - MONActivityIndicatorView
   - SDWebImage (~> 3.7)
+  - UMengFeedback (~> 2.3.4)
   - XHRefreshControl
 
 SPEC CHECKSUMS:
@@ -39,6 +41,7 @@ SPEC CHECKSUMS:
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   MONActivityIndicatorView: a00611695de16d956b17d03be25ee49a8effc5f2
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
+  UMengFeedback: 5283cc0e324dffca4dd54c4abb3cbded56487817
   XHRefreshControl: 38d7b26a0ec41b1c2fcb7718b21f8fe7250ff351
 
 COCOAPODS: 0.38.2

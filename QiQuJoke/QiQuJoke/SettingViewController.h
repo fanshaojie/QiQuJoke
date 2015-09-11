@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface SettingViewController : UIViewController
+#import "EnumManager.h"
+#import "DefineManager.h"
+@interface SettingViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
 @end

@@ -29,6 +29,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>UMengFeedback.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>XHRefreshControl.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,27 +42,32 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>12BE7965808304D800A79722FB48995F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>5352D432641F0656C90741034E32F31E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>624066D3D6ADE13E961408F6BF57E5B6</key>
+		<key>9A9FB9D15FA990CACED4E217EB388229</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9E8A5A53AFE9D2DF8F844CA82BD64467</key>
+		<key>B2939DB8E1712C95AA37D17E9F5DDDB6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B4202DB18978F3962DD017D8C7811FF8</key>
+		<key>B92784CD10798D2AC8838B1BE88A51E6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C94C8E989473A344A661794AF635DC80</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D5ACDB623CDE9E0A892D39528D13BFA9</key>
 		<dict>
 			<key>primary</key>
 			<true/>

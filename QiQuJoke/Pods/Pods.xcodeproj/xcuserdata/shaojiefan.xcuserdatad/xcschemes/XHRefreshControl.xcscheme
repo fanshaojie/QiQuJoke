@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D29AF5B39FBDEEBD7E517375"
+               BlueprintIdentifier = "B742204A6EB00EB5104F8AB8"
                BuildableName = "libXHRefreshControl.a"
                BlueprintName = "XHRefreshControl"
                ReferencedContainer = "container:Pods.xcodeproj">
