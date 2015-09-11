@@ -42,9 +42,9 @@
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         [manager GET:[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] parameters:nil success:^void(AFHTTPRequestOperation * optation, id responseObject) {
             NSData *backData = optation.responseData;
-            [backData writeToFile:filePath atomically:YES];
             NSArray *resultData = [self afterGetAllSuccessWithData:backData];
             if (resultData && complete) {
+                [backData writeToFile:filePath atomically:YES];
                 complete(resultData,NEOK);
             }
             else if (complete) {
@@ -72,14 +72,15 @@
 -(void)requestRiddleOfCate:(NSString *)cate reloadFromServer:(BOOL)needReload  pageIndex:(NSInteger)pIndex complete:(void (^)(RiddleCateModel *,RequestState errState))_complete{
     NSString *urlStr = [NSString stringWithFormat:kCommonUrl,kRiddleQuery,kRiddleAppId,kRiddleAppId,kPageDefaultCount,cate,pIndex*kPageDefaultCount];
     NetState netState = [NetHelper Instance].netState;
+    NSString *filePath = [self filePathFromUrl:urlStr];
     if (pIndex == 0&&(!needReload) ) {
-        NSString *filePath = [self filePathFromUrl:urlStr];
         BOOL isExists = [self isFileExists:filePath];
         if (isExists) {
             NSData *backData = [NSData  dataWithContentsOfFile:filePath];
             RiddleCateModel *backCateModel = [self afterGetRiddlesAtCateWithData:backData cateName:cate];
             if (backCateModel && _complete) {
                 _complete(backCateModel,NEOK);
+                
             }
             else if (_complete)
             {
@@ -105,6 +106,10 @@
                 NSData *backData = optation.responseData;
                 RiddleCateModel *backCateModel = [self afterGetRiddlesAtCateWithData:backData cateName:cate];
                 if (backCateModel && _complete) {
+                    if (pIndex == 0) {
+                        //首页进行数据缓存
+                         [backData writeToFile:filePath atomically:YES];
+                    }
                     _complete(backCateModel,NEOK);
                 }
                 else if (_complete) {

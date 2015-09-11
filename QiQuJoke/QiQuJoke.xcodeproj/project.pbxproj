@@ -20,6 +20,7 @@
 		FD1BFFF81B9005B500E5FE74 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1BFFF71B9005B500E5FE74 /* main.m */; };
 		FD1BFFFB1B9005B500E5FE74 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1BFFFA1B9005B500E5FE74 /* AppDelegate.m */; };
 		FD1BFFFE1B9005B500E5FE74 /* QiQuJoke.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FD1BFFFC1B9005B500E5FE74 /* QiQuJoke.xcdatamodeld */; };
+		FD3D639F1BA2A55F00C6C751 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3D639E1BA2A55F00C6C751 /* SettingViewController.m */; };
 		FD55042A1B9418DC0003A4A9 /* TrickManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5504291B9418DC0003A4A9 /* TrickManager.m */; };
 		FD55042E1B9419150003A4A9 /* TrickModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD55042D1B9419150003A4A9 /* TrickModel.m */; };
 		FD87B07B1B9C1354006F4C06 /* RiddleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD87B07A1B9C1354006F4C06 /* RiddleManager.m */; };
@@ -91,6 +92,8 @@
 		FD1BFFFA1B9005B500E5FE74 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		FD1BFFFD1B9005B500E5FE74 /* QiQuJoke.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QiQuJoke.xcdatamodel; sourceTree = "<group>"; };
 		FD1BFFFF1B9005B500E5FE74 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		FD3D639D1BA2A55F00C6C751 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		FD3D639E1BA2A55F00C6C751 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		FD5504281B9418DC0003A4A9 /* TrickManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrickManager.h; sourceTree = "<group>"; };
 		FD5504291B9418DC0003A4A9 /* TrickManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrickManager.m; sourceTree = "<group>"; };
 		FD55042C1B9419150003A4A9 /* TrickModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrickModel.h; sourceTree = "<group>"; };
@@ -239,6 +242,8 @@
 				FDBAA50F1B954AC600F544A6 /* CommonTableViewController.m */,
 				FDBAA5131B958F5D00F544A6 /* CommonSingleQuestViewController.h */,
 				FDBAA5141B958F5D00F544A6 /* CommonSingleQuestViewController.m */,
+				FD3D639D1BA2A55F00C6C751 /* SettingViewController.h */,
+				FD3D639E1BA2A55F00C6C751 /* SettingViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -593,6 +598,7 @@
 				2E5F5F461BA175710040BF06 /* STScratchView.m in Sources */,
 				FDBAA5101B954AC600F544A6 /* CommonTableViewController.m in Sources */,
 				FDCEB1D51B9EC1D4000FBA71 /* DXAlertView.m in Sources */,
+				FD3D639F1BA2A55F00C6C751 /* SettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

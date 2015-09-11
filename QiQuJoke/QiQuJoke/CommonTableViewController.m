@@ -42,6 +42,7 @@
         [self loadDataByOperMode:RMInit];
         didFirstReload = YES;
     }else{
+        pageIndex = 0;
         [self loadDataByOperMode:RMReload];
     }
 }

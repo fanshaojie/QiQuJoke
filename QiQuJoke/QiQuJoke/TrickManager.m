@@ -43,9 +43,9 @@
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         [manager GET:[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] parameters:nil success:^void(AFHTTPRequestOperation * optation, id responseObject) {
             NSData *backData = optation.responseData;
-            [backData writeToFile:filePath atomically:YES];
             NSArray *resultData = [self afterGetAllSuccessWithData:backData];
             if (resultData && complete) {
+                [backData writeToFile:filePath atomically:YES];
                 complete(resultData,NEOK);
             }
             else if (complete) {
@@ -72,11 +72,11 @@
  */
 -(void)requestTrickOfCate:(NSString *)cate reloadFormServer:(BOOL)needReload pageIndex:(NSInteger)pIndex complete:(void (^)(TrickCateModel *, RequestState))_complete{
     NSString *urlStr = [NSString stringWithFormat:kCommonUrl,kTrickQuery,kTrickAppId,kTrickAppId,kPageDefaultCount,cate,pIndex*kPageDefaultCount];
+     NSString *filePath = [self filePathFromUrl:urlStr];
     NetState netState = [NetHelper Instance].netState;
     if(pIndex == 0 && (!needReload))
     {
         //此种情况，先去检查本地缓存
-        NSString *filePath = [self filePathFromUrl:urlStr];
         BOOL isExists = [self  isFileExists:filePath];
         if (isExists) {
             NSData *backData = [NSData  dataWithContentsOfFile:filePath];
@@ -107,6 +107,10 @@
                 NSData *backData = optation.responseData;
                 TrickCateModel *backCateModel = [self afterGetTricksAtCateWithData:backData cateName:cate];
                 if (backCateModel && _complete) {
+                    if (pIndex == 0) {
+                        //首页需要缓存
+                        [backData writeToFile:filePath atomically:YES];
+                    }
                     _complete(backCateModel,NEOK);
                 }
                 else if (_complete) {

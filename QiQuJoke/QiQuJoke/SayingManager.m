@@ -43,9 +43,9 @@
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         [manager GET:[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] parameters:nil success:^void(AFHTTPRequestOperation * optation, id responseObject) {
             NSData *backData = optation.responseData;
-            [backData writeToFile:filePath atomically:YES];
             NSArray *resultData = [self afterGetAllSuccessWithData:backData];
             if (resultData && complete) {
+                [backData writeToFile:filePath atomically:YES];
                 complete(resultData,NEOK);
             }
             else if (complete) {
@@ -62,63 +62,6 @@
     //*************************************
 }
 
-
-/**
- *  初始化歇后语指定分类下首页的数据
- *
- *  @param cate      分类（比如:益智，校园等）
- *  @param pIndex    指定页数，从0开始中,只缓存第一页数据
- *  @param _complete 获取数据完成之后回调函数
- */
--(void)initSayingOfCate:(NSString *)cate reloadFromServer:(BOOL)needReload complete:(void (^)(SayingCateModel *,RequestState errState))_complete{
-    NetState netState = [NetHelper Instance].netState;
-    NSString *urlStr = [NSString stringWithFormat:kCommonUrl,kSayingQuery,kSayingAppId,kSayingAppId,kPageDefaultCount,cate,(long)0];
-    
-    //对数据进行本地化处理
-    //**************************************
-    NSString *filePath = [self filePathFromUrl:urlStr];
-    BOOL isExists = [self isFileExists:filePath];
-    if ((!needReload)&&isExists) {
-        NSData *backData = [NSData  dataWithContentsOfFile:filePath];
-        SayingCateModel *backCateModel = [self afterGetSayingsAtCateWithData:backData cateName:cate];
-        if (backCateModel && _complete) {
-            _complete(backCateModel,NEOK);
-        }
-        else if (_complete)
-        {
-            _complete(nil,NELocalDateErr);
-        }
-    }
-    else  if (netState == QQReachabilityStatusUnknown || netState == QQReachabilityStatusNotReachable) {
-        if (_complete) {
-            _complete(nil,NENoNet);
-        }
-        return;
-    }
-    else{
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        [manager GET:[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] parameters:nil success:^void(AFHTTPRequestOperation * optation, id responseObject) {
-            NSData *backData = optation.responseData;
-            [backData writeToFile:filePath atomically:YES];
-            SayingCateModel *backCateModel = [self afterGetSayingsAtCateWithData:backData cateName:cate];
-            if (backCateModel && _complete) {
-                _complete(backCateModel,NEOK);
-            }
-            else if (_complete) {
-                _complete(nil,NENetDataErr);
-            }
-            
-        } failure:^void(AFHTTPRequestOperation *requestOperation, NSError *error) {
-            if (_complete) {
-                _complete(nil,NENetDataErr);
-            }
-        }];
-    }
-    
-    //*************************************
-}
-
-
 /**
  *  获取歇后语指定分类指定页面下的数据(此方法不做缓存处理)
  *
@@ -129,9 +72,8 @@
 -(void)requestSayingOfCate:(NSString *)cate reloadFromServer:(BOOL)needReload pageIndex:(NSInteger)pIndex complete:(void (^)(SayingCateModel *,RequestState errState))_complete{
     NSString *urlStr = [NSString stringWithFormat:kCommonUrl,kSayingQuery,kSayingAppId,kSayingAppId,kPageDefaultCount,cate,pIndex*kPageDefaultCount];
     NetState netState = [NetHelper Instance].netState;
-    
+    NSString *filePath = [self filePathFromUrl:urlStr];
     if (pIndex == 0 && (!needReload)) {
-        NSString *filePath = [self filePathFromUrl:urlStr];
         BOOL isExists = [self isFileExists:filePath];
         if ((!needReload)&&isExists) {
             NSData *backData = [NSData  dataWithContentsOfFile:filePath];
@@ -163,6 +105,10 @@
                 NSData *backData = optation.responseData;
                 SayingCateModel *backCateModel = [self afterGetSayingsAtCateWithData:backData cateName:cate];
                 if (backCateModel && _complete) {
+                    if (pIndex == 0) {
+                        //首页进行数据缓存
+                        [backData writeToFile:filePath atomically:YES];
+                    }
                     _complete(backCateModel,NEOK);
                 }
                 else if (_complete) {
