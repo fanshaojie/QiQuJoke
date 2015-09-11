@@ -30,6 +30,7 @@
 -(void)initView{
     refreshCtrl = [[XHRefreshControl alloc]initWithScrollView:self.tableView delegate:self];
     refreshCtrl.circleColor = [UIColor orangeColor];
+    self.tableView.backgroundColor = [UIColor clearColor];
 }
 
 - (BOOL)keepiOS7NewApiCharacter;{
@@ -267,6 +268,9 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIDStr];
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIDStr];
+        cell.backgroundColor =[UIColor clearColor];
+        cell.selectedBackgroundView = [[UIView alloc]init];
+        cell.selectedBackgroundView.backgroundColor =[UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.1];
         cell.textLabel.font = [UIFont systemFontOfSize:14];
     }
     

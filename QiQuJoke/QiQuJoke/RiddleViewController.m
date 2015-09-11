@@ -41,14 +41,20 @@
 
 -(void)initView{
     self.navigationItem.title = NSLocalizedString(@"riddle", nil);
+    UIImageView *bgIv = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"listBg"]];
+    bgIv.frame = self.view.frame;
+    bgIv.contentMode = UIViewContentModeScaleToFill;
+    [self.view addSubview:bgIv];
+    
     loadingView = [[MONActivityIndicatorView alloc]init];
     loadingView.delegate = self;
     loadingView.numberOfCircles =5;
     loadingView.radius = 10;
     loadingView.internalSpacing = 3;
-    loadingView.center = self.view.center;
     [self.view addSubview:loadingView];
     [loadingView startAnimating];
+    [self placeAtTheCenterWithView:loadingView];
+    
 }
 
 - (UIColor *)activityIndicatorView:(MONActivityIndicatorView *)activityIndicatorView
@@ -58,6 +64,24 @@
     CGFloat blue  = (arc4random() % 256)/255.0;
     CGFloat alpha = 1.0f;
     return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+}
+
+- (void)placeAtTheCenterWithView:(UIView *)view {
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:view
+                                                          attribute:NSLayoutAttributeCenterX
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeCenterX
+                                                         multiplier:1.0f
+                                                           constant:0.0f]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:view
+                                                          attribute:NSLayoutAttributeCenterY
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeCenterY
+                                                         multiplier:1.0f
+                                                           constant:0.0f]];
 }
 
 -(void)initData{
@@ -84,8 +108,8 @@
             }
             
             NSDictionary *parameters = @{
-                                         CAPSPageMenuOptionScrollMenuBackgroundColor: [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:0.8],
-                                         CAPSPageMenuOptionViewBackgroundColor: [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:0.8],
+                                         CAPSPageMenuOptionScrollMenuBackgroundColor: [UIColor clearColor],
+                                         CAPSPageMenuOptionViewBackgroundColor: [UIColor clearColor],
                                          CAPSPageMenuOptionSelectedMenuItemLabelColor:[UIColor orangeColor],
                                          CAPSPageMenuOptionUnselectedMenuItemLabelColor:[UIColor blackColor],
                                          CAPSPageMenuOptionSelectionIndicatorColor: [UIColor orangeColor],

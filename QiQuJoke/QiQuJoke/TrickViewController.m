@@ -42,16 +42,40 @@
     return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
 }
 
+- (void)placeAtTheCenterWithView:(UIView *)view {
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:view
+                                                          attribute:NSLayoutAttributeCenterX
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeCenterX
+                                                         multiplier:1.0f
+                                                           constant:0.0f]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:view
+                                                          attribute:NSLayoutAttributeCenterY
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeCenterY
+                                                         multiplier:1.0f
+                                                           constant:0.0f]];
+}
+
 -(void)initView{
     [self.navigationController setNavigationBarHidden:YES];
+    
+    UIImageView *bgIv = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"listBg"]];
+    bgIv.frame = self.view.frame;
+    bgIv.contentMode = UIViewContentModeScaleToFill;
+    [self.view addSubview:bgIv];
+    
     loadingView = [[MONActivityIndicatorView alloc]init];
     loadingView.delegate = self;
     loadingView.numberOfCircles =5;
     loadingView.radius = 10;
     loadingView.internalSpacing = 3;
-    loadingView.center = self.view.center;
-    [self.view addSubview:loadingView];
     [loadingView startAnimating];
+    [self.view addSubview:loadingView];
+    [self placeAtTheCenterWithView:loadingView];
 }
 
 -(void)initData{
@@ -80,8 +104,8 @@
             }
             
             NSDictionary *parameters = @{
-                                         CAPSPageMenuOptionScrollMenuBackgroundColor: [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:0.8],
-                                         CAPSPageMenuOptionViewBackgroundColor: [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:0.8],
+                                         CAPSPageMenuOptionScrollMenuBackgroundColor:[UIColor clearColor],
+                                         CAPSPageMenuOptionViewBackgroundColor: [UIColor clearColor],
                                          CAPSPageMenuOptionSelectedMenuItemLabelColor:[UIColor orangeColor],
                                          CAPSPageMenuOptionSelectionIndicatorColor: [UIColor orangeColor],
                                          CAPSPageMenuOptionUnselectedMenuItemLabelColor:[UIColor blackColor],
@@ -97,6 +121,7 @@
         });
         
     }];
+    
 }
 
 - (void)didMoveToPage:(UIViewController *)controller index:(NSInteger)index{

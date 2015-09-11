@@ -33,10 +33,11 @@
 -(void)initView{
     [self.navigationController setNavigationBarHidden:false];
     self.title = NSLocalizedString(@"canYouGuess", nil);
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"listBg"] forBarMetrics:UIBarMetricsDefault];
     UIImageView *ivBg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"detailBg"]];
     CGRect viewRect = self.view.frame;
-    viewRect.origin.y = kScreenNavTop;
-    viewRect.size.height -=kScreenNavTop;
+//    viewRect.origin.y = kScreenNavTop;
+//    viewRect.size.height -=kScreenNavTop;
     ivBg.frame = viewRect;
     ivBg.contentMode = UIViewContentModeScaleToFill;
     [self.view addSubview:ivBg];
