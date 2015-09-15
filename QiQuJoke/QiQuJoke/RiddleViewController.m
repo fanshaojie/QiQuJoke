@@ -11,6 +11,7 @@
 @interface RiddleViewController (){
     NSArray *cateArr;
     CAPSPageMenu *cateMenu;
+    UIImageView *_bgIv;
     MONActivityIndicatorView *loadingView;
 }
 
@@ -40,11 +41,13 @@
 
 
 -(void)initView{
-    self.navigationItem.title = NSLocalizedString(@"riddle", nil);
-    UIImageView *bgIv = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"listBg"]];
-    bgIv.frame = self.view.frame;
-    bgIv.contentMode = UIViewContentModeScaleToFill;
-    [self.view addSubview:bgIv];
+    self.title = NSLocalizedString(@"riddle", nil);
+    _bgIv = [[UIImageView alloc]init];
+    _bgIv.frame = self.view.frame;
+    _bgIv.contentMode = UIViewContentModeScaleToFill;
+    [self changeBgImage];
+    [self.view addSubview:_bgIv];
+    
     
     loadingView = [[MONActivityIndicatorView alloc]init];
     loadingView.delegate = self;
@@ -54,8 +57,18 @@
     [self.view addSubview:loadingView];
     [loadingView startAnimating];
     [self placeAtTheCenterWithView:loadingView];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeBgImage) name:kSkinChangedNotificationName object:nil];
     
 }
+
+-(void)changeBgImage{
+    NSString *imgName = [[NSUserDefaults standardUserDefaults]valueForKey:kUDSkinKey];
+    if (imgName) {
+        _bgIv.image = [UIImage imageNamed:imgName];
+    }
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:imgName] forBarMetrics:UIBarMetricsDefault];
+}
+
 
 - (UIColor *)activityIndicatorView:(MONActivityIndicatorView *)activityIndicatorView
       circleBackgroundColorAtIndex:(NSUInteger)index {

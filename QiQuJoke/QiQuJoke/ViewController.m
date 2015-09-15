@@ -21,6 +21,16 @@
 }
 
 -(void)initView{
+    NSString *defaultBgName = [[NSUserDefaults standardUserDefaults]valueForKey:kUDSkinKey];
+    if (!defaultBgName) {
+        [[NSUserDefaults standardUserDefaults]setValue:@"zg1" forKey:kUDSkinKey];
+    }
+    
+    NSString *detailDefaultBgName = [[NSUserDefaults standardUserDefaults]valueForKey:kUDDtailSkinKey];
+    if (!detailDefaultBgName) {
+        [[NSUserDefaults standardUserDefaults]setValue:@"dbg7" forKey:kUDDtailSkinKey];
+    }
+    
     NetState netState = [NetHelper Instance].netState;
     RiddleViewController *rvCtrl = [[RiddleViewController alloc]init];
     rvCtrl.tabBarItem.title = NSLocalizedString(@"riddle", nil);
@@ -34,9 +44,16 @@
     sayingCtrl.tabBarItem.title = NSLocalizedString(@"saying", nil);
     sayingCtrl.tabBarItem.image = [UIImage imageNamed:@"sayingIcon"];
     
+    SettingViewController *settingCtrl = [[SettingViewController alloc]init];
+    settingCtrl.tabBarItem.title = NSLocalizedString(@"setting", nil);
+    settingCtrl.tabBarItem.image = [UIImage imageNamed:@"settingIcon"];
+    
     [self addChildViewController:[[UINavigationController alloc] initWithRootViewController:rvCtrl]];
     [self addChildViewController:[[UINavigationController alloc] initWithRootViewController:trickCtrl]];
     [self addChildViewController:[[UINavigationController alloc] initWithRootViewController:sayingCtrl]];
+    
+    [self addChildViewController:[[UINavigationController alloc]initWithRootViewController:settingCtrl ]];
+    
     self.tabBar.barTintColor = [UIColor blackColor];
     self.tabBar.tintColor = [UIColor orangeColor];
     self.selectedIndex = 1;

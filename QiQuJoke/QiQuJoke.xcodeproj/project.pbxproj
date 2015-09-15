@@ -20,9 +20,12 @@
 		FD1BFFF81B9005B500E5FE74 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1BFFF71B9005B500E5FE74 /* main.m */; };
 		FD1BFFFB1B9005B500E5FE74 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1BFFFA1B9005B500E5FE74 /* AppDelegate.m */; };
 		FD1BFFFE1B9005B500E5FE74 /* QiQuJoke.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FD1BFFFC1B9005B500E5FE74 /* QiQuJoke.xcdatamodeld */; };
+		FD25CC801BA2D65A00B4C6E5 /* SkinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD25CC7F1BA2D65A00B4C6E5 /* SkinViewController.m */; };
+		FD3B73F21BA65E8600EAD72A /* SkinViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3B73F11BA65E8600EAD72A /* SkinViewCell.m */; };
 		FD3D639F1BA2A55F00C6C751 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3D639E1BA2A55F00C6C751 /* SettingViewController.m */; };
 		FD55042A1B9418DC0003A4A9 /* TrickManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5504291B9418DC0003A4A9 /* TrickManager.m */; };
 		FD55042E1B9419150003A4A9 /* TrickModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD55042D1B9419150003A4A9 /* TrickModel.m */; };
+		FD705A981BA7ABC000D4DD29 /* DetailSkinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD705A971BA7ABC000D4DD29 /* DetailSkinViewController.m */; };
 		FD87B07B1B9C1354006F4C06 /* RiddleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD87B07A1B9C1354006F4C06 /* RiddleManager.m */; };
 		FD87B07E1B9C1364006F4C06 /* SayingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD87B07D1B9C1364006F4C06 /* SayingManager.m */; };
 		FD87B0811B9C13C0006F4C06 /* RiddleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD87B0801B9C13C0006F4C06 /* RiddleModel.m */; };
@@ -92,12 +95,18 @@
 		FD1BFFFA1B9005B500E5FE74 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		FD1BFFFD1B9005B500E5FE74 /* QiQuJoke.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QiQuJoke.xcdatamodel; sourceTree = "<group>"; };
 		FD1BFFFF1B9005B500E5FE74 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		FD25CC7E1BA2D65A00B4C6E5 /* SkinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkinViewController.h; sourceTree = "<group>"; };
+		FD25CC7F1BA2D65A00B4C6E5 /* SkinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkinViewController.m; sourceTree = "<group>"; };
+		FD3B73F01BA65E8600EAD72A /* SkinViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkinViewCell.h; sourceTree = "<group>"; };
+		FD3B73F11BA65E8600EAD72A /* SkinViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkinViewCell.m; sourceTree = "<group>"; };
 		FD3D639D1BA2A55F00C6C751 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		FD3D639E1BA2A55F00C6C751 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		FD5504281B9418DC0003A4A9 /* TrickManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrickManager.h; sourceTree = "<group>"; };
 		FD5504291B9418DC0003A4A9 /* TrickManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrickManager.m; sourceTree = "<group>"; };
 		FD55042C1B9419150003A4A9 /* TrickModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrickModel.h; sourceTree = "<group>"; };
 		FD55042D1B9419150003A4A9 /* TrickModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrickModel.m; sourceTree = "<group>"; };
+		FD705A961BA7ABC000D4DD29 /* DetailSkinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailSkinViewController.h; sourceTree = "<group>"; };
+		FD705A971BA7ABC000D4DD29 /* DetailSkinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailSkinViewController.m; sourceTree = "<group>"; };
 		FD87B0791B9C1354006F4C06 /* RiddleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RiddleManager.h; sourceTree = "<group>"; };
 		FD87B07A1B9C1354006F4C06 /* RiddleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RiddleManager.m; sourceTree = "<group>"; };
 		FD87B07C1B9C1364006F4C06 /* SayingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SayingManager.h; sourceTree = "<group>"; };
@@ -244,6 +253,10 @@
 				FDBAA5141B958F5D00F544A6 /* CommonSingleQuestViewController.m */,
 				FD3D639D1BA2A55F00C6C751 /* SettingViewController.h */,
 				FD3D639E1BA2A55F00C6C751 /* SettingViewController.m */,
+				FD25CC7E1BA2D65A00B4C6E5 /* SkinViewController.h */,
+				FD25CC7F1BA2D65A00B4C6E5 /* SkinViewController.m */,
+				FD705A961BA7ABC000D4DD29 /* DetailSkinViewController.h */,
+				FD705A971BA7ABC000D4DD29 /* DetailSkinViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -257,6 +270,8 @@
 				FDCEB1C81B9EB2E9000FBA71 /* MLNavigationController.m */,
 				FDCEB1C01B9E8EAD000FBA71 /* LXActivity.h */,
 				FDCEB1C11B9E8EAD000FBA71 /* LXActivity.m */,
+				FD3B73F01BA65E8600EAD72A /* SkinViewCell.h */,
+				FD3B73F11BA65E8600EAD72A /* SkinViewCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -580,18 +595,21 @@
 				FD1BFFF81B9005B500E5FE74 /* main.m in Sources */,
 				FDCEB1C91B9EB2E9000FBA71 /* MLNavigationController.m in Sources */,
 				FD1B00281B900B8700E5FE74 /* RiddleViewController.m in Sources */,
+				FD3B73F21BA65E8600EAD72A /* SkinViewCell.m in Sources */,
 				FD87B0841B9C1402006F4C06 /* SayingModel.m in Sources */,
 				FD1B01151B906AD700E5FE74 /* CAPSPageMenu.m in Sources */,
 				FD55042E1B9419150003A4A9 /* TrickModel.m in Sources */,
 				FD1B002B1B900C8200E5FE74 /* SayingViewController.m in Sources */,
 				FD1B00251B900B5C00E5FE74 /* TrickViewController.m in Sources */,
 				FDBAA5151B958F5D00F544A6 /* CommonSingleQuestViewController.m in Sources */,
+				FD705A981BA7ABC000D4DD29 /* DetailSkinViewController.m in Sources */,
 				FDBAA5181B968FFD00F544A6 /* NSString+MessageDigest.m in Sources */,
 				FD1B00011B9005B500E5FE74 /* ViewController.m in Sources */,
 				FDCEB1C21B9E8EAD000FBA71 /* LXActivity.m in Sources */,
 				FD87B07E1B9C1364006F4C06 /* SayingManager.m in Sources */,
 				FD55042A1B9418DC0003A4A9 /* TrickManager.m in Sources */,
 				FDBAA50D1B9541D000F544A6 /* UIManager.m in Sources */,
+				FD25CC801BA2D65A00B4C6E5 /* SkinViewController.m in Sources */,
 				FD87B0811B9C13C0006F4C06 /* RiddleModel.m in Sources */,
 				FD1BFFFE1B9005B500E5FE74 /* QiQuJoke.xcdatamodeld in Sources */,
 				FDCEB1D81B9ED183000FBA71 /* NetHelper.m in Sources */,

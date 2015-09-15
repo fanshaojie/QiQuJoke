@@ -22,6 +22,10 @@
 #define kBtnDefaultHeight 30
 #define kScreenTop  20
 #define kTabBarDefaultHeight 48
+#define kUDSkinKey @"skinName"
+#define kSkinChangedNotificationName @"skinChanged"
+#define kDetailSkinChangedNotice @"detailSkinChanged"
+#define kUDDtailSkinKey @"detailSkinName"
 #define kShareSDKApiKey  @"a342c9f37da4"
 #define kShareSDKApiSecret @"75e6cb0f213b9558620fd2553d12135f"
 #define kShareSDKUrl @"http://www.sharesdk.cn"
@@ -30,4 +34,5 @@
 #define kWechatAppID @"wx7859ffb4573bc997"
 #define kWechatAppSecret @"1f1bb8a21c3e9ce4e625a31fb3e9d0e2"
 #define kUmengAppKey @"55f289a167e58e88e40014cd"
+
 #endif

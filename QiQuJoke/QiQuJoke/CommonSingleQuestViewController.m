@@ -8,7 +8,9 @@
 
 #import "CommonSingleQuestViewController.h"
 
-@interface CommonSingleQuestViewController()
+@interface CommonSingleQuestViewController(){
+    UIImageView *_bgIv;
+}
 
 @property (nonatomic,strong) UILabel *cntLbl;
 @property (nonatomic,strong) UIButton *btnPrevious;
@@ -33,18 +35,25 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:false];
+    [self changBgImage];
+}
+
+-(void)changBgImage{
+    NSString *imgName = [[NSUserDefaults standardUserDefaults]valueForKey:kUDDtailSkinKey];
+    if (imgName) {
+        _bgIv.image = [UIImage imageNamed:imgName];
+    }
 }
 
 -(void)initView{
     self.title = NSLocalizedString(@"canYouGuess", nil);
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"listBg"] forBarMetrics:UIBarMetricsDefault];
-    UIImageView *ivBg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"detailBg"]];
-    CGRect viewRect = self.view.frame;
-//    viewRect.origin.y = kScreenNavTop;
-//    viewRect.size.height -=kScreenNavTop;
-    ivBg.frame = viewRect;
-    ivBg.contentMode = UIViewContentModeScaleToFill;
-    [self.view addSubview:ivBg];
+    self.view.backgroundColor = [UIColor  whiteColor];
+    
+    _bgIv = [[UIImageView alloc]init];
+    _bgIv.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - kScreenNavTop - kTabBarDefaultHeight);
+    [self changBgImage];
+    _bgIv.contentMode = UIViewContentModeScaleToFill;
+    [self.view addSubview:_bgIv];
     //内容
     self.cntLbl = [[UILabel alloc]initWithFrame:CGRectMake(25, (CGRectGetHeight(self.view.frame)-kScreenNavTop - kTabBarDefaultHeight)/3, CGRectGetWidth(self.view.frame) - 50, 100)];
     self.cntLbl.textAlignment = NSTextAlignmentCenter;
@@ -181,5 +190,6 @@
 -(void)initData{
     
 }
+
 
 @end

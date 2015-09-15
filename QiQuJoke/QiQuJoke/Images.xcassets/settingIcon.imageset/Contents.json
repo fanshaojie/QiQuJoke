@@ -3,11 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "zg6.png"
+      "filename" : "settingIcon.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "settingIcon@2x.png"
     },
     {
       "idiom" : "universal",

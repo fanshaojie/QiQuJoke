@@ -34,4 +34,8 @@
     [hud hide:YES afterDelay:1];
 }
 
++(UIColor*)selectedDefaultColor{
+    return  [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.2];
+}
+
 @end

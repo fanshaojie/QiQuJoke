@@ -28,3 +28,8 @@
 "wechatFriends" = "微信朋友圈";
 "QQZone"  = "QQ空间";
 "noNet" = "当前网络不可用,请检查网络连接";
+"listSkin" = "列表皮肤";
+"detailSkin" = "详情皮肤";
+"advice" = "意见建议";
+"recommend" = "精彩推荐";
+"setting" = "设置";

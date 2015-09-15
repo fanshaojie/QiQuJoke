@@ -15,6 +15,8 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "WXApi.h"
 #import "NetHelper.h"
+#import <UMFeedback.h>
+#import "DefineManager.h"
 @interface AppDelegate ()
 
 @end
@@ -31,6 +33,9 @@
     ViewController *controller= [[ViewController alloc]init];
     self.window.rootViewController=controller;
     [[self window]makeKeyAndVisible];
+    
+    //友盟反馈
+    [UMFeedback setAppkey:kUmengAppKey];
     
     //初始化分享组件
     [ShareSDK registerApp:kShareSDKApiKey activePlatforms:@[@(SSDKPlatformTypeQQ),@(SSDKPlatformSubTypeQZone ), @(SSDKPlatformTypeWechat),@(SSDKPlatformSubTypeWechatTimeline)] onImport:^(SSDKPlatformType platformType){

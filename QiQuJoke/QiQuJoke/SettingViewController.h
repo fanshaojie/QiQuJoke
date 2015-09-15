@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "EnumManager.h"
 #import "DefineManager.h"
+#import "UIManager.h"
+#import <UMFeedback.h>
+#import "SkinViewController.h"
+#import "DetailSkinViewController.h"
 @interface SettingViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
 @end

@@ -12,6 +12,9 @@
 #import "SayingViewController.h"
 #import "MLNavigationController.h"
 #import "NetHelper.h"
+#import "SettingViewController.h"
+#import "DefineManager.h"
+
 @interface ViewController : UITabBarController
 
 
