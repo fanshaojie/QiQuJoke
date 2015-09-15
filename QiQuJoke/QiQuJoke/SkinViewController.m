@@ -26,7 +26,7 @@ static NSString *cellID = @"skinCell";
 -(void)initView{
     self.title = NSLocalizedString(@"listSkin", nil);
     self.view.backgroundColor = [UIColor whiteColor];
-    _skinNamesArr = @[@"zg1",@"zg2",@"zg3",@"zg4",@"zg6",@"zg7"];
+    _skinNamesArr = @[@"zg1",@"zg2",@"zg3",@"zg4",@"zg6",@"zg7",@"zg8"];
     NSString *imgName = [[NSUserDefaults standardUserDefaults]objectForKey:kUDSkinKey];
     for (int i = 0; i<_skinNamesArr.count; i++) {
         if ([imgName isEqualToString:_skinNamesArr[i]]) {
