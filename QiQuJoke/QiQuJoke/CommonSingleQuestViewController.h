@@ -16,7 +16,8 @@
 #import "LXActivity.h"
 #import "UIManager.h"
 #import "STScratchView.h"
-@interface CommonSingleQuestViewController : UIViewController<LXActivityDelegate>
+#import "BaiduMobAdView.h"
+@interface CommonSingleQuestViewController : UIViewController<LXActivityDelegate,BaiduMobAdViewDelegate>
 
 @property (nonatomic) id  cnt;
 @property (nonatomic) ContentType cntType;
