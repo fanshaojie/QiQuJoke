@@ -20,7 +20,6 @@
 @property (nonatomic,strong) UIImageView *ball;
 @property (nonatomic,strong) UILabel *lblAnswer;
 @property (nonatomic,strong) UILabel *lblTip;
-@property (nonatomic,strong) BaiduMobAdView *sharedAdView;
 
 @end
 
@@ -111,15 +110,6 @@
             [self.lblTip setAlpha:0];
         }];
     }
-    
-    self.sharedAdView = [[BaiduMobAdView alloc] init];
-    self.sharedAdView.AdType = BaiduMobAdViewTypeBanner;
-    
-    self.sharedAdView.frame = CGRectMake(0, self.view.bounds.size.height-kBaiduAdViewSizeDefaultHeight-49-64, self.view.bounds.size.width, kBaiduAdViewSizeDefaultHeight);
-    NSLog(@"X:%f  Y:%f  宽度：%f  高度：%f",self.sharedAdView.frame.origin.x,self.sharedAdView.frame.origin.y,self.sharedAdView.frame.size.width,self.sharedAdView.frame.size.height);
-    self.sharedAdView.delegate = self;
-    [self.view addSubview:self.sharedAdView];
-    [self.sharedAdView start];
 }
 
 /**
@@ -131,8 +121,7 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    self.sharedAdView.delegate = nil;
-    self.sharedAdView = nil;
+   
 }
 
 -(void)btnShareClicked{
