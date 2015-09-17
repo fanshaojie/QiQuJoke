@@ -34,6 +34,16 @@
     [hud hide:YES afterDelay:1];
 }
 
++(void)showToastIn:(UIView *)view info:(NSString *)info {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:true];
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText = info;
+    hud.margin = 10.f;
+    hud.yOffset = 150.f;
+    hud.removeFromSuperViewOnHide = YES;
+    [hud hide:YES afterDelay:1];
+}
+
 +(UIColor*)selectedDefaultColor{
     return  [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.2];
 }

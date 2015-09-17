@@ -14,6 +14,7 @@
 +(void)showAlert:(NSString*)content;
 +(void)showAlert:(NSString *)content title:(NSString*)title;
 +(void)showNoNetToastIn:(UIView*)view;
++(void)showToastIn:(UIView*)view info:(NSString*)info;
 +(UIColor*)selectedDefaultColor;
 +(UIColor*)btnDefaultColor;
 @end
