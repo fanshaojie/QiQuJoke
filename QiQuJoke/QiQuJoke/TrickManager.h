@@ -15,6 +15,7 @@
 #import "EnumManager.h"
 @interface TrickManager : NSObject
 
+
 -(void)initTricksOfCateAllWithComplete:(void(^)(NSArray *trickCateArr,RequestState errState))complete;
 
 -(void)requestTrickOfCate:(NSString*)cate reloadFormServer:(BOOL)needReload  pageIndex:(NSInteger)pIndex complete:(void(^)(TrickCateModel*,RequestState errState)) _complete;
