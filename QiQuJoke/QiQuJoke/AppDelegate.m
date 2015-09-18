@@ -49,9 +49,6 @@
             case SSDKPlatformSubTypeWechatTimeline:
                 [ShareSDKConnector connectWeChat:[WXApi class]];
                 break;
-            case SSDKPlatformSubTypeQZone:
-                [ShareSDKConnector connectQQ:[QQApiInterface class] tencentOAuthClass:[TencentOAuth class]];
-                break;
             default:
                 break;
         }
@@ -63,9 +60,6 @@
                 break;
             case SSDKPlatformTypeWechat:
                 [appInfo SSDKSetupWeChatByAppId:kWechatAppID appSecret:kWechatAppSecret];
-                break;
-            case SSDKPlatformSubTypeQZone:
-                [appInfo SSDKSetupQQByAppId:kQQAppID appKey:kQQAppKey authType:SSDKAuthTypeBoth];
                 break;
             case SSDKPlatformSubTypeWechatTimeline:
                 [appInfo SSDKSetupWeChatByAppId:kWechatAppID appSecret:kWechatAppSecret];

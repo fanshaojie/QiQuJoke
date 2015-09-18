@@ -140,11 +140,12 @@
 -(void)shareCommon:(SSDKPlatformType)platformType{
     //创建分享参数
     NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
-    [shareParams SSDKSetupShareParamsByText:self.cntLbl.text
-                                     images:@[[UIImage imageNamed:@"shareImg"]]
-                                        url:[NSURL URLWithString:@"http://mob.com"]
+    [shareParams SSDKSetupShareParamsByText:[NSString stringWithFormat:@"%@\r\n%@",self.cntLbl.text,NSLocalizedString(@"shareTitle", nil)]
+                                     images:nil
+                                        url:nil
                                       title:self.tabBarItem.title
-                                       type:SSDKContentTypeImage];
+                                       type:SSDKContentTypeAuto];
+    
     
     //进行分享
     [ShareSDK share:platformType
@@ -192,9 +193,6 @@
     }
     else if((NSInteger)imageIndex == 2){//qq
         [self shareToQQ];
-        
-    }else if((NSInteger)imageIndex ==3){//qq空间
-        [self shareToZone];
         
     }
 }

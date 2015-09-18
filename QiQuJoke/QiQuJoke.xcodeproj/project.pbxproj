@@ -25,6 +25,8 @@
 		2E9268991BA2C9410082CEDB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E9268981BA2C9410082CEDB /* UIKit.framework */; };
 		2E92689B1BA2C95D0082CEDB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E92689A1BA2C95D0082CEDB /* Foundation.framework */; };
 		2E92689D1BA2C9710082CEDB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E92689C1BA2C9710082CEDB /* CoreGraphics.framework */; };
+		2EAD31931BABBEDC003047FB /* Favorite+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD31901BABBEDC003047FB /* Favorite+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		2EAD31941BABBEDC003047FB /* Favorite.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD31921BABBEDC003047FB /* Favorite.m */; settings = {ASSET_TAGS = (); }; };
 		F75F527120135F1553F379A5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA98F9C1F5D3AF2E1CF37BB9 /* libPods.a */; };
 		FD1B00011B9005B500E5FE74 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1B00001B9005B500E5FE74 /* ViewController.m */; };
 		FD1B00091B9005B500E5FE74 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD1B00071B9005B500E5FE74 /* LaunchScreen.xib */; };
@@ -115,6 +117,10 @@
 		2E9268981BA2C9410082CEDB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2E92689A1BA2C95D0082CEDB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2E92689C1BA2C9710082CEDB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2EAD318F1BABBEDC003047FB /* Favorite+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Favorite+CoreDataProperties.h"; sourceTree = "<group>"; };
+		2EAD31901BABBEDC003047FB /* Favorite+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Favorite+CoreDataProperties.m"; sourceTree = "<group>"; };
+		2EAD31911BABBEDC003047FB /* Favorite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Favorite.h; sourceTree = "<group>"; };
+		2EAD31921BABBEDC003047FB /* Favorite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Favorite.m; sourceTree = "<group>"; };
 		8E2DCDEEA6F3A593C2402EEC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		FA98F9C1F5D3AF2E1CF37BB9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD1B00001B9005B500E5FE74 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
@@ -466,6 +472,10 @@
 		FD55042B1B9418F70003A4A9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2EAD318F1BABBEDC003047FB /* Favorite+CoreDataProperties.h */,
+				2EAD31901BABBEDC003047FB /* Favorite+CoreDataProperties.m */,
+				2EAD31911BABBEDC003047FB /* Favorite.h */,
+				2EAD31921BABBEDC003047FB /* Favorite.m */,
 				FD55042C1B9419150003A4A9 /* TrickModel.h */,
 				FD55042D1B9419150003A4A9 /* TrickModel.m */,
 				FD87B07F1B9C13C0006F4C06 /* RiddleModel.h */,
@@ -587,6 +597,7 @@
 					};
 					FD1BFFF11B9005B500E5FE74 = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = K4WUP8V8HP;
 					};
 				};
 			};
@@ -685,6 +696,7 @@
 				FD87B07B1B9C1354006F4C06 /* RiddleManager.m in Sources */,
 				FD1BFFFB1B9005B500E5FE74 /* AppDelegate.m in Sources */,
 				FD1BFFF81B9005B500E5FE74 /* main.m in Sources */,
+				2EAD31931BABBEDC003047FB /* Favorite+CoreDataProperties.m in Sources */,
 				FDCEB1C91B9EB2E9000FBA71 /* MLNavigationController.m in Sources */,
 				FD1B00281B900B8700E5FE74 /* RiddleViewController.m in Sources */,
 				FD3B73F21BA65E8600EAD72A /* SkinViewCell.m in Sources */,
@@ -709,6 +721,7 @@
 				FDBAA5101B954AC600F544A6 /* CommonTableViewController.m in Sources */,
 				FDCEB1D51B9EC1D4000FBA71 /* DXAlertView.m in Sources */,
 				FD3D639F1BA2A55F00C6C751 /* SettingViewController.m in Sources */,
+				2EAD31941BABBEDC003047FB /* Favorite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -820,6 +833,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/QiQuJoke/libraries/extends/GooglePlusSDK",
@@ -878,6 +893,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/QiQuJoke/libraries/extends/GooglePlusSDK",
