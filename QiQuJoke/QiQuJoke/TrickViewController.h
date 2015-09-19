@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TrickManager.h"
-#import "TrickModel.h"
+#import "CateModel.h"
 #import "UIManager.h"
 #import "CAPSPageMenu.h"
 #import "CommonTableViewController.h"

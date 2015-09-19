@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TrickModel.h"
+#import "CateModel.h"
 #import "AFNetworking.h"
 #import "DefineManager.h"
 #import "NSString+MessageDigest.h"
@@ -15,9 +15,12 @@
 #import "EnumManager.h"
 @interface TrickManager : NSObject
 
++(TrickManager*)instance;
 
--(void)initTricksOfCateAllWithComplete:(void(^)(NSArray *trickCateArr,RequestState errState))complete;
+@property (nonatomic,strong) NSMutableArray *cateArr;
 
--(void)requestTrickOfCate:(NSString*)cate reloadFormServer:(BOOL)needReload  pageIndex:(NSInteger)pIndex complete:(void(^)(TrickCateModel*,RequestState errState)) _complete;
+-(void)initTricksOfCateAllWithComplete:(void(^)(RequestState errState))complete;
+
+-(void)requestTrickOfCate:(NSString*)cate reloadFormServer:(BOOL)needReload  pageIndex:(NSInteger)pIndex complete:(void(^)(RequestState errState)) _complete;
 
 @end

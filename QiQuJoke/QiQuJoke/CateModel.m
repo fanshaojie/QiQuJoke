@@ -6,13 +6,13 @@
 //  Copyright (c) 2015年 少杰范. All rights reserved.
 //
 
-#import "TrickModel.h"
+#import "CateModel.h"
 
-@implementation TrickModel
+@implementation CateModel
 
 @end
 
-@implementation TrickCateModel
+@implementation ItemModel
 
 
 @end

@@ -7,13 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@interface TrickCateModel : NSObject
+#import "EnumManager.h"
+@interface CateModel : NSObject
 @property (nonatomic,strong) NSString  *cateName;
-@property (nonatomic,retain) NSMutableArray *trickArray;
+@property (nonatomic,retain) NSMutableArray *itemsArr;
+@property (nonatomic) NSInteger nums;
+@property (nonatomic) ContentType type;
 @end
 
-@interface TrickModel : NSObject
+@interface ItemModel : NSObject
 @property (nonatomic,strong)  NSString *content;
 @property (nonatomic,strong) NSString *answer;
 

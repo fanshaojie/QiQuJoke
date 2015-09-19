@@ -10,12 +10,23 @@
 
 
 @implementation TrickManager
+
++(TrickManager *)instance{
+    static dispatch_once_t onceT;
+    static TrickManager *_trickManager;
+    dispatch_once(&onceT, ^{
+        _trickManager = [[TrickManager alloc]init];
+    });
+    return _trickManager;
+}
+
+
 /**
  *  脑筋急转弯默认加载项－全部  以及获取了分类
  *
  *  @param complete 获取数据完成回调函数
  */
--(void)initTricksOfCateAllWithComplete:(void (^)(NSArray *,RequestState errState))complete{
+-(void)initTricksOfCateAllWithComplete:(void (^)(RequestState errState))complete{
     NetState netState = [NetHelper Instance].netState;
     NSString *urlStr = [NSString stringWithFormat:kCommonUrl,kTrickQuery,kTrickAppId,kTrickAppId,kPageDefaultCount,@"",(long)0];
     
@@ -25,36 +36,36 @@
     BOOL isExists = [self isFileExists:filePath];
     if (isExists) {
         NSData *backData = [NSData  dataWithContentsOfFile:filePath];
-        NSArray *resultData = [self afterGetAllSuccessWithData:backData];
-        if (resultData && complete) {
-            complete(resultData,NEOK);
+        BOOL isOK = [self afterGetAllSuccessWithData:backData];
+        if (isOK && complete) {
+            complete(NEOK);
         }
         else if (complete)
         {
-            complete(nil,NELocalDateErr);
+            complete(NELocalDateErr);
         }
     }
     else  if (netState == QQReachabilityStatusUnknown || netState == QQReachabilityStatusNotReachable) {
         if (complete) {
-            complete(nil,NENoNet);
+            complete(NENoNet);
         }
     }
     else{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         [manager GET:[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] parameters:nil success:^void(AFHTTPRequestOperation * optation, id responseObject) {
             NSData *backData = optation.responseData;
-            NSArray *resultData = [self afterGetAllSuccessWithData:backData];
-            if (resultData && complete) {
+            BOOL isOK = [self afterGetAllSuccessWithData:backData];
+            if (isOK && complete) {
                 [backData writeToFile:filePath atomically:YES];
-                complete(resultData,NEOK);
+                complete(NEOK);
             }
             else if (complete) {
-                complete(nil,NENetDataErr);
+                complete(NENetDataErr);
             }
             
         } failure:^void(AFHTTPRequestOperation *requestOperation, NSError *error) {
             if (complete) {
-                complete(nil,NENetDataErr);
+                complete(NENetDataErr);
             }
         }];
     }
@@ -70,8 +81,8 @@
  *  @param pIndex    页码
  *  @param _complete 获取数据回调函数
  */
--(void)requestTrickOfCate:(NSString *)cate reloadFormServer:(BOOL)needReload pageIndex:(NSInteger)pIndex complete:(void (^)(TrickCateModel *, RequestState))_complete{
-    NSString *urlStr = [NSString stringWithFormat:kCommonUrl,kTrickQuery,kTrickAppId,kTrickAppId,kPageDefaultCount,cate,pIndex*kPageDefaultCount];
+-(void)requestTrickOfCate:(NSString *)cate reloadFormServer:(BOOL)needReload pageIndex:(NSInteger)pIndex complete:(void (^)( RequestState))_complete{
+    NSString *urlStr = [NSString stringWithFormat:kCommonUrl,kTrickQuery,kTrickAppId,kTrickAppId,kPageDefaultCount,[self checkOutCateKey:cate] ,pIndex*kPageDefaultCount];
      NSString *filePath = [self filePathFromUrl:urlStr];
     NetState netState = [NetHelper Instance].netState;
     if(pIndex == 0 && (!needReload))
@@ -80,13 +91,13 @@
         BOOL isExists = [self  isFileExists:filePath];
         if (isExists) {
             NSData *backData = [NSData  dataWithContentsOfFile:filePath];
-            TrickCateModel *backCateModel = [self afterGetTricksAtCateWithData:backData cateName:cate];
-            if (backCateModel && _complete) {
-                _complete(backCateModel,NEOK);
+            BOOL isOK = [self afterGetTricksAtCateWithData:backData cateName:cate pIndex:pIndex ];
+            if (isOK && _complete) {
+                _complete(NEOK);
             }
             else if (_complete)
             {
-                _complete(nil,NELocalDateErr);
+                _complete(NELocalDateErr);
             }
         }
         else{
@@ -99,27 +110,27 @@
     netrequeststep:
         if (netState == QQReachabilityStatusUnknown || netState == QQReachabilityStatusNotReachable) {
             if (_complete) {
-                _complete(nil,NENoNet);
+                _complete(NENoNet);
             }
         }else{
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             [manager GET:[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] parameters:nil success:^void(AFHTTPRequestOperation * optation, id responseObject) {
                 NSData *backData = optation.responseData;
-                TrickCateModel *backCateModel = [self afterGetTricksAtCateWithData:backData cateName:cate];
-                if (backCateModel && _complete) {
+                BOOL isOK = [self afterGetTricksAtCateWithData:backData cateName:cate pIndex:pIndex];
+                if (isOK && _complete) {
                     if (pIndex == 0) {
                         //首页需要缓存
                         [backData writeToFile:filePath atomically:YES];
                     }
-                    _complete(backCateModel,NEOK);
+                    _complete(NEOK);
                 }
                 else if (_complete) {
-                    _complete(nil,NENetDataErr);
+                    _complete(NENetDataErr);
                 }
                 
             } failure:^void(AFHTTPRequestOperation *requestOperation, NSError *error) {
                 if (_complete) {
-                    _complete(nil,NENetDataErr);
+                    _complete(NENetDataErr);
                 }
             }];
         }
@@ -134,29 +145,43 @@
  *
  *  @return 数据所对应对象实体
  */
--(TrickCateModel*)afterGetTricksAtCateWithData:(NSData*)data cateName:(NSString*)_cateName{
+-(BOOL)afterGetTricksAtCateWithData:(NSData*)data cateName:(NSString*)_cateName pIndex:(NSInteger)pi{
     NSError *error = nil;
     NSDictionary *backDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
     if (error) {
-        return nil;
+        return NO;
     }
     NSArray *rootResultNodeArr =[backDic objectForKey:@"data"];
     NSDictionary *resultNodeDic = rootResultNodeArr.firstObject;
+    NSString *listNumStr = [resultNodeDic objectForKey:@"listNum"];
     NSArray *dispDataNodeArr = [resultNodeDic objectForKey:@"disp_data"];
-    TrickCateModel *cateModel = [[TrickCateModel alloc]init];
-    cateModel.cateName = _cateName;
+    
+    CateModel *tcm = nil;
+    for (CateModel *tmp in _cateArr) {
+        if (tmp.cateName == _cateName) {
+            tcm = tmp;
+            tcm.nums = listNumStr.integerValue;
+            break;
+        }
+    }
+    
+    if (pi == 0 && tcm.itemsArr) {
+        //此种情况为下拉刷新时，需要删除所有缓存数据
+        [tcm.itemsArr removeAllObjects];
+    }
+
     for (NSDictionary *tmpDic in dispDataNodeArr) {
         NSString *content = [tmpDic objectForKey:@"content"];
         NSString *answer = [tmpDic objectForKey:@"answer"];
-        TrickModel *tm = [[TrickModel alloc]init];
+        ItemModel *tm = [[ItemModel alloc]init];
         tm.content = content;
         tm.answer = answer;
-        if (!cateModel.trickArray) {
-            cateModel.trickArray = [[NSMutableArray alloc]init];
+        if (!tcm.itemsArr) {
+            tcm.itemsArr = [[NSMutableArray alloc]init];
         }
-        [cateModel.trickArray addObject:tm];
+        [tcm.itemsArr addObject:tm];
     }
-    return cateModel;
+    return YES;
 }
 
 /**
@@ -166,42 +191,49 @@
  *
  *  @return trickcatemodel集合
  */
--(NSArray*)afterGetAllSuccessWithData:(NSData*)data{
+-(BOOL)afterGetAllSuccessWithData:(NSData*)data{
     NSError *error = nil;
     NSDictionary *backDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
     if (error) {
-        return nil;
+        return NO;
     }
     NSArray *rootResultNodeArr =[backDic objectForKey:@"data"];
     NSDictionary *resultNodeDic = rootResultNodeArr.firstObject;
+    NSString *listNumStr = [resultNodeDic objectForKey:@"listNum"];
     NSArray *dispDataNodeArr = [resultNodeDic objectForKey:@"disp_data"];
     
     NSArray *displayTagsNodeArr = [resultNodeDic objectForKey:@"display_tags"];
     NSDictionary *displayTagsNodeDic = displayTagsNodeArr.firstObject;
     NSArray *cateNodeArr = [displayTagsNodeDic objectForKey:@"tag_values"];
     
-    NSMutableArray *resultArr = [[NSMutableArray alloc]init];
-    TrickCateModel *cateOfAll = [[TrickCateModel alloc]init];
+    CateModel *cateOfAll = [[CateModel alloc]init];
     cateOfAll.cateName = NSLocalizedString(@"all", nil);
-    [resultArr addObject:cateOfAll];
+    cateOfAll.nums = listNumStr.integerValue;
+    cateOfAll.type = CTTrick;
+    if (!_cateArr) {
+        _cateArr = [[NSMutableArray alloc]init];
+    }
+    [_cateArr addObject:cateOfAll];
+    
     for (NSString *tmpStr in cateNodeArr) {
-        TrickCateModel *tcm = [[TrickCateModel alloc]init];
+        CateModel *tcm = [[CateModel alloc]init];
         tcm.cateName  = tmpStr;
-        [resultArr addObject:tcm];
+        tcm.type = CTTrick;
+        [_cateArr addObject:tcm];
     }
     
     for (NSDictionary *tmpDic in dispDataNodeArr) {
         NSString *content = [tmpDic objectForKey:@"content"];
         NSString *answer = [tmpDic objectForKey:@"answer"];
-        TrickModel *tm = [[TrickModel alloc]init];
+        ItemModel *tm = [[ItemModel alloc]init];
         tm.content = content;
         tm.answer = answer;
-        if (!cateOfAll.trickArray) {
-            cateOfAll.trickArray = [[NSMutableArray alloc]init];
+        if (!cateOfAll.itemsArr) {
+            cateOfAll.itemsArr = [[NSMutableArray alloc]init];
         }
-        [cateOfAll.trickArray addObject:tm];
+        [cateOfAll.itemsArr addObject:tm];
     }
-    return resultArr;
+    return YES;
 }
 
 
@@ -217,6 +249,19 @@
     return  [path stringByAppendingPathComponent:url.md5];
 }
 
+/**
+ *  获取搜索关键字
+ *
+ *  @param cateName 分类名称
+ *
+ *  @return 搜索关键字
+ */
+-(NSString*)checkOutCateKey:(NSString*)cateName{
+    if ([cateName isEqualToString:NSLocalizedString(@"all", nil)]) {
+        return @"";
+    }
+    return cateName;
+}
 
 /**
  *  判断文件文件是否存在

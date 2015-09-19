@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RiddleModel.h"
+#import "CateModel.h"
 #import "AFNetworking.h"
 #import "DefineManager.h"
 #import "NSString+MessageDigest.h"
@@ -15,8 +15,12 @@
 #import "NetHelper.h"
 @interface RiddleManager : NSObject
 
--(void)initRiddlesOfCateAllWithComplete:(void(^)(NSArray *riddleCateArr,RequestState errState))complete ;
++(RiddleManager*)instance;
 
--(void)requestRiddleOfCate:(NSString*)cate reloadFromServer:(BOOL)needReload  pageIndex:(NSInteger)pIndex complete:(void(^)(RiddleCateModel* rcm,RequestState errState)) _complete;
+@property (nonatomic,strong) NSMutableArray *cateArr;
+
+-(void)initRiddlesOfCateAllWithComplete:(void(^)(RequestState errState))complete ;
+
+-(void)requestRiddleOfCate:(NSString*)cate reloadFromServer:(BOOL)needReload  pageIndex:(NSInteger)pIndex complete:(void(^)(RequestState errState)) _complete;
 
 @end
