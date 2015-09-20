@@ -8,7 +8,7 @@
 
 
 #import <Foundation/Foundation.h>
-#import "SayingModel.h"
+#import "CateModel.h"
 #import "AFNetworking.h"
 #import "DefineManager.h"
 #import "NSString+MessageDigest.h"
@@ -16,8 +16,11 @@
 #import "NetHelper.h"
 @interface SayingManager : NSObject
 
--(void)initSayingsOfCateAllWithComplete:(void(^)(NSArray *SayingCateArr,RequestState errState))complete ;
++(SayingManager*)instance;
+@property (nonatomic,strong) NSMutableArray *cateArr;
 
--(void)requestSayingOfCate:(NSString*)cate reloadFromServer:(BOOL)needReload pageIndex:(NSInteger)pIndex complete:(void(^)(SayingCateModel* scm,RequestState errState)) _complete;
+-(void)initSayingsOfCateAllWithComplete:(void(^)(RequestState errState))complete ;
+
+-(void)requestSayingOfCate:(NSString*)cate reloadFromServer:(BOOL)needReload pageIndex:(NSInteger)pIndex complete:(void(^)(RequestState errState)) _complete;
 
 @end

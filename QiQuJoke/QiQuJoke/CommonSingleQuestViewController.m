@@ -15,9 +15,9 @@
 @property (nonatomic,strong) UILabel *cntLbl;
 @property (nonatomic,strong) UIButton *btnPrevious;
 @property (nonatomic,strong) UIButton *btnNext;
-@property (nonatomic,strong) UIBarButtonItem *shareItem;
+@property (nonatomic,strong) UIBarButtonItem *shareItemBtn;
 @property (nonatomic,strong) STScratchView *scratchView;
-@property (nonatomic,strong) UIImageView *ball;
+@property (nonatomic,strong) UIImageView *ballIv;
 @property (nonatomic,strong) UILabel *lblAnswer;
 @property (nonatomic,strong) UILabel *lblTip;
 
@@ -59,48 +59,36 @@
     self.cntLbl.textAlignment = NSTextAlignmentCenter;
     self.cntLbl.numberOfLines = 0;
     [self.view addSubview:self.cntLbl];
+    ItemModel *im = self.cm.itemsArr[self.iindex];
+    self.cntLbl.text = im.content;
     
     //分享
-    self.shareItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(btnShareClicked)];
-    self.navigationItem.rightBarButtonItem = self.shareItem;
-    
-    if (_cntType == CTTrick) {
-        TrickModel *trickModel = _cnt;
-        self.cntLbl.text =trickModel.content;
-    }
-    else if (_cntType == CTRiddle) {
-        RiddleModel *riddleModel = _cnt;
-        self.cntLbl.text = riddleModel.content;
-    }
-    else if (_cntType == CTSaying) {
-        SayingModel *sayingModel = _cnt;
-        self.cntLbl.text = sayingModel.content;
-    }
+    self.shareItemBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(btnShareClicked)];
+    self.navigationItem.rightBarButtonItem = self.shareItemBtn;
     
     
-    if (_cntType != CTSaying) {
+    if ( self.cm.type != CTSaying) {
         CGFloat scratchX = 30;
         CGFloat scratchY = CGRectGetMaxY(self.cntLbl.frame)+ 20;
         CGFloat scratchWidth = self.view.frame.size.width-scratchX * 2;
         CGFloat scratchHeight = 80;
         
         self.scratchView = [[STScratchView alloc] initWithFrame:CGRectMake(scratchX, scratchY, scratchWidth, scratchHeight)];
-        [self.scratchView setSizeBrush:20.0];
+        [self.scratchView setSizeBrush:30.0];
         
-        self.ball = [[UIImageView alloc] init];
-        [self.ball setFrame:CGRectMake(0, 0, scratchWidth, scratchHeight)];
-        [self.ball setImage:[UIImage imageNamed:@"scratch"]];
-        [self.scratchView setHideView:self.ball];
+        self.ballIv = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"scratch"]];
+        [self.ballIv setFrame:CGRectMake(0, 0, scratchWidth, scratchHeight)];
+        [self.scratchView setHideView:self.ballIv];
         
         self.lblAnswer = [[UILabel alloc] initWithFrame:CGRectMake(scratchX, scratchY, scratchWidth, scratchHeight)];
         self.lblAnswer.textAlignment = NSTextAlignmentCenter;
-        TrickModel *trickModel = _cnt;
-        [self.lblAnswer setText:trickModel.answer];
+        self.lblAnswer.numberOfLines = 0;
+        self.lblAnswer.text = im.answer;
         
         self.lblTip = [[UILabel alloc] initWithFrame:CGRectMake(scratchX, scratchY, scratchWidth, scratchHeight)];
         self.lblTip.textAlignment = NSTextAlignmentCenter;
         self.lblTip.textColor = [UIColor whiteColor];
-        self.lblTip.text = @"刮开我,揭晓答案";
+        self.lblTip.text = NSLocalizedString(@"toSeeAnswer", nil);
         
         [self.view addSubview:self.lblAnswer];
         [self.view addSubview:self.scratchView];
@@ -112,17 +100,7 @@
     }
 }
 
-/**
- *  百度广告应用APPID
- */
--(NSString *)publisherId{
-    return @"";
-}
-
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-   
-}
+#pragma mark 分享代码
 
 -(void)btnShareClicked{
     LXActivity  *sheetView = [[LXActivity alloc]initWithTitle:NSLocalizedString(@"shareToWhere", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) ShareButtonTitles:@[NSLocalizedString(@"wechat", nil),NSLocalizedString(@"wechatFriends", nil),NSLocalizedString(@"QQ", nil),NSLocalizedString(@"QQZone", nil)] withShareButtonImagesName:@[@"sns_icon_wechat",@"sns_icon_friends",@"sns_icon_qq",@"sns_icon_zone" ]];

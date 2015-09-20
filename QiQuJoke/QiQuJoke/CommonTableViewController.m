@@ -9,11 +9,10 @@
 #import "CommonTableViewController.h"
 
 @interface CommonTableViewController (){
-    ContentType cntType;
-    id cnt;
-    NSInteger pageIndex;
     BOOL didFirstReload ;
+    CateModel *_cm;
     XHRefreshControl *refreshCtrl;
+    CateModel *cateModel;
 }
 
 @end
@@ -39,17 +38,32 @@
 
 -(void)beginPullDownRefreshing{
     if (!didFirstReload) {
-        [self loadDataByOperMode:RMInit];
+        [self loadDataByOperMode:RMInit pIndex:0];
         didFirstReload = YES;
     }else{
-        pageIndex = 0;
-        [self loadDataByOperMode:RMReload];
+        [self loadDataByOperMode:RMReload pIndex:0];
     }
 }
 
 -(void)beginLoadMoreRefreshing{
-    pageIndex++;
-    [self loadDataByOperMode:RMLoadMore];
+    if (_cm.itemsArr.count >[self.tableView numberOfRowsInSection:0]) {
+        //使用场景为:详情页面上一条下一条引起的数据已被缓存
+        [self.tableView reloadData];
+    }
+    else{
+        //上拉加载更多数据（从服务器端请求更多数据）
+        NSInteger indexOfNeedLoad = _cm.itemsArr.count/kPageDefaultCount;
+        [self loadDataByOperMode:RMLoadMore pIndex:indexOfNeedLoad];
+    }
+    
+}
+
+-(instancetype)initWithCateModel:(CateModel *)cm{
+    self = [super init];
+    if (self) {
+        _cm = cm;
+    }
+    return self;
 }
 
 -(NSString *)lastUpdateTimeString{
@@ -58,7 +72,7 @@
     return [formater stringFromDate:[NSDate date]];
 }
 
--(void)loadDataByOperMode:(RequestMode)mode{
+-(void)loadDataByOperMode:(RequestMode)mode pIndex:(NSInteger)pi{
     BOOL needReloadFormServer = false;
     if (mode == RMInit) {
         needReloadFormServer = NO;
@@ -67,39 +81,20 @@
         needReloadFormServer = YES;
     }
     
-    switch (cntType) {
+    if(mode == RMInit && _cm.itemsArr){
+        [refreshCtrl endPullDownRefreshing];
+        return;
+    }
+    switch (_cm.type) {
         case CTTrick:{
-            TrickCateModel *cateModel = cnt;
-            if(mode == RMInit && cateModel.trickArray){
-                [refreshCtrl endPullDownRefreshing];
-                return;
-            }
-            TrickManager *manager =   [[TrickManager alloc]init];
-            [manager requestTrickOfCate:[self checkOutCateKey:cateModel.cateName] reloadFormServer:needReloadFormServer pageIndex:pageIndex complete:^(TrickCateModel *cm, RequestState errState) {
+            [[TrickManager instance]requestTrickOfCate:_cm.cateName reloadFormServer:needReloadFormServer pageIndex:pi complete:^(RequestState errState) {
                 if(errState == NENoNet)
                 {
-                    if(mode == RMLoadMore)
-                    {
-                        pageIndex-- ;
-                    }
                     [UIManager showNoNetToastIn:self.view];
                 }
-                else if(cm)
+                else if(_cm.itemsArr)
                 {
-                    if(mode == RMLoadMore){
-                        TrickCateModel *cateModel = cnt;
-                        [cateModel.trickArray addObjectsFromArray:cm.trickArray];
-                    }
-                    else{
-                        cnt = cm;
-                    }
                     [self.tableView reloadData];
-                }
-                else {
-                    if(mode == RMLoadMore)
-                    {
-                        pageIndex-- ;
-                    }
                 }
                 if (mode == RMLoadMore) {
                     [refreshCtrl endLoadMoreRefresing];
@@ -112,38 +107,14 @@
             break;
         }
         case CTRiddle:{
-            RiddleCateModel *cateModel = cnt;
-            if(mode == RMInit && cateModel.riddleArray){
-                [refreshCtrl endPullDownRefreshing];
-                return;
-            }
-            RiddleManager *manager =   [[RiddleManager alloc]init];
-            
-            [manager requestRiddleOfCate:[self checkOutCateKey:cateModel.cateName] reloadFromServer:needReloadFormServer pageIndex:pageIndex complete:^(RiddleCateModel *rcm, RequestState errState) {
+            [[RiddleManager instance]requestRiddleOfCate:_cm.cateName reloadFromServer:needReloadFormServer pageIndex:pi complete:^(RequestState errState) {
                 if(errState == NENoNet)
                 {
-                    if(mode == RMLoadMore)
-                    {
-                        pageIndex-- ;
-                    }
                     [UIManager showNoNetToastIn:self.view];
                 }
-                else if(rcm)
+                else if(_cm.itemsArr)
                 {
-                    if(mode == RMLoadMore){
-                        RiddleCateModel *cateModel = cnt;
-                        [cateModel.riddleArray addObjectsFromArray:rcm.riddleArray];
-                    }
-                    else{
-                        cnt = rcm;
-                    }
                     [self.tableView reloadData];
-                }
-                else {
-                    if(mode == RMLoadMore)
-                    {
-                        pageIndex-- ;
-                    }
                 }
                 if (mode == RMLoadMore) {
                     [refreshCtrl endLoadMoreRefresing];
@@ -151,43 +122,19 @@
                 else{
                     [refreshCtrl endPullDownRefreshing];
                 }
-                
             }];
             break;
         }
         case CTSaying:
         {
-            SayingCateModel *cateModel = cnt;
-            if(mode == RMInit && cateModel.sayingArray){
-                [refreshCtrl endPullDownRefreshing];
-                return;
-            }
-            SayingManager *manager =   [[SayingManager alloc]init];
-            [manager requestSayingOfCate:[self checkOutCateKey:cateModel.cateName] reloadFromServer:needReloadFormServer pageIndex:pageIndex complete:^(SayingCateModel *scm, RequestState errState) {
+            [[SayingManager instance]requestSayingOfCate:_cm.cateName reloadFromServer:needReloadFormServer pageIndex:pi complete:^(RequestState errState) {
                 if(errState == NENoNet)
                 {
-                    if(mode == RMLoadMore)
-                    {
-                        pageIndex-- ;
-                    }
                     [UIManager showNoNetToastIn:self.view];
                 }
-                else if(scm)
+                else if(_cm.itemsArr)
                 {
-                    if(mode == RMLoadMore){
-                        SayingCateModel *cateModel = cnt;
-                        [cateModel.sayingArray addObjectsFromArray:scm.sayingArray];
-                    }
-                    else{
-                        cnt = scm;
-                    }
                     [self.tableView reloadData];
-                }
-                else {
-                    if(mode == RMLoadMore)
-                    {
-                        pageIndex-- ;
-                    }
                 }
                 if (mode == RMLoadMore) {
                     [refreshCtrl endLoadMoreRefresing];
@@ -195,7 +142,6 @@
                 else{
                     [refreshCtrl endPullDownRefreshing];
                 }
-                
             }];
             break;
         }
@@ -204,23 +150,7 @@
     }
 }
 
-
-/**
- *  获取搜索关键字
- *
- *  @param cateName 分类名称
- *
- *  @return 搜索关键字
- */
--(NSString*)checkOutCateKey:(NSString*)cateName{
-    if ([cateName isEqualToString:NSLocalizedString(@"all", nil)]) {
-        return @"";
-    }
-    return cateName;
-}
-
 -(void)initData{
-    pageIndex = 0;
     [refreshCtrl startPullDownRefreshing];
 }
 
@@ -232,14 +162,6 @@
 }
 
 
--(instancetype)initWithContentType:(ContentType)type Content:(id)ct{
-    if (self = [super init]) {
-        cntType = type;
-        cnt = ct;
-    }
-    return self;
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -249,19 +171,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    if (cntType == CTTrick) {
-        TrickCateModel *cateModel = cnt;
-        return cateModel.trickArray.count;
+    if (_cm.itemsArr) {
+        return _cm.itemsArr.count;
     }
-    else if(cntType == CTRiddle) {
-        RiddleCateModel *cateModel = cnt;
-        return cateModel.riddleArray.count;
-    }
-    else if(cntType == CTSaying) {
-        SayingCateModel *cateModel = cnt;
-        return cateModel.sayingArray.count;
-    }
-    return 3 ;
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -275,47 +188,14 @@
         cell.textLabel.font = [UIFont systemFontOfSize:14];
     }
     
-    if (cntType == CTTrick) {
-        TrickCateModel *cateModel = cnt;
-        TrickModel *trickModel =  [cateModel.trickArray objectAtIndex:indexPath.row];
-        cell.textLabel.text = trickModel.content;
-        
-    }
-    else if(cntType == CTRiddle) {
-        RiddleCateModel *cateModle = cnt;
-        RiddleModel *riddleModel = [cateModle.riddleArray objectAtIndex:indexPath.row];
-        cell.textLabel.text = riddleModel.content;
-    }
-    else if(cntType == CTSaying) {
-        SayingCateModel *cateModel = cnt;
-        SayingModel  *sayingModel = [cateModel.sayingArray objectAtIndex:indexPath.row];
-        cell.textLabel.text = sayingModel.content;
-    }
-    
+    ItemModel *im = [_cm.itemsArr objectAtIndex:indexPath.row];
+    cell.textLabel.text = im.content;
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (cntType == CTTrick) {
-        TrickCateModel *cateModel = cnt;
-        TrickModel *trickModel =  [cateModel.trickArray objectAtIndex:indexPath.row];
-        if (self.delegate && [self.delegate respondsToSelector:@selector(cellSelectedAtModel:)]) {
-            [self.delegate cellSelectedAtModel:trickModel];
-        }
-    }
-    else if(cntType == CTRiddle) {
-        RiddleCateModel *cateModel = cnt;
-        RiddleModel *riddleModel = [cateModel.riddleArray objectAtIndex:indexPath.row];
-        if (self.delegate && [self.delegate respondsToSelector:@selector(cellSelectedAtModel:)]) {
-            [self.delegate cellSelectedAtModel:riddleModel];
-        }
-    }
-    else if(cntType == CTSaying) {
-        SayingCateModel *cateModel = cnt;
-        SayingModel *sayingModel = [cateModel.sayingArray objectAtIndex:indexPath.row];
-        if (self.delegate && [self.delegate respondsToSelector:@selector(cellSelectedAtModel:)]) {
-            [self.delegate cellSelectedAtModel:sayingModel];
-        }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(selectedCellIndex:cm:)]) {
+        [self.delegate selectedCellIndex:indexPath.row cm:_cm];
     }
 }
 

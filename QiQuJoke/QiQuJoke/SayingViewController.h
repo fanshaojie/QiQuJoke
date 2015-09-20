@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SayingModel.h"
+#import "CateModel.h"
 #import "SayingManager.h"
 #import "UIManager.h"
 #import "CAPSPageMenu.h"

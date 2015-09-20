@@ -9,25 +9,22 @@
 #import <UIKit/UIKit.h>
 #import "EnumManager.h"
 #import "DefineManager.h"
-#import "TrickModel.h"
-#import "TrickManager.h"
+#import "CateModel.h"
 #import <XHRefreshControl.h>
 #import "UIManager.h"
 #import "RiddleManager.h"
-#import "RiddleModel.h"
-#import "SayingModel.h"
 #import "SayingManager.h"
 #import "NetHelper.h"
+#import "TrickManager.h"
 @protocol tableViewProcotol <NSObject>
 
--(void)cellSelectedAtModel:(id)model;
+-(void)selectedCellIndex:(NSInteger)index cm:(CateModel*)cm;
 
 @end
 
 @interface CommonTableViewController : UITableViewController<XHRefreshControlDelegate>
 
--(instancetype)initWithContentType:(ContentType)type Content:(id)ct;
-
+-(instancetype)initWithCateModel:(CateModel*)cm;
 @property (nonatomic)  id<tableViewProcotol> delegate;
 
 @end

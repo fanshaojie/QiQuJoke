@@ -9,7 +9,6 @@
 #import "TrickViewController.h"
 
 @interface TrickViewController (){
-    NSArray *cateArr;
     CAPSPageMenu *cateMenu;
     UIImageView *_bgIv;
     MONActivityIndicatorView *loadingView;
@@ -29,7 +28,7 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
     NetState netState = [NetHelper Instance].netState;
-    if ((!cateArr)&&(netState == QQReachabilityStatusReachableViaWiFi || netState == QQReachabilityStatusReachableViaWWAN)) {
+    if ((![TrickManager instance].cateArr)&&(netState == QQReachabilityStatusReachableViaWiFi || netState == QQReachabilityStatusReachableViaWWAN)) {
         [self initData];
     }
 }
@@ -91,24 +90,23 @@
 
 -(void)initData{
     [loadingView startAnimating];
-    TrickManager *manager = [[TrickManager alloc]init];
-    [manager initTricksOfCateAllWithComplete:^(NSArray *trickCateArr,RequestState ErrState)  {
+
+    [[TrickManager instance]initTricksOfCateAllWithComplete:^(RequestState ErrState)  {
         [loadingView stopAnimating];
         if (ErrState == NENoNet) {
             [UIManager  showNoNetToastIn:self.view];
             return;
         }
         
-        cateArr = trickCateArr;
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (trickCateArr == nil) {
+            if ([TrickManager instance].cateArr == nil) {
                 [UIManager showAlert:NSLocalizedString(@"netErr", nil)];
                 return;
             }
             
             NSMutableArray *ctrlArr = [[NSMutableArray alloc]init];
-            for (TrickCateModel *cate in cateArr) {
-                CommonTableViewController *ctvCtrl = [[CommonTableViewController alloc]initWithContentType:CTTrick Content:cate];
+            for (CateModel  *cate in [TrickManager instance].cateArr) {
+                CommonTableViewController *ctvCtrl = [[CommonTableViewController alloc]initWithCateModel:cate];
                 ctvCtrl.title = cate.cateName;
                 ctvCtrl.delegate =self;
                 [ctrlArr addObject:ctvCtrl];
@@ -139,12 +137,10 @@
    
 }
 
-
--(void)cellSelectedAtModel:(id)model{
-    TrickModel *tm = model;
+-(void)selectedCellIndex:(NSInteger)index cm:(CateModel *)cm{
     CommonSingleQuestViewController *singleCtrl = [[CommonSingleQuestViewController alloc]init];
-    singleCtrl.cntType = CTTrick;
-    singleCtrl.cnt = tm;
+    singleCtrl.cm = cm;
+    singleCtrl.iindex = index;
     [self.navigationController pushViewController:singleCtrl animated:true];
 }
 

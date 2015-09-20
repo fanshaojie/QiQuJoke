@@ -9,16 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "EnumManager.h"
 #import "DefineManager.h"
-#import "TrickModel.h"
-#import "RiddleModel.h"
-#import "SayingModel.h"
+#import "CateModel.h"
 #import <ShareSDK/ShareSDK.h>
 #import "LXActivity.h"
 #import "UIManager.h"
 #import "STScratchView.h"
+#import "TrickManager.h"
 @interface CommonSingleQuestViewController : UIViewController<LXActivityDelegate>
 
-@property (nonatomic) id  cnt;
-@property (nonatomic) ContentType cntType;
+@property (nonatomic,strong) CateModel *cm;
+@property (nonatomic,assign) NSInteger iindex;
+
 
 @end

@@ -9,51 +9,61 @@
 #import "RiddleManager.h"
 
 @implementation RiddleManager
++(RiddleManager *)instance{
+    static dispatch_once_t onceT;
+    static RiddleManager *_manager;
+    dispatch_once(&onceT, ^{
+        _manager = [[RiddleManager alloc]init];
+    });
+    return _manager;
+}
+
 
 /**
  *  谜语默认加载项－全部  以及获取了分类
  *
  *  @param complete 获取数据完成回调函数
  */
--(void)initRiddlesOfCateAllWithComplete:(void (^)(NSArray *,RequestState errState))complete{
+-(void)initRiddlesOfCateAllWithComplete:(void (^)(RequestState errState))complete{
     NetState netState = [NetHelper Instance].netState;
     NSString *urlStr = [NSString stringWithFormat:kCommonUrl,kRiddleQuery,kRiddleAppId,kRiddleAppId,kPageDefaultCount,@"",(long)0];
+    
     //对数据进行本地化处理
     //**************************************
     NSString *filePath = [self filePathFromUrl:urlStr];
     BOOL isExists = [self isFileExists:filePath];
     if (isExists) {
         NSData *backData = [NSData  dataWithContentsOfFile:filePath];
-        NSArray *resultData = [self afterGetAllSuccessWithData:backData];
-        if (resultData && complete) {
-            complete(resultData,NEOK);
+        BOOL isOK = [self afterGetAllSuccessWithData:backData];
+        if (isOK && complete) {
+            complete(NEOK);
         }
         else if (complete)
         {
-            complete(nil,NELocalDateErr);
+            complete(NELocalDateErr);
         }
     }
-    else if (netState == QQReachabilityStatusUnknown || netState == QQReachabilityStatusNotReachable) {
+    else  if (netState == QQReachabilityStatusUnknown || netState == QQReachabilityStatusNotReachable) {
         if (complete) {
-            complete(nil,NENoNet);
+            complete(NENoNet);
         }
     }
     else{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         [manager GET:[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] parameters:nil success:^void(AFHTTPRequestOperation * optation, id responseObject) {
             NSData *backData = optation.responseData;
-            NSArray *resultData = [self afterGetAllSuccessWithData:backData];
-            if (resultData && complete) {
+            BOOL isOK = [self afterGetAllSuccessWithData:backData];
+            if (isOK && complete) {
                 [backData writeToFile:filePath atomically:YES];
-                complete(resultData,NEOK);
+                complete(NEOK);
             }
             else if (complete) {
-                complete(nil,NENetDataErr);
+                complete(NENetDataErr);
             }
             
         } failure:^void(AFHTTPRequestOperation *requestOperation, NSError *error) {
             if (complete) {
-                complete(nil,NENetDataErr);
+                complete(NENetDataErr);
             }
         }];
     }
@@ -65,67 +75,65 @@
  *  获取谜语指定分类指定页面下的数据(此方法不做缓存处理)
  *
  *  @param cate      分类
- *  @param needReload 只对第一页有效
+ *  @param needReload 只针对第一页,其他无效
  *  @param pIndex    页码
  *  @param _complete 获取数据回调函数
  */
--(void)requestRiddleOfCate:(NSString *)cate reloadFromServer:(BOOL)needReload  pageIndex:(NSInteger)pIndex complete:(void (^)(RiddleCateModel *,RequestState errState))_complete{
-    NSString *urlStr = [NSString stringWithFormat:kCommonUrl,kRiddleQuery,kRiddleAppId,kRiddleAppId,kPageDefaultCount,cate,pIndex*kPageDefaultCount];
-    NetState netState = [NetHelper Instance].netState;
+-(void)requestRiddleOfCate:(NSString *)cate reloadFromServer:(BOOL)needReload pageIndex:(NSInteger)pIndex complete:(void (^)(RequestState))_complete{
+    NSString *urlStr = [NSString stringWithFormat:kCommonUrl,kRiddleQuery,kRiddleAppId,kRiddleAppId,kPageDefaultCount,[self checkOutCateKey:cate] ,pIndex*kPageDefaultCount];
     NSString *filePath = [self filePathFromUrl:urlStr];
-    if (pIndex == 0&&(!needReload) ) {
-        BOOL isExists = [self isFileExists:filePath];
+    NetState netState = [NetHelper Instance].netState;
+    if(pIndex == 0 && (!needReload))
+    {
+        //此种情况，先去检查本地缓存
+        BOOL isExists = [self  isFileExists:filePath];
         if (isExists) {
             NSData *backData = [NSData  dataWithContentsOfFile:filePath];
-            RiddleCateModel *backCateModel = [self afterGetRiddlesAtCateWithData:backData cateName:cate];
-            if (backCateModel && _complete) {
-                _complete(backCateModel,NEOK);
-                
+            BOOL isOK = [self afterGetRiddlesAtCateWithData:backData cateName:cate pIndex:pIndex ];
+            if (isOK && _complete) {
+                _complete(NEOK);
             }
             else if (_complete)
             {
-                _complete(nil,NELocalDateErr);
+                _complete(NELocalDateErr);
             }
         }
         else{
-            //网络请求
-            goto riddlenetrequest;
+            //本地文件不存在则进行网络请求
+            goto netrequeststep;
         }
+        
     }
     else{
-    riddlenetrequest:
+    netrequeststep:
         if (netState == QQReachabilityStatusUnknown || netState == QQReachabilityStatusNotReachable) {
             if (_complete) {
-                _complete(nil,NENoNet);
+                _complete(NENoNet);
             }
-            return;
-        }
-        else{
+        }else{
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
             [manager GET:[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] parameters:nil success:^void(AFHTTPRequestOperation * optation, id responseObject) {
                 NSData *backData = optation.responseData;
-                RiddleCateModel *backCateModel = [self afterGetRiddlesAtCateWithData:backData cateName:cate];
-                if (backCateModel && _complete) {
+                BOOL isOK = [self afterGetRiddlesAtCateWithData:backData cateName:cate pIndex:pIndex];
+                if (isOK && _complete) {
                     if (pIndex == 0) {
-                        //首页进行数据缓存
-                         [backData writeToFile:filePath atomically:YES];
+                        //首页需要缓存
+                        [backData writeToFile:filePath atomically:YES];
                     }
-                    _complete(backCateModel,NEOK);
+                    _complete(NEOK);
                 }
                 else if (_complete) {
-                    _complete(nil,NENetDataErr);
+                    _complete(NENetDataErr);
                 }
                 
             } failure:^void(AFHTTPRequestOperation *requestOperation, NSError *error) {
                 if (_complete) {
-                    _complete(nil,NENetDataErr);
+                    _complete(NENetDataErr);
                 }
             }];
         }
     }
-    
-    
-    
+
 }
 
 
@@ -137,32 +145,44 @@
  *
  *  @return 数据所对应对象实体
  */
--(RiddleCateModel*)afterGetRiddlesAtCateWithData:(NSData*)data cateName:(NSString*)_cateName{
+-(BOOL)afterGetRiddlesAtCateWithData:(NSData*)data cateName:(NSString*)_cateName pIndex:(NSInteger)pi{
     NSError *error = nil;
     NSDictionary *backDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
     if (error) {
-        return nil;
+        return NO;
     }
     NSArray *rootResultNodeArr =[backDic objectForKey:@"data"];
     NSDictionary *resultNodeDic = rootResultNodeArr.firstObject;
+    NSString *listNumStr = [resultNodeDic objectForKey:@"listNum"];
     NSArray *dispDataNodeArr = [resultNodeDic objectForKey:@"disp_data"];
-    RiddleCateModel *cateModel = [[RiddleCateModel alloc]init];
-    cateModel.cateName = _cateName;
+    
+    CateModel *tcm = nil;
+    for (CateModel *tmp in _cateArr) {
+        if (tmp.cateName == _cateName) {
+            tcm = tmp;
+            tcm.nums = listNumStr.integerValue;
+            break;
+        }
+    }
+    
+    if (pi == 0 && tcm.itemsArr) {
+        //此种情况为下拉刷新时，需要删除所有缓存数据
+        [tcm.itemsArr removeAllObjects];
+    }
+    
     for (NSDictionary *tmpDic in dispDataNodeArr) {
         NSString *content = [tmpDic objectForKey:@"content"];
         NSString *answer = [tmpDic objectForKey:@"answer"];
-        RiddleModel *tm = [[RiddleModel alloc]init];
+        ItemModel *tm = [[ItemModel alloc]init];
         tm.content = content;
         tm.answer = answer;
-        if (!cateModel.riddleArray) {
-            cateModel.riddleArray = [[NSMutableArray alloc]init];
+        if (!tcm.itemsArr) {
+            tcm.itemsArr = [[NSMutableArray alloc]init];
         }
-        [cateModel.riddleArray addObject:tm];
+        [tcm.itemsArr addObject:tm];
     }
-    return cateModel;
+    return YES;
 }
-
-
 
 /**
  *  解析谜语－全部分类下数据以及所有分类
@@ -171,42 +191,49 @@
  *
  *  @return Riddlecatemodel集合
  */
--(NSArray*)afterGetAllSuccessWithData:(NSData*)data{
+-(BOOL)afterGetAllSuccessWithData:(NSData*)data{
     NSError *error = nil;
     NSDictionary *backDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
     if (error) {
-        return nil;
+        return NO;
     }
     NSArray *rootResultNodeArr =[backDic objectForKey:@"data"];
     NSDictionary *resultNodeDic = rootResultNodeArr.firstObject;
+    NSString *listNumStr = [resultNodeDic objectForKey:@"listNum"];
     NSArray *dispDataNodeArr = [resultNodeDic objectForKey:@"disp_data"];
     
     NSArray *displayTagsNodeArr = [resultNodeDic objectForKey:@"display_tags"];
     NSDictionary *displayTagsNodeDic = displayTagsNodeArr.firstObject;
     NSArray *cateNodeArr = [displayTagsNodeDic objectForKey:@"tag_values"];
     
-    NSMutableArray *resultArr = [[NSMutableArray alloc]init];
-    RiddleCateModel *cateOfAll = [[RiddleCateModel alloc]init];
+    CateModel *cateOfAll = [[CateModel alloc]init];
     cateOfAll.cateName = NSLocalizedString(@"all", nil);
-    [resultArr addObject:cateOfAll];
+    cateOfAll.nums = listNumStr.integerValue;
+    cateOfAll.type = CTRiddle;
+    if (!_cateArr) {
+        _cateArr = [[NSMutableArray alloc]init];
+    }
+    [_cateArr addObject:cateOfAll];
+    
     for (NSString *tmpStr in cateNodeArr) {
-        RiddleCateModel *tcm = [[RiddleCateModel alloc]init];
+        CateModel *tcm = [[CateModel alloc]init];
         tcm.cateName  = tmpStr;
-        [resultArr addObject:tcm];
+        tcm.type = CTRiddle;
+        [_cateArr addObject:tcm];
     }
     
     for (NSDictionary *tmpDic in dispDataNodeArr) {
         NSString *content = [tmpDic objectForKey:@"content"];
         NSString *answer = [tmpDic objectForKey:@"answer"];
-        RiddleModel *tm = [[RiddleModel alloc]init];
+        ItemModel *tm = [[ItemModel alloc]init];
         tm.content = content;
         tm.answer = answer;
-        if (!cateOfAll.riddleArray) {
-            cateOfAll.riddleArray = [[NSMutableArray alloc]init];
+        if (!cateOfAll.itemsArr) {
+            cateOfAll.itemsArr = [[NSMutableArray alloc]init];
         }
-        [cateOfAll.riddleArray addObject:tm];
+        [cateOfAll.itemsArr addObject:tm];
     }
-    return resultArr;
+    return YES;
 }
 
 
@@ -222,6 +249,19 @@
     return  [path stringByAppendingPathComponent:url.md5];
 }
 
+/**
+ *  获取搜索关键字
+ *
+ *  @param cateName 分类名称
+ *
+ *  @return 搜索关键字
+ */
+-(NSString*)checkOutCateKey:(NSString*)cateName{
+    if ([cateName isEqualToString:NSLocalizedString(@"all", nil)]) {
+        return @"";
+    }
+    return cateName;
+}
 
 /**
  *  判断文件文件是否存在
@@ -238,6 +278,5 @@
     }
     return NO;
 }
-
 
 @end

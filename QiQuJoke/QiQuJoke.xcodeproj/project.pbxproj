@@ -43,12 +43,10 @@
 		FD3B73F21BA65E8600EAD72A /* SkinViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3B73F11BA65E8600EAD72A /* SkinViewCell.m */; };
 		FD3D639F1BA2A55F00C6C751 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3D639E1BA2A55F00C6C751 /* SettingViewController.m */; };
 		FD55042A1B9418DC0003A4A9 /* TrickManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD5504291B9418DC0003A4A9 /* TrickManager.m */; };
-		FD55042E1B9419150003A4A9 /* TrickModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD55042D1B9419150003A4A9 /* TrickModel.m */; };
+		FD55042E1B9419150003A4A9 /* CateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD55042D1B9419150003A4A9 /* CateModel.m */; };
 		FD705A981BA7ABC000D4DD29 /* DetailSkinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD705A971BA7ABC000D4DD29 /* DetailSkinViewController.m */; };
 		FD87B07B1B9C1354006F4C06 /* RiddleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD87B07A1B9C1354006F4C06 /* RiddleManager.m */; };
 		FD87B07E1B9C1364006F4C06 /* SayingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD87B07D1B9C1364006F4C06 /* SayingManager.m */; };
-		FD87B0811B9C13C0006F4C06 /* RiddleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD87B0801B9C13C0006F4C06 /* RiddleModel.m */; };
-		FD87B0841B9C1402006F4C06 /* SayingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD87B0831B9C1402006F4C06 /* SayingModel.m */; };
 		FD87B0AB1B9D5C0E006F4C06 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD87B08C1B9D5C0E006F4C06 /* TencentOpenAPI.framework */; };
 		FD87B0AC1B9D5C0E006F4C06 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FD87B08D1B9D5C0E006F4C06 /* TencentOpenApi_IOS_Bundle.bundle */; };
 		FD87B0B11B9D5C0E006F4C06 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD87B09E1B9D5C0E006F4C06 /* libWeChatSDK.a */; };
@@ -151,18 +149,14 @@
 		FD3D639E1BA2A55F00C6C751 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		FD5504281B9418DC0003A4A9 /* TrickManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrickManager.h; sourceTree = "<group>"; };
 		FD5504291B9418DC0003A4A9 /* TrickManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrickManager.m; sourceTree = "<group>"; };
-		FD55042C1B9419150003A4A9 /* TrickModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrickModel.h; sourceTree = "<group>"; };
-		FD55042D1B9419150003A4A9 /* TrickModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrickModel.m; sourceTree = "<group>"; };
+		FD55042C1B9419150003A4A9 /* CateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CateModel.h; sourceTree = "<group>"; };
+		FD55042D1B9419150003A4A9 /* CateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CateModel.m; sourceTree = "<group>"; };
 		FD705A961BA7ABC000D4DD29 /* DetailSkinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailSkinViewController.h; sourceTree = "<group>"; };
 		FD705A971BA7ABC000D4DD29 /* DetailSkinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailSkinViewController.m; sourceTree = "<group>"; };
 		FD87B0791B9C1354006F4C06 /* RiddleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RiddleManager.h; sourceTree = "<group>"; };
 		FD87B07A1B9C1354006F4C06 /* RiddleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RiddleManager.m; sourceTree = "<group>"; };
 		FD87B07C1B9C1364006F4C06 /* SayingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SayingManager.h; sourceTree = "<group>"; };
 		FD87B07D1B9C1364006F4C06 /* SayingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SayingManager.m; sourceTree = "<group>"; };
-		FD87B07F1B9C13C0006F4C06 /* RiddleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RiddleModel.h; sourceTree = "<group>"; };
-		FD87B0801B9C13C0006F4C06 /* RiddleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RiddleModel.m; sourceTree = "<group>"; };
-		FD87B0821B9C1402006F4C06 /* SayingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SayingModel.h; sourceTree = "<group>"; };
-		FD87B0831B9C1402006F4C06 /* SayingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SayingModel.m; sourceTree = "<group>"; };
 		FD87B08C1B9D5C0E006F4C06 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
 		FD87B08D1B9D5C0E006F4C06 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
 		FD87B09E1B9D5C0E006F4C06 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
@@ -476,12 +470,8 @@
 				2EAD31901BABBEDC003047FB /* Favorite+CoreDataProperties.m */,
 				2EAD31911BABBEDC003047FB /* Favorite.h */,
 				2EAD31921BABBEDC003047FB /* Favorite.m */,
-				FD55042C1B9419150003A4A9 /* TrickModel.h */,
-				FD55042D1B9419150003A4A9 /* TrickModel.m */,
-				FD87B07F1B9C13C0006F4C06 /* RiddleModel.h */,
-				FD87B0801B9C13C0006F4C06 /* RiddleModel.m */,
-				FD87B0821B9C1402006F4C06 /* SayingModel.h */,
-				FD87B0831B9C1402006F4C06 /* SayingModel.m */,
+				FD55042C1B9419150003A4A9 /* CateModel.h */,
+				FD55042D1B9419150003A4A9 /* CateModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -597,7 +587,7 @@
 					};
 					FD1BFFF11B9005B500E5FE74 = {
 						CreatedOnToolsVersion = 6.3.2;
-						DevelopmentTeam = K4WUP8V8HP;
+						DevelopmentTeam = NKSKNF252X;
 					};
 				};
 			};
@@ -700,9 +690,8 @@
 				FDCEB1C91B9EB2E9000FBA71 /* MLNavigationController.m in Sources */,
 				FD1B00281B900B8700E5FE74 /* RiddleViewController.m in Sources */,
 				FD3B73F21BA65E8600EAD72A /* SkinViewCell.m in Sources */,
-				FD87B0841B9C1402006F4C06 /* SayingModel.m in Sources */,
 				FD1B01151B906AD700E5FE74 /* CAPSPageMenu.m in Sources */,
-				FD55042E1B9419150003A4A9 /* TrickModel.m in Sources */,
+				FD55042E1B9419150003A4A9 /* CateModel.m in Sources */,
 				FD1B002B1B900C8200E5FE74 /* SayingViewController.m in Sources */,
 				FD1B00251B900B5C00E5FE74 /* TrickViewController.m in Sources */,
 				FDBAA5151B958F5D00F544A6 /* CommonSingleQuestViewController.m in Sources */,
@@ -714,7 +703,6 @@
 				FD55042A1B9418DC0003A4A9 /* TrickManager.m in Sources */,
 				FDBAA50D1B9541D000F544A6 /* UIManager.m in Sources */,
 				FD25CC801BA2D65A00B4C6E5 /* SkinViewController.m in Sources */,
-				FD87B0811B9C13C0006F4C06 /* RiddleModel.m in Sources */,
 				FD1BFFFE1B9005B500E5FE74 /* QiQuJoke.xcdatamodeld in Sources */,
 				FDCEB1D81B9ED183000FBA71 /* NetHelper.m in Sources */,
 				2E5F5F461BA175710040BF06 /* STScratchView.m in Sources */,
@@ -882,6 +870,7 @@
 					"\"UIKit\"",
 					"-lstdc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = cn.fanshaojie.QiQuJoker;
 				PRODUCT_NAME = "猜一猜";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -942,6 +931,7 @@
 					"\"UIKit\"",
 					"-lstdc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = cn.fanshaojie.QiQuJoker;
 				PRODUCT_NAME = "猜一猜";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

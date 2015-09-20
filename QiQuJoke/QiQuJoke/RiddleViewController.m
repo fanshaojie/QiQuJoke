@@ -9,7 +9,6 @@
 #import "RiddleViewController.h"
 
 @interface RiddleViewController (){
-    NSArray *cateArr;
     CAPSPageMenu *cateMenu;
     UIImageView *_bgIv;
     MONActivityIndicatorView *loadingView;
@@ -29,7 +28,7 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
     NetState netState = [NetHelper Instance].netState;
-    if (cateArr == nil &&(netState == QQReachabilityStatusReachableViaWiFi || netState == QQReachabilityStatusReachableViaWWAN)) {
+    if ([RiddleManager instance].cateArr == nil &&(netState == QQReachabilityStatusReachableViaWiFi || netState == QQReachabilityStatusReachableViaWWAN)) {
         [self initData];
     }
 }
@@ -98,23 +97,22 @@
 }
 
 -(void)initData{
-    RiddleManager *manager = [[RiddleManager alloc]init];
-    [manager initRiddlesOfCateAllWithComplete:^(NSArray *riddleCateArr,RequestState errState)  {
+    [[RiddleManager instance]initRiddlesOfCateAllWithComplete:^(RequestState errState)  {
         [loadingView stopAnimating];
         if (errState == NENoNet) {
             [UIManager showNoNetToastIn:self.view];
             return;
         }
-        cateArr = riddleCateArr;
+
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (riddleCateArr == nil) {
+            if ([RiddleManager instance].cateArr== nil) {
                 [UIManager showAlert:NSLocalizedString(@"netErr", nil)];
                 return;
             }
             
             NSMutableArray *ctrlArr = [[NSMutableArray alloc]init];
-            for (RiddleCateModel *cate in cateArr) {
-                CommonTableViewController *ctvCtrl = [[CommonTableViewController alloc]initWithContentType:CTRiddle Content:cate];
+            for (CateModel *cate in [RiddleManager instance].cateArr) {
+                CommonTableViewController *ctvCtrl = [[CommonTableViewController alloc]initWithCateModel:cate];
                 ctvCtrl.title = cate.cateName;
                 ctvCtrl.delegate =self;
                 [ctrlArr addObject:ctvCtrl];
@@ -141,11 +139,10 @@
     }];
 }
 
--(void)cellSelectedAtModel:(id)model{
-    RiddleModel *tm = model;
+-(void)selectedCellIndex:(NSInteger)index cm:(CateModel *)cm{
     CommonSingleQuestViewController *singleCtrl = [[CommonSingleQuestViewController alloc]init];
-    singleCtrl.cntType = CTTrick;
-    singleCtrl.cnt = tm;
+    singleCtrl.cm = cm;
+    singleCtrl.iindex = index;
     [self.navigationController pushViewController:singleCtrl animated:true];
 }
 

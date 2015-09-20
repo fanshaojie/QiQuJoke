@@ -9,7 +9,6 @@
 #import "SayingViewController.h"
 
 @interface SayingViewController (){
-    NSArray *cateArr;
     CAPSPageMenu *cateMenu;
     UIImageView *_bgIv;
     MONActivityIndicatorView *loadingView;
@@ -29,31 +28,29 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
     NetState netState = [NetHelper Instance].netState;
-    if ((!cateArr)&&(netState == QQReachabilityStatusReachableViaWiFi || netState == QQReachabilityStatusReachableViaWWAN)) {
+    if ((![SayingManager instance].cateArr)&&(netState == QQReachabilityStatusReachableViaWiFi || netState == QQReachabilityStatusReachableViaWWAN)) {
         [self initData];
     }
 }
 
 -(void)initData{
     [loadingView startAnimating];
-    SayingManager *manager = [[SayingManager alloc]init];
-    [manager initSayingsOfCateAllWithComplete:^(NSArray *sayingCateArr,RequestState errState)  {
+    [[SayingManager instance] initSayingsOfCateAllWithComplete:^(RequestState errState)  {
         [loadingView stopAnimating];
         if (errState == NENoNet) {
             [UIManager showNoNetToastIn:self.view];
             return;
         }
         
-        cateArr = sayingCateArr;
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (sayingCateArr == nil) {
+            if ([SayingManager instance].cateArr == nil) {
                 [UIManager showAlert:NSLocalizedString(@"netErr", nil)];
                 return;
             }
             
             NSMutableArray *ctrlArr = [[NSMutableArray alloc]init];
-            for (SayingCateModel *cate in cateArr) {
-                CommonTableViewController *ctvCtrl = [[CommonTableViewController alloc]initWithContentType:CTSaying Content:cate];
+            for (CateModel *cate in [SayingManager instance].cateArr) {
+                CommonTableViewController *ctvCtrl = [[CommonTableViewController alloc]initWithCateModel:cate];
                 ctvCtrl.title = cate.cateName;
                 ctvCtrl.delegate =self;
                 [ctrlArr addObject:ctvCtrl];
@@ -85,13 +82,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-
--(void)cellSelectedAtModel:(id)model{
-    SayingModel *tm = model;
+-(void)selectedCellIndex:(NSInteger)index cm:(CateModel *)cm{
     CommonSingleQuestViewController *singleCtrl = [[CommonSingleQuestViewController alloc]init];
-    singleCtrl.cntType = CTSaying;
-    singleCtrl.cnt = tm;
+    singleCtrl.cm = cm;
+    singleCtrl.iindex = index;
     [self.navigationController pushViewController:singleCtrl animated:true];
+
 }
 
 -(void)initView{

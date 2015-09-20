@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RiddleModel.h"
+#import "CateModel.h"
 #import "RiddleManager.h"
 #import "UIManager.h"
 #import "CAPSPageMenu.h"
