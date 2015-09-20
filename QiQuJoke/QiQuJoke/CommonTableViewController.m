@@ -36,6 +36,26 @@
     return YES;
 }
 
+- (NSInteger)autoLoadMoreRefreshedCountConverManual{
+    if (_cm && _cm.nums) {
+        if (_cm.nums%kPageDefaultCount == 0) {
+             NSLog(@"总页数:%ld",_cm.nums/kPageDefaultCount);
+          return  _cm.nums/kPageDefaultCount;
+            
+        }
+        else{
+             NSLog(@"总页数:%ld",_cm.nums/kPageDefaultCount + 1);
+            return _cm.nums/kPageDefaultCount + 1;
+           
+        }
+    }
+    return  10;
+}
+
+-(NSString *)displayAutoLoadMoreRefreshedMessage{
+    return NSLocalizedString(@"noContent", nil);
+}
+
 -(void)beginPullDownRefreshing{
     if (!didFirstReload) {
         [self loadDataByOperMode:RMInit pIndex:0];
@@ -53,6 +73,7 @@
     else{
         //上拉加载更多数据（从服务器端请求更多数据）
         NSInteger indexOfNeedLoad = _cm.itemsArr.count/kPageDefaultCount;
+        NSLog(@"%d",indexOfNeedLoad);
         [self loadDataByOperMode:RMLoadMore pIndex:indexOfNeedLoad];
     }
     

@@ -33,6 +33,7 @@
     //对数据进行本地化处理
     //**************************************
     NSString *filePath = [self filePathFromUrl:urlStr];
+    
     BOOL isExists = [self isFileExists:filePath];
     if (isExists) {
         NSData *backData = [NSData  dataWithContentsOfFile:filePath];
@@ -198,6 +199,9 @@
         return NO;
     }
     NSArray *rootResultNodeArr =[backDic objectForKey:@"data"];
+    if (!rootResultNodeArr) {
+        return NO;
+    }
     NSDictionary *resultNodeDic = rootResultNodeArr.firstObject;
     NSString *listNumStr = [resultNodeDic objectForKey:@"listNum"];
     NSArray *dispDataNodeArr = [resultNodeDic objectForKey:@"disp_data"];
