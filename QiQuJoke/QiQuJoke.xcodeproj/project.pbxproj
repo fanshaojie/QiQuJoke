@@ -28,6 +28,7 @@
 		2EAD31931BABBEDC003047FB /* Favorite+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD31901BABBEDC003047FB /* Favorite+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
 		2EAD31941BABBEDC003047FB /* Favorite.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EAD31921BABBEDC003047FB /* Favorite.m */; settings = {ASSET_TAGS = (); }; };
 		F75F527120135F1553F379A5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA98F9C1F5D3AF2E1CF37BB9 /* libPods.a */; };
+		FD11E52F1BAE375800454B73 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD11E52E1BAE375800454B73 /* CoreDataManager.m */; settings = {ASSET_TAGS = (); }; };
 		FD1B00011B9005B500E5FE74 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1B00001B9005B500E5FE74 /* ViewController.m */; };
 		FD1B00091B9005B500E5FE74 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD1B00071B9005B500E5FE74 /* LaunchScreen.xib */; };
 		FD1B00251B900B5C00E5FE74 /* TrickViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1B00241B900B5C00E5FE74 /* TrickViewController.m */; };
@@ -121,6 +122,8 @@
 		2EAD31921BABBEDC003047FB /* Favorite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Favorite.m; sourceTree = "<group>"; };
 		8E2DCDEEA6F3A593C2402EEC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		FA98F9C1F5D3AF2E1CF37BB9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD11E52D1BAE375800454B73 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
+		FD11E52E1BAE375800454B73 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
 		FD1B00001B9005B500E5FE74 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		FD1B00081B9005B500E5FE74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		FD1B000E1B9005B500E5FE74 /* QiQuJokeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QiQuJokeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -390,6 +393,8 @@
 				FDBAA5171B968FFD00F544A6 /* NSString+MessageDigest.m */,
 				FDCEB1D61B9ED183000FBA71 /* NetHelper.h */,
 				FDCEB1D71B9ED183000FBA71 /* NetHelper.m */,
+				FD11E52D1BAE375800454B73 /* CoreDataManager.h */,
+				FD11E52E1BAE375800454B73 /* CoreDataManager.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -705,6 +710,7 @@
 				FD25CC801BA2D65A00B4C6E5 /* SkinViewController.m in Sources */,
 				FD1BFFFE1B9005B500E5FE74 /* QiQuJoke.xcdatamodeld in Sources */,
 				FDCEB1D81B9ED183000FBA71 /* NetHelper.m in Sources */,
+				FD11E52F1BAE375800454B73 /* CoreDataManager.m in Sources */,
 				2E5F5F461BA175710040BF06 /* STScratchView.m in Sources */,
 				FDBAA5101B954AC600F544A6 /* CommonTableViewController.m in Sources */,
 				FDCEB1D51B9EC1D4000FBA71 /* DXAlertView.m in Sources */,

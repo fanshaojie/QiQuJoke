@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Favorite (CoreDataProperties)
 
-@property (nullable, nonatomic, retain) NSString *catetype;
+@property (nullable, nonatomic) NSInteger *catetype;
 @property (nullable, nonatomic, retain) NSString *content;
 @property (nullable, nonatomic, retain) NSString *answer;
 

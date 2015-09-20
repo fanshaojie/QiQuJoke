@@ -35,3 +35,5 @@
 "setting" = "设置";
 "shareTitle" = "分享自应用《猜一猜》";
 "toSeeAnswer" = "刮开我,揭晓答案";
+"isFaved" = "已加入收藏";
+"isNotFaved" = "已取消收藏";

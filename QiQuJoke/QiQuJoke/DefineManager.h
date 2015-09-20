@@ -35,4 +35,9 @@
 #define kWechatAppSecret @"1f1bb8a21c3e9ce4e625a31fb3e9d0e2"
 #define kUmengAppKey @"55f289a167e58e88e40014cd"
 
+#define kFavNameKey  @"Favorite"
+#define kCateTypeKey @"catetype"
+#define kContentKey @"content"
+#define kAnswerKey @"answer"
+
 #endif

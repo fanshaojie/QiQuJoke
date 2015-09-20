@@ -10,6 +10,8 @@
 
 @interface CommonSingleQuestViewController(){
     UIImageView *_bgIv;
+    UIImageView *_favIv;
+    BOOL _isFav;
 }
 
 @property (nonatomic,strong) UILabel *cntLbl;
@@ -24,6 +26,8 @@
 @end
 
 @implementation CommonSingleQuestViewController
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -66,6 +70,13 @@
     self.shareItemBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(btnShareClicked)];
     self.navigationItem.rightBarButtonItem = self.shareItemBtn;
     
+    _favIv = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectGetWidth(self.view.frame)*2/3, 0, CGRectGetWidth(self.view.frame)/6, CGRectGetWidth(self.view.frame)/6*3/2)];
+    _favIv.contentMode = UIViewContentModeScaleToFill;
+    UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(favIvClicked)];
+    _favIv.userInteractionEnabled = YES;
+    [_favIv addGestureRecognizer:tapGes];
+    [self.view addSubview:_favIv];
+    
     
     if ( self.cm.type != CTSaying) {
         CGFloat scratchX = 30;
@@ -98,6 +109,43 @@
             [self.lblTip setAlpha:0];
         }];
     }
+}
+
+-(void)favIvClicked{
+    ItemModel *im = _cm.itemsArr[self.iindex];
+    if (_isFav) {
+        //取消收藏操作
+        [[CoreDataManager instance]deleteDataWithClassName:kFavNameKey predicate:[NSPredicate predicateWithFormat:@"catetype == %d and content==%@",_cm.type,im.content]];
+        _isFav = NO;
+        _favIv.image = [UIImage imageNamed:@"unfav"];
+        [UIManager showToastIn:self.view info:NSLocalizedString(@"isNotFaved", nil)];
+    }else{
+        //增加收藏操作
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+        [dic setValue:im.content forKey:kContentKey];
+        [dic setValue:im.answer forKey:kAnswerKey];
+        [dic setValue:[NSNumber numberWithInteger:_cm.type] forKey:kCateTypeKey];
+        [[CoreDataManager instance]insertDataWithClassName:kFavNameKey attriDic:dic];
+        _isFav = YES;
+        _favIv.image = [UIImage imageNamed:@"fav"];
+        [UIManager showToastIn:self.view info:NSLocalizedString(@"isFaved", nil)];
+    }
+}
+
+-(void)toMakeFav{
+    ItemModel *im = _cm.itemsArr[self.iindex];
+    NSArray *imArr = [[CoreDataManager instance]selectDataFromClassName:kFavNameKey predicate:[NSPredicate predicateWithFormat:@"catetype == %d AND content == %@" ,_cm.type, im.content] sortkeys:nil];
+    
+    if (imArr && imArr.count > 0) {
+        //已被收藏
+        _isFav = YES;
+        _favIv.image = [UIImage imageNamed:@"fav"];
+    }
+    else{
+        _isFav = NO;
+        _favIv.image = [UIImage imageNamed:@"unfav"];
+    }
+    
 }
 
 #pragma mark 分享代码
@@ -176,7 +224,7 @@
 }
 
 -(void)initData{
-    
+    [self toMakeFav];
 }
 
 
