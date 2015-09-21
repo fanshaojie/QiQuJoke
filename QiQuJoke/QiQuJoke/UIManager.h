@@ -7,14 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DXAlertView.h"
 #import <UIKit/UIKit.h>
 #import <MBProgressHUD.h>
 @interface UIManager : NSObject
-+(void)showAlert:(NSString*)content;
-+(void)showAlert:(NSString *)content title:(NSString*)title;
 +(void)showNoNetToastIn:(UIView*)view;
 +(void)showToastIn:(UIView*)view info:(NSString*)info;
 +(UIColor*)selectedDefaultColor;
++(void)showToastIn:(UIView*)view title:(NSString*)title content:(NSString*)cnt;
 +(UIColor*)btnDefaultColor;
 @end

@@ -33,10 +33,16 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self setOpaque:NO];
-        
         _sizeBrush = 10.0;
     }
     return self;
+}
+
+-(void)reset:(UIView*)hideView{
+    [self initScratch];
+    [self setHideView:hideView];
+    [self setNeedsDisplay];
+    
 }
 
 #pragma mark -
@@ -74,7 +80,6 @@
     
     CGContextSetFillColorWithColor(_contextMask, [UIColor blackColor].CGColor);
     CGContextFillRect(_contextMask, CGRectMake(0, 0, self.frame.size.width * scale, self.frame.size.height * scale));
-
     
     CGContextSetStrokeColorWithColor(_contextMask, [UIColor whiteColor].CGColor);
     CGContextSetLineWidth(_contextMask, _sizeBrush);

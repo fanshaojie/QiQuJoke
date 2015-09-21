@@ -10,16 +10,6 @@
 #import <UIKit/UIKit.h>
 @implementation UIManager
 
-+(void)showAlert:(NSString *)content{
-    DXAlertView *alert = [[DXAlertView alloc]initWithTitle:NSLocalizedString(@"tip", nil) contentText:content leftButtonTitle:nil  rightButtonTitle:NSLocalizedString(@"confirm", nil)];
-    [alert show];
-}
-
-+(void)showAlert:(NSString *)content title:(NSString*)title{
-    DXAlertView *alert = [[DXAlertView alloc]initWithTitle:title contentText:content leftButtonTitle:nil  rightButtonTitle:NSLocalizedString(@"confirm", nil)];
-    [alert show];
-}
-
 +(UIColor *)btnDefaultColor{
     return [UIColor orangeColor];
 }
@@ -38,6 +28,17 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:true];
     hud.mode = MBProgressHUDModeText;
     hud.labelText = info;
+    hud.margin = 10.f;
+    hud.yOffset = 150.f;
+    hud.removeFromSuperViewOnHide = YES;
+    [hud hide:YES afterDelay:1];
+}
+
++(void)showToastIn:(UIView *)view title:(NSString *)title content:(NSString *)cnt{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:true];
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText = title;
+    hud.detailsLabelText = cnt;
     hud.margin = 10.f;
     hud.yOffset = 150.f;
     hud.removeFromSuperViewOnHide = YES;

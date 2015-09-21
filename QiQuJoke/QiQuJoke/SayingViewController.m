@@ -44,7 +44,7 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([SayingManager instance].cateArr == nil) {
-                [UIManager showAlert:NSLocalizedString(@"netErr", nil)];
+                [UIManager showToastIn:self.view info:NSLocalizedString(@"netErr", nil)];
                 return;
             }
             

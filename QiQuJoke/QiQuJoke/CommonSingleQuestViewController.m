@@ -12,6 +12,8 @@
     UIImageView *_bgIv;
     UIImageView *_favIv;
     BOOL _isFav;
+    UIButton *_preBtn;
+    UIButton *_nextBtn;
 }
 
 @property (nonatomic,strong) UILabel *cntLbl;
@@ -26,8 +28,6 @@
 @end
 
 @implementation CommonSingleQuestViewController
-
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -59,7 +59,7 @@
     _bgIv.contentMode = UIViewContentModeScaleToFill;
     [self.view addSubview:_bgIv];
     //内容
-    self.cntLbl = [[UILabel alloc]initWithFrame:CGRectMake(25, (CGRectGetHeight(self.view.frame)-kScreenNavTop - kTabBarDefaultHeight)/3, CGRectGetWidth(self.view.frame) - 50, 100)];
+    self.cntLbl = [[UILabel alloc]initWithFrame:CGRectMake(30, (CGRectGetHeight(self.view.frame)-kScreenNavTop - kTabBarDefaultHeight)/3, CGRectGetWidth(self.view.frame) - 60, 100)];
     self.cntLbl.textAlignment = NSTextAlignmentCenter;
     self.cntLbl.numberOfLines = 0;
     [self.view addSubview:self.cntLbl];
@@ -76,7 +76,6 @@
     _favIv.userInteractionEnabled = YES;
     [_favIv addGestureRecognizer:tapGes];
     [self.view addSubview:_favIv];
-    
     
     if ( self.cm.type != CTSaying) {
         CGFloat scratchX = 30;
@@ -109,6 +108,108 @@
             [self.lblTip setAlpha:0];
         }];
     }
+    
+    _preBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    _preBtn.frame = CGRectMake(0,(self.view.frame.size.height - kScreenNavTop - kTabBarDefaultHeight) /2, 26, 26*2);
+    [_preBtn addTarget:self action:@selector(preBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    [_preBtn setBackgroundImage:[UIImage imageNamed:@"left"] forState:UIControlStateNormal];
+    [self.view addSubview:_preBtn];
+    
+    
+    _nextBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    _nextBtn.frame = CGRectMake(self.view.frame.size.width - 26,(self.view.frame.size.height - kScreenNavTop - kTabBarDefaultHeight) /2, 26, 26*2);
+    [_nextBtn addTarget:self action:@selector(nextBtnClicked) forControlEvents:UIControlEventTouchUpInside];
+    [_nextBtn setBackgroundImage:[UIImage imageNamed:@"right"] forState:UIControlStateNormal];
+    [self.view addSubview:_nextBtn];
+}
+
+-(void)preBtnClicked{
+    _iindex--;
+    [self resetContent];
+    [self autoBtnState];
+}
+
+-(void)resetContent{
+    ItemModel *im =  _cm.itemsArr[_iindex];
+    self.cntLbl.text = im.content;
+    if (self.lblAnswer) {
+        self.lblAnswer.text = im.answer;
+       [self.scratchView reset:self.ballIv];
+    }
+    [self toJudgeFav];
+    
+}
+
+
+-(void)autoBtnState{
+    if (self.iindex == 0) {
+        _preBtn.alpha = 0;
+    }
+    else if(_cm && _cm.itemsArr && self.iindex == _cm.itemsArr.count -1)
+    {
+        _nextBtn.alpha = 0;
+        NSInteger needLoadIndex = _cm.itemsArr.count/kPageDefaultCount;
+        //显示等待动画以及请求更多数据
+        if (_cm.type == CTTrick) {
+            [[TrickManager instance]requestTrickOfCate:_cm.cateName reloadFormServer:YES pageIndex:needLoadIndex complete:^(RequestState errState) {
+                if (errState == NENoNet) {
+                    [UIManager showToastIn:self.view info:NSLocalizedString(@"noNet", nil)];
+                    return ;
+                }
+                else if(errState == NELocalDateErr || errState == NENetDataErr){
+                   //此种情况暂不处理
+                }
+                else if (errState == NEOK){
+                    _nextBtn.alpha = 1;
+                }
+            }];
+        }
+        else if (_cm.type == CTRiddle){
+            [[RiddleManager instance]requestRiddleOfCate:_cm.cateName reloadFromServer:YES pageIndex:needLoadIndex complete:^(RequestState errState) {
+                if (errState == NENoNet) {
+                    [UIManager showToastIn:self.view info:NSLocalizedString(@"noNet", nil)];
+                    return ;
+                }
+                else if(errState == NELocalDateErr || errState == NENetDataErr){
+                    //此种情况暂不处理
+                }
+                else if (errState == NEOK){
+                    _nextBtn.alpha = 1;
+                }
+           
+            }];
+        }
+        else{
+            [[SayingManager instance]requestSayingOfCate:_cm.cateName reloadFromServer:YES pageIndex:needLoadIndex complete:^(RequestState errState) {
+                if (errState == NENoNet) {
+                    [UIManager showToastIn:self.view info:NSLocalizedString(@"noNet", nil)];
+                    return ;
+                }
+                else if(errState == NELocalDateErr || errState == NENetDataErr){
+                    //此种情况暂不处理
+                }
+                else if (errState == NEOK){
+                    _nextBtn.alpha = 1;
+                }
+            }];
+        }
+    }
+    else
+    {
+        _nextBtn.alpha = 1;
+        _preBtn.alpha = 1;
+    }
+}
+
+-(void)nextBtnClicked{
+    _iindex++;
+    [self resetContent];
+    [self autoBtnState];
+}
+
+-(void)initData{
+    [self toJudgeFav];
+    [self autoBtnState];
 }
 
 -(void)favIvClicked{
@@ -132,7 +233,7 @@
     }
 }
 
--(void)toMakeFav{
+-(void)toJudgeFav{
     ItemModel *im = _cm.itemsArr[self.iindex];
     NSArray *imArr = [[CoreDataManager instance]selectDataFromClassName:kFavNameKey predicate:[NSPredicate predicateWithFormat:@"catetype == %d AND content == %@" ,_cm.type, im.content] sortkeys:nil];
     
@@ -151,7 +252,7 @@
 #pragma mark 分享代码
 
 -(void)btnShareClicked{
-    LXActivity  *sheetView = [[LXActivity alloc]initWithTitle:NSLocalizedString(@"shareToWhere", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) ShareButtonTitles:@[NSLocalizedString(@"wechat", nil),NSLocalizedString(@"wechatFriends", nil),NSLocalizedString(@"QQ", nil),NSLocalizedString(@"QQZone", nil)] withShareButtonImagesName:@[@"sns_icon_wechat",@"sns_icon_friends",@"sns_icon_qq",@"sns_icon_zone" ]];
+    LXActivity  *sheetView = [[LXActivity alloc]initWithTitle:NSLocalizedString(@"shareToWhere", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) ShareButtonTitles:@[NSLocalizedString(@"wechat", nil),NSLocalizedString(@"wechatFriends", nil),NSLocalizedString(@"QQ", nil)] withShareButtonImagesName:@[@"sns_icon_wechat",@"sns_icon_friends",@"sns_icon_qq" ]];
     [sheetView showInView:self.view];
 }
 
@@ -181,17 +282,19 @@
          switch (state) {
              case SSDKResponseStateSuccess:
              {
-                 [UIManager showAlert:nil title:NSLocalizedString(@"shareSuccess", nil)];
+                 [UIManager showToastIn:self.view info:NSLocalizedString(@"shareSuccess", nil)];
                  break;
              }
              case SSDKResponseStateFail:
              {
-                 [UIManager showAlert:[NSString stringWithFormat:@"%@", [error.userInfo valueForKey:@"error_message"]]  title:NSLocalizedString(@"shareFailed", nil)];
+                 [UIManager showToastIn:self.view title:NSLocalizedString(@"shareFailed", nil) content:[NSString stringWithFormat:@"%@", [error.userInfo valueForKey:@"error_message"]]];
+                 //[UIManager showAlert:[NSString stringWithFormat:@"%@", [error.userInfo valueForKey:@"error_message"]]  title:NSLocalizedString(@"shareFailed", nil)];
                  break;
              }
              case SSDKResponseStateCancel:
              {
-                 [UIManager showAlert:nil title:NSLocalizedString(@"shareCancel", nil)];
+                // [UIManager showAlert:nil title:NSLocalizedString(@"shareCancel", nil)];
+                 [UIManager showToastIn:self.view info:NSLocalizedString(@"shareCancel", nil)];
                  break;
              }
              default:
@@ -223,9 +326,7 @@
     }
 }
 
--(void)initData{
-    [self toMakeFav];
-}
+
 
 
 @end

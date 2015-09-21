@@ -15,5 +15,6 @@
 
 - (void)setHideView:(UIView *)hideView;
 - (void)setAutomaticScratchCurve:(UIBezierPath *)curvePath duration:(float)duration;
+-(void)reset:(UIView*)hideView;
 
 @end

@@ -73,7 +73,7 @@
     else{
         //上拉加载更多数据（从服务器端请求更多数据）
         NSInteger indexOfNeedLoad = _cm.itemsArr.count/kPageDefaultCount;
-        NSLog(@"%d",indexOfNeedLoad);
+        NSLog(@"%ld",(long)indexOfNeedLoad);
         [self loadDataByOperMode:RMLoadMore pIndex:indexOfNeedLoad];
     }
     

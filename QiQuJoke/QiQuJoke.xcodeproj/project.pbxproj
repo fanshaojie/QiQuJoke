@@ -69,11 +69,6 @@
 		FDBAA5181B968FFD00F544A6 /* NSString+MessageDigest.m in Sources */ = {isa = PBXBuildFile; fileRef = FDBAA5171B968FFD00F544A6 /* NSString+MessageDigest.m */; };
 		FDCEB1C21B9E8EAD000FBA71 /* LXActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = FDCEB1C11B9E8EAD000FBA71 /* LXActivity.m */; };
 		FDCEB1C91B9EB2E9000FBA71 /* MLNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDCEB1C81B9EB2E9000FBA71 /* MLNavigationController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		FDCEB1D11B9EC1D4000FBA71 /* btn_close_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = FDCEB1CB1B9EC1D4000FBA71 /* btn_close_normal.png */; };
-		FDCEB1D21B9EC1D4000FBA71 /* btn_close_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDCEB1CC1B9EC1D4000FBA71 /* btn_close_normal@2x.png */; };
-		FDCEB1D31B9EC1D4000FBA71 /* btn_close_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = FDCEB1CD1B9EC1D4000FBA71 /* btn_close_selected.png */; };
-		FDCEB1D41B9EC1D4000FBA71 /* btn_close_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDCEB1CE1B9EC1D4000FBA71 /* btn_close_selected@2x.png */; };
-		FDCEB1D51B9EC1D4000FBA71 /* DXAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDCEB1D01B9EC1D4000FBA71 /* DXAlertView.m */; };
 		FDCEB1D81B9ED183000FBA71 /* NetHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FDCEB1D71B9ED183000FBA71 /* NetHelper.m */; };
 /* End PBXBuildFile section */
 
@@ -197,12 +192,6 @@
 		FDCEB1C11B9E8EAD000FBA71 /* LXActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXActivity.m; sourceTree = "<group>"; };
 		FDCEB1C71B9EB2E9000FBA71 /* MLNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLNavigationController.h; sourceTree = "<group>"; };
 		FDCEB1C81B9EB2E9000FBA71 /* MLNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLNavigationController.m; sourceTree = "<group>"; };
-		FDCEB1CB1B9EC1D4000FBA71 /* btn_close_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_close_normal.png; sourceTree = "<group>"; };
-		FDCEB1CC1B9EC1D4000FBA71 /* btn_close_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_close_normal@2x.png"; sourceTree = "<group>"; };
-		FDCEB1CD1B9EC1D4000FBA71 /* btn_close_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_close_selected.png; sourceTree = "<group>"; };
-		FDCEB1CE1B9EC1D4000FBA71 /* btn_close_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_close_selected@2x.png"; sourceTree = "<group>"; };
-		FDCEB1CF1B9EC1D4000FBA71 /* DXAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXAlertView.h; sourceTree = "<group>"; };
-		FDCEB1D01B9EC1D4000FBA71 /* DXAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXAlertView.m; sourceTree = "<group>"; };
 		FDCEB1D61B9ED183000FBA71 /* NetHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetHelper.h; sourceTree = "<group>"; };
 		FDCEB1D71B9ED183000FBA71 /* NetHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -403,7 +392,6 @@
 			isa = PBXGroup;
 			children = (
 				2E9268731BA2C7A50082CEDB /* ios_api */,
-				FDCEB1CA1B9EC1D4000FBA71 /* Vendor */,
 				FD87B0851B9D5C0E006F4C06 /* libraries */,
 				FD1B01121B906A7100E5FE74 /* PageMenu */,
 			);
@@ -524,19 +512,6 @@
 			path = WeChatSDK;
 			sourceTree = "<group>";
 		};
-		FDCEB1CA1B9EC1D4000FBA71 /* Vendor */ = {
-			isa = PBXGroup;
-			children = (
-				FDCEB1CB1B9EC1D4000FBA71 /* btn_close_normal.png */,
-				FDCEB1CC1B9EC1D4000FBA71 /* btn_close_normal@2x.png */,
-				FDCEB1CD1B9EC1D4000FBA71 /* btn_close_selected.png */,
-				FDCEB1CE1B9EC1D4000FBA71 /* btn_close_selected@2x.png */,
-				FDCEB1CF1B9EC1D4000FBA71 /* DXAlertView.h */,
-				FDCEB1D01B9EC1D4000FBA71 /* DXAlertView.m */,
-			);
-			path = Vendor;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -627,17 +602,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDCEB1D21B9EC1D4000FBA71 /* btn_close_normal@2x.png in Resources */,
 				FD1B00331B904A5000E5FE74 /* Images.xcassets in Resources */,
 				2E9268811BA2C7A50082CEDB /* baidumobadsdk.bundle in Resources */,
-				FDCEB1D31B9EC1D4000FBA71 /* btn_close_selected.png in Resources */,
 				FD1B00091B9005B500E5FE74 /* LaunchScreen.xib in Resources */,
-				FDCEB1D11B9EC1D4000FBA71 /* btn_close_normal.png in Resources */,
 				FD87B0B31B9D5C0E006F4C06 /* ShareSDK.bundle in Resources */,
 				FD87B0AC1B9D5C0E006F4C06 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				FD87B0B71B9D5C0E006F4C06 /* ShareSDKUI.bundle in Resources */,
 				FD1B002D1B900DEC00E5FE74 /* Localizable.strings in Resources */,
-				FDCEB1D41B9EC1D4000FBA71 /* btn_close_selected@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -713,7 +684,6 @@
 				FD11E52F1BAE375800454B73 /* CoreDataManager.m in Sources */,
 				2E5F5F461BA175710040BF06 /* STScratchView.m in Sources */,
 				FDBAA5101B954AC600F544A6 /* CommonTableViewController.m in Sources */,
-				FDCEB1D51B9EC1D4000FBA71 /* DXAlertView.m in Sources */,
 				FD3D639F1BA2A55F00C6C751 /* SettingViewController.m in Sources */,
 				2EAD31941BABBEDC003047FB /* Favorite.m in Sources */,
 			);

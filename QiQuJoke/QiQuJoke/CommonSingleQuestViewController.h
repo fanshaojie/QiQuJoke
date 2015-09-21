@@ -16,6 +16,8 @@
 #import "STScratchView.h"
 #import "TrickManager.h"
 #import "CoreDataManager.h"
+#import "RiddleManager.h"
+#import "SayingManager.h"
 @interface CommonSingleQuestViewController : UIViewController<LXActivityDelegate>
 
 @property (nonatomic,strong) CateModel *cm;

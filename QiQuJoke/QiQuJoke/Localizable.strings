@@ -32,9 +32,10 @@
 "detailSkin" = "详情皮肤";
 "advice" = "意见建议";
 "recommend" = "精彩推荐";
-"setting" = "设置";
+"setting" = "我的";
 "shareTitle" = "分享自应用《猜一猜》";
 "toSeeAnswer" = "刮开我,揭晓答案";
 "isFaved" = "已加入收藏";
 "isNotFaved" = "已取消收藏";
 "noContent" = "更多精彩,敬请期待";
+"noAvailableContent" = "暂无更多内容";
