@@ -22,6 +22,11 @@
     
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tabBarController.tabBar setHidden:NO];
+}
+
 -(void)initView{
     self.title = NSLocalizedString(@"setting", nil);
     self.view.backgroundColor = [UIColor whiteColor];
@@ -56,6 +61,7 @@
     {
         //意见建议
         [self.navigationController pushViewController:[UMFeedback feedbackViewController] animated:YES];
+        [self.tabBarController.tabBar setHidden:YES];
     }
     else if(indexPath.row == 4)
     {

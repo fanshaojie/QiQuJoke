@@ -59,7 +59,7 @@
     _bgIv.contentMode = UIViewContentModeScaleToFill;
     [self.view addSubview:_bgIv];
     //内容
-    self.cntLbl = [[UILabel alloc]initWithFrame:CGRectMake(30, (CGRectGetHeight(self.view.frame)-kScreenNavTop - kTabBarDefaultHeight)/3, CGRectGetWidth(self.view.frame) - 60, 100)];
+    self.cntLbl = [[UILabel alloc]initWithFrame:CGRectMake(30, (CGRectGetHeight(self.view.frame)-kScreenNavTop - kTabBarDefaultHeight)/3, CGRectGetWidth(self.view.frame) - 60, 120)];
     self.cntLbl.textAlignment = NSTextAlignmentCenter;
     self.cntLbl.numberOfLines = 0;
     [self.view addSubview:self.cntLbl];
