@@ -117,7 +117,6 @@
     if (imgName) {
         _bgIv.image = [UIImage imageNamed:imgName];
     }
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:imgName] forBarMetrics:UIBarMetricsDefault];
 }
 
 - (UIColor *)activityIndicatorView:(MONActivityIndicatorView *)activityIndicatorView

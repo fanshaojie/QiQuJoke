@@ -54,7 +54,7 @@
     self.view.backgroundColor = [UIColor  whiteColor];
     
     _bgIv = [[UIImageView alloc]init];
-    _bgIv.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - kScreenNavTop - kTabBarDefaultHeight);
+    _bgIv.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)  - kTabBarDefaultHeight);
     [self changBgImage];
     _bgIv.contentMode = UIViewContentModeScaleToFill;
     [self.view addSubview:_bgIv];
@@ -70,7 +70,7 @@
     self.shareItemBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(btnShareClicked)];
     self.navigationItem.rightBarButtonItem = self.shareItemBtn;
     
-    _favIv = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectGetWidth(self.view.frame)*2/3, 0, CGRectGetWidth(self.view.frame)/6, CGRectGetWidth(self.view.frame)/6*3/2)];
+    _favIv = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectGetWidth(self.view.frame)*2/3, kScreenNavTop, CGRectGetWidth(self.view.frame)/6, CGRectGetWidth(self.view.frame)/6*3/2)];
     _favIv.contentMode = UIViewContentModeScaleToFill;
     UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(favIvClicked)];
     _favIv.userInteractionEnabled = YES;
@@ -110,14 +110,14 @@
     }
     
     _preBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    _preBtn.frame = CGRectMake(0,(self.view.frame.size.height - kScreenNavTop - kTabBarDefaultHeight) /2, 26, 26*2);
+    _preBtn.frame = CGRectMake(0,(self.view.frame.size.height  - kTabBarDefaultHeight) /2, 26, 26*2);
     [_preBtn addTarget:self action:@selector(preBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [_preBtn setBackgroundImage:[UIImage imageNamed:@"left"] forState:UIControlStateNormal];
     [self.view addSubview:_preBtn];
     
     
     _nextBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    _nextBtn.frame = CGRectMake(self.view.frame.size.width - 26,(self.view.frame.size.height - kScreenNavTop - kTabBarDefaultHeight) /2, 26, 26*2);
+    _nextBtn.frame = CGRectMake(self.view.frame.size.width - 26,(self.view.frame.size.height  - kTabBarDefaultHeight) /2, 26, 26*2);
     [_nextBtn addTarget:self action:@selector(nextBtnClicked) forControlEvents:UIControlEventTouchUpInside];
     [_nextBtn setBackgroundImage:[UIImage imageNamed:@"right"] forState:UIControlStateNormal];
     [self.view addSubview:_nextBtn];
