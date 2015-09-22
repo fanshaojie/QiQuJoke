@@ -35,6 +35,7 @@
     _favoriteTable = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     _favoriteTable.dataSource = self;
     _favoriteTable.delegate = self;
+    _favoriteTable.tableFooterView = [[UIView alloc] init];
 
     [self.view addSubview:_favoriteTable];
     
@@ -48,6 +49,10 @@
     _newDataDic = [[NSMutableDictionary alloc] init];
     _cateNameArray =[[NSMutableArray alloc]init];
     NSArray *sqlArr = [[CoreDataManager instance] selectDataFromClassName:@"Favorite" predicate:nil sortkeys:nil];
+    if (sqlArr.count == 0) {
+        [UIManager showToastIn:self.view info:NSLocalizedString(@"noFavorite", nil)];
+        return;
+    }
     for (NSManagedObject *item in sqlArr) {
         NSString *typeStr = [item valueForKey:@"catetype"];
         if (![_newDataDic.allKeys containsObject:typeStr]) {
