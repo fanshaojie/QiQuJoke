@@ -12,6 +12,7 @@
 #import "CateModel.h"
 #import <CoreData/CoreData.h>
 #import "DefineManager.h"
+#import <MBProgressHUD.h>
 @interface FaviorteViewController : UIViewController
 
 @end

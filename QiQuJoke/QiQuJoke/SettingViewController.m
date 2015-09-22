@@ -48,21 +48,20 @@
     }
     else if(indexPath.row == 2)
     {
-        //意见建议
-        [self.navigationController pushViewController:[UMFeedback feedbackViewController] animated:YES];
-    }
-    else if(indexPath.row == 3)
-    {
-        //精彩推荐
-       
-    }
-    else if(indexPath.row == 4)
-    {
         //我的收藏
         FaviorteViewController *favorite = [[FaviorteViewController alloc] init];
         [self.navigationController pushViewController:favorite animated:YES];
     }
-    
+    else if(indexPath.row == 3)
+    {
+        //意见建议
+        [self.navigationController pushViewController:[UMFeedback feedbackViewController] animated:YES];
+    }
+    else if(indexPath.row == 4)
+    {
+        //精彩推荐
+       
+    }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -93,22 +92,21 @@
     else if(indexPath.row == 1){
         cell.textLabel.text = NSLocalizedString(@"detailSkin", nil);
     }
-    else if(indexPath.row == 2)
-    {
-        //意见建议
-        cell.textLabel.text = NSLocalizedString(@"advice", nil);
-    }
-    else if(indexPath.row == 3)
-    {
-        //精彩推荐
-        cell.textLabel.text = NSLocalizedString(@"recommend", nil);
-    }
-    else if (indexPath.row == 4)
+    else if (indexPath.row == 2)
     {
         //我的收藏
         cell.textLabel.text = NSLocalizedString(@"myFavorite", nil);
     }
-    
+    else if(indexPath.row == 3)
+    {
+        //意见建议
+        cell.textLabel.text = NSLocalizedString(@"advice", nil);
+    }
+    else if(indexPath.row == 4)
+    {
+        //精彩推荐
+        cell.textLabel.text = NSLocalizedString(@"recommend", nil);
+    }
     return cell;
 }
 

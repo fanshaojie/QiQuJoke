@@ -10,7 +10,7 @@
 
 @interface FaviorteViewController ()<UITableViewDataSource,UITableViewDelegate>{
     UITableView *_favoriteTable;
-    NSArray *_dataArray;
+    NSMutableArray *_cateNameArray;
     NSMutableDictionary *_newDataDic;
 }
 
@@ -20,8 +20,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self initView];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     [self initData];
 }
 
@@ -32,6 +35,7 @@
     _favoriteTable = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     _favoriteTable.dataSource = self;
     _favoriteTable.delegate = self;
+
     [self.view addSubview:_favoriteTable];
     
     self.navigationItem.title = NSLocalizedString(@"myFavorite", nil);
@@ -42,17 +46,21 @@
  */
 -(void)initData{
     _newDataDic = [[NSMutableDictionary alloc] init];
-    _dataArray = [[CoreDataManager instance] selectDataFromClassName:@"Favorite" predicate:nil sortkeys:nil];
-    for (NSManagedObject *item in _dataArray) {
+    _cateNameArray =[[NSMutableArray alloc]init];
+    NSArray *sqlArr = [[CoreDataManager instance] selectDataFromClassName:@"Favorite" predicate:nil sortkeys:nil];
+    for (NSManagedObject *item in sqlArr) {
         NSString *typeStr = [item valueForKey:@"catetype"];
         if (![_newDataDic.allKeys containsObject:typeStr]) {
             [ _newDataDic setObject:[[NSMutableArray alloc]init] forKey:typeStr];
+            [_cateNameArray addObject:typeStr];
         }
+        
         ItemModel *itemModel = [[ItemModel alloc] init];
         [itemModel setContent:[item valueForKey:@"content"]];
         [itemModel setAnswer:[item valueForKey:@"answer"]];
         [_newDataDic[typeStr] addObject:itemModel];
     }
+    [_favoriteTable reloadData];
 
 }
 
@@ -67,7 +75,7 @@
  *  列表组名
  */
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    NSNumber *indexStr =[_newDataDic.allKeys objectAtIndex:section];
+    NSString *indexStr =[_cateNameArray objectAtIndex:section];
     switch (indexStr.intValue) {
         case CTTrick:
             return NSLocalizedString(@"trick", nil);
@@ -90,7 +98,7 @@
  *  每组显示行数
  */
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-     NSNumber *indexStr =[_newDataDic.allKeys objectAtIndex:section];
+     NSNumber *indexStr =[_cateNameArray objectAtIndex:section];
     NSArray *imArr = [_newDataDic objectForKey:indexStr];
     return imArr.count;
 }
@@ -105,16 +113,26 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIDStr];
         cell.backgroundColor =[UIColor clearColor];
         cell.selectedBackgroundView = [[UIView alloc]init];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectedBackgroundView.backgroundColor =[UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:0.1];
         cell.textLabel.font = [UIFont systemFontOfSize:14];
     }
     
-    NSNumber *indexStr =[_newDataDic.allKeys objectAtIndex:indexPath.section];
+    NSNumber *indexStr =[_cateNameArray objectAtIndex:indexPath.section];
     NSArray *imArr = [_newDataDic objectForKey:indexStr];
     ItemModel *itemModel = imArr[indexPath.row];
     cell.textLabel.text = itemModel.content;
     
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSNumber *indexStr =[_cateNameArray objectAtIndex:indexPath.section];
+    NSMutableArray *imArr = [_newDataDic objectForKey:indexStr];
+    ItemModel *itemModel = imArr[indexPath.row];
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:itemModel.content message:itemModel.answer delegate:self cancelButtonTitle:@"我知道了" otherButtonTitles:nil, nil];
+    [alertView show];
 }
 
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -126,10 +144,10 @@
 }
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSNumber *indexStr =[_newDataDic.allKeys objectAtIndex:indexPath.section];
+    NSNumber *indexStr =[_cateNameArray objectAtIndex:indexPath.section];
     NSMutableArray *imArr = [_newDataDic objectForKey:indexStr];
     ItemModel *itemModel = imArr[indexPath.row];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"content == %@ AND catetype == %d",itemModel.content,indexPath.section];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"content == %@ AND catetype == %@",itemModel.content,[NSString stringWithFormat:@"%@",indexStr]];
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [[CoreDataManager instance] deleteDataWithClassName:kFavNameKey predicate:predicate];
         [imArr removeObjectAtIndex:indexPath.row];
