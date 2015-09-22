@@ -41,3 +41,5 @@
 "noAvailableContent" = "暂无更多内容";
 "myFavorite" = "我的收藏";
 "cancelFavorite" = "取消收藏";
+"isFirst" = "已经是第一条啦";
+"toLoadMoreData" = "努力加载下一条，别急哈";

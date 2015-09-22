@@ -126,7 +126,7 @@
 -(void)preBtnClicked{
     _iindex--;
     [self resetContent];
-    [self autoBtnState];
+    [self autoBtnState:NO];
 }
 
 -(void)resetContent{
@@ -141,13 +141,18 @@
 }
 
 
--(void)autoBtnState{
+-(void)autoBtnState:(BOOL)isInit{
     if (self.iindex == 0) {
         _preBtn.alpha = 0;
+        if (!isInit) {
+            [UIManager showToastIn:self.view info:NSLocalizedString(@"isFirst", nil)];
+        }
     }
     else if(_cm && _cm.itemsArr && self.iindex == _cm.itemsArr.count -1)
     {
-        _nextBtn.alpha = 0;
+        _nextBtn.alpha = 0.4;
+        _nextBtn.enabled = NO;
+        [UIManager showToastIn:self.view info:NSLocalizedString(@"toLoadMoreData", nil)];
         NSInteger needLoadIndex = _cm.itemsArr.count/kPageDefaultCount;
         //显示等待动画以及请求更多数据
         if (_cm.type == CTTrick) {
@@ -158,9 +163,11 @@
                 }
                 else if(errState == NELocalDateErr || errState == NENetDataErr){
                    //此种情况暂不处理
+                    
                 }
                 else if (errState == NEOK){
                     _nextBtn.alpha = 1;
+                    _nextBtn.enabled =YES;
                 }
             }];
         }
@@ -175,6 +182,7 @@
                 }
                 else if (errState == NEOK){
                     _nextBtn.alpha = 1;
+                    _nextBtn.enabled = YES;
                 }
            
             }];
@@ -190,6 +198,7 @@
                 }
                 else if (errState == NEOK){
                     _nextBtn.alpha = 1;
+                    _nextBtn.enabled = YES;
                 }
             }];
         }
@@ -197,19 +206,21 @@
     else
     {
         _nextBtn.alpha = 1;
+        _nextBtn.enabled = YES;
         _preBtn.alpha = 1;
+        _preBtn.enabled = YES;
     }
 }
 
 -(void)nextBtnClicked{
     _iindex++;
     [self resetContent];
-    [self autoBtnState];
+    [self autoBtnState:NO];
 }
 
 -(void)initData{
     [self toJudgeFav];
-    [self autoBtnState];
+    [self autoBtnState:YES];
 }
 
 -(void)favIvClicked{
