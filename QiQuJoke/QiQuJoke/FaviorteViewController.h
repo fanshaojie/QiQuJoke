@@ -13,6 +13,7 @@
 #import <CoreData/CoreData.h>
 #import "DefineManager.h"
 #import <MBProgressHUD.h>
+#import "UIManager.h"
 @interface FaviorteViewController : UIViewController
 
 @end
