@@ -572,7 +572,7 @@
 					};
 					FD1BFFF11B9005B500E5FE74 = {
 						CreatedOnToolsVersion = 6.3.2;
-						DevelopmentTeam = K4WUP8V8HP;
+						DevelopmentTeam = NKSKNF252X;
 					};
 				};
 			};
@@ -853,7 +853,7 @@
 					"\"UIKit\"",
 					"-lstdc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cn.fanshaojie.QiQuJoke;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.fanshaojie.QiQuJoker;
 				PRODUCT_NAME = "猜一猜";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -916,7 +916,7 @@
 					"\"UIKit\"",
 					"-lstdc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cn.fanshaojie.QiQuJoke;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.fanshaojie.QiQuJoker;
 				PRODUCT_NAME = "猜一猜";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
