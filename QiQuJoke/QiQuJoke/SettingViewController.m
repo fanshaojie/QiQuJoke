@@ -57,13 +57,24 @@
         FaviorteViewController *favorite = [[FaviorteViewController alloc] init];
         [self.navigationController pushViewController:favorite animated:YES];
     }
-    else if(indexPath.row == 3)
+    else if(indexPath.row == 3){
+        //清理缓存
+        NSString *path = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
+        BOOL isOK = [[NSFileManager defaultManager]removeItemAtPath:path error:nil];
+        if (isOK) {
+            [UIManager showToastIn:self.view info:NSLocalizedString(@"clearCacheOK", nil)];
+        }
+        else{
+            [UIManager showToastIn:self.view info:NSLocalizedString(@"noCache", nil)];
+        }
+    }
+    else if(indexPath.row == 4)
     {
         //意见建议
         [self.navigationController pushViewController:[UMFeedback feedbackViewController] animated:YES];
         [self.tabBarController.tabBar setHidden:YES];
     }
-    else if(indexPath.row == 4)
+    else if(indexPath.row == 5)
     {
         //精彩推荐
        
@@ -71,7 +82,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return 6;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -103,12 +114,16 @@
         //我的收藏
         cell.textLabel.text = NSLocalizedString(@"myFavorite", nil);
     }
-    else if(indexPath.row == 3)
+    else if(indexPath.row == 3){
+        //清理缓存
+        cell.textLabel.text = NSLocalizedString(@"clearCache", nil);
+    }
+    else if(indexPath.row == 4)
     {
         //意见建议
         cell.textLabel.text = NSLocalizedString(@"advice", nil);
     }
-    else if(indexPath.row == 4)
+    else if(indexPath.row == 5)
     {
         //精彩推荐
         cell.textLabel.text = NSLocalizedString(@"recommend", nil);
