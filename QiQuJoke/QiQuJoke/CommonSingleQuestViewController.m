@@ -104,7 +104,7 @@
         [self.view addSubview:self.scratchView];
         [self.view addSubview:self.lblTip];
         
-        [UIView animateWithDuration:5.0 animations:^{
+        [UIView animateWithDuration:2.0 animations:^{
             [self.lblTip setAlpha:0];
         }];
     }
