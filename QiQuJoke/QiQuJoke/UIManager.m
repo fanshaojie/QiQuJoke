@@ -19,7 +19,7 @@
     hud.mode = MBProgressHUDModeText;
     hud.labelText = NSLocalizedString(@"noNet", nil);
     hud.margin = 10.f;
-    hud.yOffset = 150.f;
+    hud.yOffset = 15.f;
     hud.removeFromSuperViewOnHide = YES;
     [hud hide:YES afterDelay:1];
 }

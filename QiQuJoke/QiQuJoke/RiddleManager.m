@@ -171,8 +171,8 @@
     }
     
     for (NSDictionary *tmpDic in dispDataNodeArr) {
-        NSString *content = [tmpDic objectForKey:@"content"];
-        NSString *answer = [tmpDic objectForKey:@"answer"];
+        NSString *content = [NSString stringWithFormat:@"%@",[tmpDic objectForKey:@"content"]];
+        NSString *answer = [NSString stringWithFormat:@"%@",[tmpDic objectForKey:@"answer"]];
         ItemModel *tm = [[ItemModel alloc]init];
         tm.content = content;
         tm.answer = answer;
