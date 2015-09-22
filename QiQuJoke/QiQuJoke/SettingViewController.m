@@ -56,11 +56,17 @@
         //精彩推荐
        
     }
+    else if(indexPath.row == 4)
+    {
+        //我的收藏
+        FaviorteViewController *favorite = [[FaviorteViewController alloc] init];
+        [self.navigationController pushViewController:favorite animated:YES];
+    }
     
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return 5;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -96,6 +102,11 @@
     {
         //精彩推荐
         cell.textLabel.text = NSLocalizedString(@"recommend", nil);
+    }
+    else if (indexPath.row == 4)
+    {
+        //我的收藏
+        cell.textLabel.text = NSLocalizedString(@"myFavorite", nil);
     }
     
     return cell;

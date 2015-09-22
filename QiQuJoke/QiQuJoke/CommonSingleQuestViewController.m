@@ -225,7 +225,7 @@
         NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
         [dic setValue:im.content forKey:kContentKey];
         [dic setValue:im.answer forKey:kAnswerKey];
-        [dic setValue:[NSNumber numberWithInteger:_cm.type] forKey:kCateTypeKey];
+        [dic setValue:[NSString stringWithFormat:@"%d",_cm.type] forKey:kCateTypeKey];
         [[CoreDataManager instance]insertDataWithClassName:kFavNameKey attriDic:dic];
         _isFav = YES;
         _favIv.image = [UIImage imageNamed:@"fav"];

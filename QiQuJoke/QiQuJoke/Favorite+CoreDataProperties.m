@@ -2,7 +2,7 @@
 //  Favorite+CoreDataProperties.m
 //  QiQuJoke
 //
-//  Created by 陈辉 on 15/9/18.
+//  Created by 陈辉 on 15/9/22.
 //  Copyright © 2015年 少杰范. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu

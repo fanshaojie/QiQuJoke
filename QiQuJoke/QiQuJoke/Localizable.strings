@@ -39,3 +39,5 @@
 "isNotFaved" = "已取消收藏";
 "noContent" = "更多精彩,敬请期待";
 "noAvailableContent" = "暂无更多内容";
+"myFavorite" = "我的收藏";
+"cancelFavorite" = "取消收藏";

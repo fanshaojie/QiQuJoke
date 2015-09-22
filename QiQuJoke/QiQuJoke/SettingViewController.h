@@ -13,6 +13,7 @@
 #import <UMFeedback.h>
 #import "SkinViewController.h"
 #import "DetailSkinViewController.h"
+#import "FaviorteViewController.h"
 @interface SettingViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
 @end
