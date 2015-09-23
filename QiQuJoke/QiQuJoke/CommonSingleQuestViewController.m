@@ -84,7 +84,7 @@
         CGFloat scratchHeight = 80;
         
         self.scratchView = [[STScratchView alloc] initWithFrame:CGRectMake(scratchX, scratchY, scratchWidth, scratchHeight)];
-        [self.scratchView setSizeBrush:30.0];
+        [self.scratchView setSizeBrush:50.0];
         
         self.ballIv = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"scratch"]];
         [self.ballIv setFrame:CGRectMake(0, 0, scratchWidth, scratchHeight)];
