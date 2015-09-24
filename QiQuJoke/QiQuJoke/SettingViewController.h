@@ -14,6 +14,7 @@
 #import "SkinViewController.h"
 #import "DetailSkinViewController.h"
 #import "FaviorteViewController.h"
-@interface SettingViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+#import "BaiduMobAdView.h"
+@interface SettingViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,BaiduMobAdViewDelegate>
 
 @end

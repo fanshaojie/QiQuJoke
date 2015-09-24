@@ -10,6 +10,7 @@
 
 @interface SettingViewController (){
     UITableView *_settingTable;
+    BaiduMobAdView *_adView;
 }
 
 @end
@@ -33,8 +34,20 @@
     _settingTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)- kScreenNavTop - kTabBarDefaultHeight)];
     _settingTable.dataSource = self;
     _settingTable.delegate = self;
-    _settingTable.tableFooterView = [[UIView alloc]init];
+    //_settingTable.tableFooterView = [[UIView alloc]init];
     [self.view addSubview:_settingTable];
+    
+    _adView = [[BaiduMobAdView alloc]init];
+    _adView.AdUnitTag = @"2014898";
+    _adView.AdType = BaiduMobAdViewTypeBanner;
+    _adView.frame = CGRectMake(0,0 , kBaiduAdViewSizeDefaultWidth, kBaiduAdViewSizeDefaultHeight);
+    _adView.delegate = self;
+    _settingTable.tableFooterView = _adView;
+     [_adView start];
+}
+
+-(NSString *)publisherId{
+    return @"b6059d44";
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -77,7 +90,7 @@
     else if(indexPath.row == 5)
     {
         //精彩推荐
-       
+        [UIManager showToastIn:self.view info:NSLocalizedString(@"waitRecommend", nil)];
     }
 }
 

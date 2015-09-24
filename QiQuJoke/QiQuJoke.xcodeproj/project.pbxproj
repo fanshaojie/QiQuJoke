@@ -136,7 +136,7 @@
 		FD1B00321B904A5000E5FE74 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FD1B01131B906AD700E5FE74 /* CAPSPageMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAPSPageMenu.h; sourceTree = "<group>"; };
 		FD1B01141B906AD700E5FE74 /* CAPSPageMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAPSPageMenu.m; sourceTree = "<group>"; };
-		FD1BFFF21B9005B500E5FE74 /* 猜一猜.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "猜一猜.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD1BFFF21B9005B500E5FE74 /* QiQuJoke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QiQuJoke.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD1BFFF61B9005B500E5FE74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD1BFFF71B9005B500E5FE74 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FD1BFFF91B9005B500E5FE74 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -426,7 +426,7 @@
 		FD1BFFF31B9005B500E5FE74 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FD1BFFF21B9005B500E5FE74 /* 猜一猜.app */,
+				FD1BFFF21B9005B500E5FE74 /* QiQuJoke.app */,
 				FD1B000E1B9005B500E5FE74 /* QiQuJokeTests.xctest */,
 			);
 			name = Products;
@@ -554,7 +554,7 @@
 			);
 			name = QiQuJoke;
 			productName = QiQuJoke;
-			productReference = FD1BFFF21B9005B500E5FE74 /* 猜一猜.app */;
+			productReference = FD1BFFF21B9005B500E5FE74 /* QiQuJoke.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -854,7 +854,7 @@
 					"-lstdc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.fanshaojie.QiQuJoker;
-				PRODUCT_NAME = "猜一猜";
+				PRODUCT_NAME = QiQuJoke;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -917,7 +917,7 @@
 					"-lstdc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.fanshaojie.QiQuJoker;
-				PRODUCT_NAME = "猜一猜";
+				PRODUCT_NAME = QiQuJoke;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
