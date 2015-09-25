@@ -572,7 +572,7 @@
 					};
 					FD1BFFF11B9005B500E5FE74 = {
 						CreatedOnToolsVersion = 6.3.2;
-						DevelopmentTeam = NKSKNF252X;
+						DevelopmentTeam = F76MBQ74WX;
 					};
 				};
 			};
@@ -853,7 +853,7 @@
 					"\"UIKit\"",
 					"-lstdc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cn.fanshaojie.QiQuJoker;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.fanshaojie.QiQuJoke;
 				PRODUCT_NAME = QiQuJoke;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -916,7 +916,7 @@
 					"\"UIKit\"",
 					"-lstdc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cn.fanshaojie.QiQuJoker;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.fanshaojie.QiQuJoke;
 				PRODUCT_NAME = QiQuJoke;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FD1BFFF11B9005B500E5FE74"
-               BuildableName = "&#x731c;&#x4e00;&#x731c;.app"
+               BuildableName = "QiQuJoke.app"
                BlueprintName = "QiQuJoke"
                ReferencedContainer = "container:QiQuJoke.xcodeproj">
             </BuildableReference>
@@ -37,10 +37,10 @@
       </BuildActionEntries>
    </BuildAction>
    <TestAction
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      buildConfiguration = "Debug">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -57,27 +57,30 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FD1BFFF11B9005B500E5FE74"
-            BuildableName = "&#x731c;&#x4e00;&#x731c;.app"
+            BuildableName = "QiQuJoke.app"
             BlueprintName = "QiQuJoke"
             ReferencedContainer = "container:QiQuJoke.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <AdditionalOptions>
+      </AdditionalOptions>
    </TestAction>
    <LaunchAction
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FD1BFFF11B9005B500E5FE74"
-            BuildableName = "&#x731c;&#x4e00;&#x731c;.app"
+            BuildableName = "QiQuJoke.app"
             BlueprintName = "QiQuJoke"
             ReferencedContainer = "container:QiQuJoke.xcodeproj">
          </BuildableReference>
@@ -86,17 +89,17 @@
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
+      buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FD1BFFF11B9005B500E5FE74"
-            BuildableName = "&#x731c;&#x4e00;&#x731c;.app"
+            BuildableName = "QiQuJoke.app"
             BlueprintName = "QiQuJoke"
             ReferencedContainer = "container:QiQuJoke.xcodeproj">
          </BuildableReference>
