@@ -92,10 +92,14 @@
         //精彩推荐
         [UIManager showToastIn:self.view info:NSLocalizedString(@"waitRecommend", nil)];
     }
+    else if(indexPath.row == 6){
+        [UIManager showToastIn:self.view title:NSLocalizedString(@"sponserUs", <#comment#>) content:NSLocalizedString(@"toClickMe", nil)];
+    }
+    
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 6;
+    return 7;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -140,6 +144,9 @@
     {
         //精彩推荐
         cell.textLabel.text = NSLocalizedString(@"recommend", nil);
+    }
+    else if (indexPath.row == 6){
+        cell.textLabel.text = NSLocalizedString(@"sponserUs", nil);
     }
     return cell;
 }
