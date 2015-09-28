@@ -23,12 +23,12 @@
 -(void)initView{
     NSString *defaultBgName = [[NSUserDefaults standardUserDefaults]valueForKey:kUDSkinKey];
     if (!defaultBgName) {
-        [[NSUserDefaults standardUserDefaults]setValue:@"zg2" forKey:kUDSkinKey];
+        [[NSUserDefaults standardUserDefaults]setValue:@"zg4" forKey:kUDSkinKey];
     }
     
     NSString *detailDefaultBgName = [[NSUserDefaults standardUserDefaults]valueForKey:kUDDtailSkinKey];
     if (!detailDefaultBgName) {
-        [[NSUserDefaults standardUserDefaults]setValue:@"dbg6" forKey:kUDDtailSkinKey];
+        [[NSUserDefaults standardUserDefaults]setValue:@"dbg4" forKey:kUDDtailSkinKey];
     }
     
     NetState netState = [NetHelper Instance].netState;

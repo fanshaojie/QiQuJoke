@@ -5,7 +5,7 @@
   Created by 少杰范 on 15/8/28.
   Copyright (c) 2015年 少杰范. All rights reserved.
 */
-"appName" = "猜一猜";
+"appName" = "每日一猜";
 "riddle" = "谜语";
 "trick" = "脑筋急转弯";
 "saying" = "歇后语";
@@ -33,7 +33,7 @@
 "advice" = "意见建议";
 "recommend" = "精彩推荐";
 "setting" = "我的";
-"shareTitle" = "分享自应用《猜一猜》";
+"shareTitle" = "分享自应用《每日一猜》";
 "toSeeAnswer" = "刮开我,揭晓答案";
 "isFaved" = "已加入收藏";
 "isNotFaved" = "已取消收藏";
