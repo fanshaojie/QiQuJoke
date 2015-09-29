@@ -136,7 +136,7 @@
 		FD1B00321B904A5000E5FE74 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FD1B01131B906AD700E5FE74 /* CAPSPageMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAPSPageMenu.h; sourceTree = "<group>"; };
 		FD1B01141B906AD700E5FE74 /* CAPSPageMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAPSPageMenu.m; sourceTree = "<group>"; };
-		FD1BFFF21B9005B500E5FE74 /* QiQuJoke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QiQuJoke.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD1BFFF21B9005B500E5FE74 /* QiQuJoke2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QiQuJoke2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD1BFFF61B9005B500E5FE74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD1BFFF71B9005B500E5FE74 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FD1BFFF91B9005B500E5FE74 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -426,7 +426,7 @@
 		FD1BFFF31B9005B500E5FE74 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FD1BFFF21B9005B500E5FE74 /* QiQuJoke.app */,
+				FD1BFFF21B9005B500E5FE74 /* QiQuJoke2.app */,
 				FD1B000E1B9005B500E5FE74 /* QiQuJokeTests.xctest */,
 			);
 			name = Products;
@@ -554,7 +554,7 @@
 			);
 			name = QiQuJoke;
 			productName = QiQuJoke;
-			productReference = FD1BFFF21B9005B500E5FE74 /* QiQuJoke.app */;
+			productReference = FD1BFFF21B9005B500E5FE74 /* QiQuJoke2.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -777,7 +777,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: fanshaojie2010@163.com (3MU5RB78TF)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -853,9 +853,9 @@
 					"\"UIKit\"",
 					"-lstdc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cn.fanshaojie.QiQuJoke;
-				PRODUCT_NAME = QiQuJoke;
-				PROVISIONING_PROFILE = "";
+				PRODUCT_BUNDLE_IDENTIFIER = cn.fanshaojie.QiQuJoke2;
+				PRODUCT_NAME = QiQuJoke2;
+				PROVISIONING_PROFILE = "d335d997-e553-47a2-abd0-3dd5996ebf0a";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -867,7 +867,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: fanshaojie2010@163.com (3MU5RB78TF)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -916,9 +916,9 @@
 					"\"UIKit\"",
 					"-lstdc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cn.fanshaojie.QiQuJoke;
-				PRODUCT_NAME = QiQuJoke;
-				PROVISIONING_PROFILE = "";
+				PRODUCT_BUNDLE_IDENTIFIER = cn.fanshaojie.QiQuJoke2;
+				PRODUCT_NAME = QiQuJoke2;
+				PROVISIONING_PROFILE = "d335d997-e553-47a2-abd0-3dd5996ebf0a";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

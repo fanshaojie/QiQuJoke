@@ -99,6 +99,18 @@ typedef NS_ENUM(NSUInteger, SSDKPlatformType){
      */
     SSDKPlatformTypeGooglePlus          = 14,
     /**
+     *  Instagram
+     */
+    SSDKPlatformTypeInstagram           = 15,
+    /**
+     *  LinkedIn
+     */
+    SSDKPlatformTypeLinkedIn            = 16,
+    /**
+     *  Tumblr
+     */
+    SSDKPlatformTypeTumblr              = 17,
+    /**
      *  邮件
      */
     SSDKPlatformTypeMail                = 18,
@@ -127,9 +139,21 @@ typedef NS_ENUM(NSUInteger, SSDKPlatformType){
      */
     SSDKPlatformTypePocket              = 26,
     /**
+     *  有道云笔记
+     */
+    SSDKPlatformTypeYouDaoNote          = 27,
+    /**
+     *  Flickr
+     */
+    SSDKPlatformTypeFlickr              = 34,
+    /**
      *  微信收藏
      */
     SSDKPlatformSubTypeWechatFav        = 37,
+    /**
+     *  WhatsApp
+     */
+    SSDKPlatformTypeWhatsApp            = 43,
     /**
      *  微信平台,
      */

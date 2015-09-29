@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FD1BFFF11B9005B500E5FE74"
-               BuildableName = "QiQuJoke.app"
+               BuildableName = "QiQuJoke2.app"
                BlueprintName = "QiQuJoke"
                ReferencedContainer = "container:QiQuJoke.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FD1BFFF11B9005B500E5FE74"
-            BuildableName = "QiQuJoke.app"
+            BuildableName = "QiQuJoke2.app"
             BlueprintName = "QiQuJoke"
             ReferencedContainer = "container:QiQuJoke.xcodeproj">
          </BuildableReference>
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FD1BFFF11B9005B500E5FE74"
-            BuildableName = "QiQuJoke.app"
+            BuildableName = "QiQuJoke2.app"
             BlueprintName = "QiQuJoke"
             ReferencedContainer = "container:QiQuJoke.xcodeproj">
          </BuildableReference>
@@ -99,7 +99,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FD1BFFF11B9005B500E5FE74"
-            BuildableName = "QiQuJoke.app"
+            BuildableName = "QiQuJoke2.app"
             BlueprintName = "QiQuJoke"
             ReferencedContainer = "container:QiQuJoke.xcodeproj">
          </BuildableReference>
