@@ -31,7 +31,7 @@
 -(void)initView{
     self.title = NSLocalizedString(@"setting", nil);
     self.view.backgroundColor = [UIColor whiteColor];
-    _settingTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)- kScreenNavTop - kTabBarDefaultHeight)];
+    _settingTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - kTabBarDefaultHeight)];
     _settingTable.dataSource = self;
     _settingTable.delegate = self;
     //_settingTable.tableFooterView = [[UIView alloc]init];
