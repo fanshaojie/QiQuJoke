@@ -31,7 +31,7 @@
         [[NSUserDefaults standardUserDefaults]setValue:@"dbg4" forKey:kUDDtailSkinKey];
     }
     
-    NetState netState = [NetHelper Instance].netState;
+    //NetState netState = [NetHelper Instance].netState;
     RiddleViewController *rvCtrl = [[RiddleViewController alloc]init];
     rvCtrl.tabBarItem.title = NSLocalizedString(@"riddle", nil);
     rvCtrl.tabBarItem.image = [UIImage imageNamed:@"riddleIcon"];
