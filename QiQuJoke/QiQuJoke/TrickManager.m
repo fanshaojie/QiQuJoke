@@ -250,7 +250,13 @@
  */
 -(NSString*)filePathFromUrl:(NSString*)url{
     NSString *path = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
-    return  [path stringByAppendingPathComponent:url.md5];
+    NSString *webDir = [path stringByAppendingPathComponent:@"WEBCACHE"];
+    BOOL isDir = YES;
+    BOOL dirExists = [[NSFileManager defaultManager]fileExistsAtPath:webDir isDirectory:&isDir];
+    if (!dirExists) {
+       dirExists = [[NSFileManager defaultManager]createDirectoryAtPath:webDir withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    return  [webDir stringByAppendingPathComponent:url.md5];
 }
 
 

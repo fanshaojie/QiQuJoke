@@ -72,8 +72,9 @@
     }
     else if(indexPath.row == 3){
         //清理缓存
-        NSString *path = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
-        BOOL isOK = [[NSFileManager defaultManager]removeItemAtPath:path error:nil];
+        NSString *basePath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject;
+        NSString *webDir = [basePath stringByAppendingPathComponent:@"WEBCACHE"];
+        BOOL isOK = [[NSFileManager defaultManager]removeItemAtPath:webDir error:nil];
         if (isOK) {
             [UIManager showToastIn:self.view info:NSLocalizedString(@"clearCacheOK", nil)];
         }
