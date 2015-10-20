@@ -88,19 +88,26 @@
         [self.navigationController pushViewController:[UMFeedback feedbackViewController] animated:YES];
         [self.tabBarController.tabBar setHidden:YES];
     }
+    else if(indexPath.row == 7){
+        //亲，给个好评吧
+        
+        NSString *url = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@",@"1043441963"];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    }
     else if(indexPath.row == 5)
     {
         //精彩推荐
         [UIManager showToastIn:self.view info:NSLocalizedString(@"waitRecommend", nil)];
     }
     else if(indexPath.row == 6){
+        //赞助我们
         [UIManager showToastIn:self.view title:NSLocalizedString(@"sponserUs", <#comment#>) content:NSLocalizedString(@"toClickMe", nil)];
     }
     
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 7;
+    return 8;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -140,6 +147,9 @@
     {
         //意见建议
         cell.textLabel.text = NSLocalizedString(@"advice", nil);
+    }
+    else if (indexPath.row == 7){
+        cell.textLabel.text = NSLocalizedString(@"toPraise", nil);
     }
     else if(indexPath.row == 5)
     {
