@@ -34,6 +34,9 @@
 #define kWechatAppID @"wx7859ffb4573bc997"
 #define kWechatAppSecret @"1f1bb8a21c3e9ce4e625a31fb3e9d0e2"
 #define kUmengAppKey @"55f289a167e58e88e40014cd"
+#define kUserTimesKey @"userTimesKey"
+#define kSetJudgeTimesKey @"setTimesKey"
+#define kIsJudgedKey @"isJudgeKey"
 
 #define kFavNameKey  @"Favorite"
 #define kCateTypeKey @"catetype"

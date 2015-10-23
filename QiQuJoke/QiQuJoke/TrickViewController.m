@@ -61,7 +61,6 @@
 }
 
 -(void)initView{
-
     _bgIv = [[UIImageView alloc]init];
     _bgIv.frame = self.view.frame;
     _bgIv.contentMode = UIViewContentModeScaleToFill;

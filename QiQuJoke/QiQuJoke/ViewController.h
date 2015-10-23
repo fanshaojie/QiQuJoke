@@ -15,7 +15,7 @@
 #import "SettingViewController.h"
 #import "DefineManager.h"
 
-@interface ViewController : UITabBarController
+@interface ViewController : UITabBarController<UIAlertViewDelegate>
 
 
 @end

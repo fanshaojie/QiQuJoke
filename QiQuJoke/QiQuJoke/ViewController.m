@@ -57,6 +57,50 @@
     self.tabBar.barTintColor = [UIColor blackColor];
     self.tabBar.tintColor = [UIColor orangeColor];
     self.selectedIndex = 1;
+    [self recordUserTimes];
+}
+
+-(void)recordUserTimes{
+    BOOL isJudged = [[NSUserDefaults standardUserDefaults]boolForKey:kIsJudgedKey];
+    if (isJudged) {
+        return;
+    }
+    NSInteger times =  [[NSUserDefaults standardUserDefaults]integerForKey:kUserTimesKey];
+    NSInteger setTimes = [[NSUserDefaults standardUserDefaults]integerForKey:kSetJudgeTimesKey];
+    
+    if (times) {
+        times++;
+        if (times == setTimes) {
+            //弹出评价提示
+            NSString *displayName = [[NSBundle mainBundle]objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"说说您对%@的印象",displayName]
+                                                                message:@"您的评价对我们很重要"
+                                                               delegate:self
+                                                      cancelButtonTitle:nil
+                                                      otherButtonTitles:@"残忍的拒绝",@"赞一个",nil];
+            [alertView show];
+            
+            setTimes = setTimes*3;
+            [[NSUserDefaults standardUserDefaults]setInteger:setTimes forKey:kSetJudgeTimesKey];
+        }
+    }
+    else{
+        times =1;
+        setTimes = 5;
+        [[NSUserDefaults standardUserDefaults]setInteger:setTimes forKey:kSetJudgeTimesKey];
+    }
+    [[NSUserDefaults standardUserDefaults]setInteger:times forKey:kUserTimesKey];
+    
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex ==  1) {
+        [[NSUserDefaults standardUserDefaults]setBool:YES forKey:kIsJudgedKey];
+        //去评价
+        NSString *url = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@",@"1043441963"];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    }
+    
 }
 
 
